@@ -1,4 +1,4 @@
-package com.spmall.www;
+package com.spmall;
 
 import java.text.DateFormat;
 import java.util.Date;
