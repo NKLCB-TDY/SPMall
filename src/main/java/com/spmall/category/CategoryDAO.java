@@ -1,4 +1,4 @@
-package com.spmall.member;
+package com.spmall.category;
 
 public interface CategoryDAO {
 	

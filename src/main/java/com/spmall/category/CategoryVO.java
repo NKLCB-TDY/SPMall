@@ -1,4 +1,4 @@
-package com.spmall.member;
+package com.spmall.category;
 
 public class CategoryVO {
 	
