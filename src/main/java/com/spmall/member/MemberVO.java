@@ -3,93 +3,160 @@ package com.spmall.member;
 import java.util.Date;
 
 public class MemberVO {
-	private String memberId;		//아이디
-	private String memberPw;		//비밀번호
-	private String memberPhone;		//전화번호
-	private String memberAddr1;		//우편번호
-	private String memberAddr2;		//기본주소
-	private String memberAddr3;		//동
-	private String memberAddr4;		//상세주소
+	private String member_id;		//아이디
+	private String member_pw;		//비밀번호
+	private String member_phone;		//전화번호
+	private String member_addr1;		//우편번호
+	private String member_addr2;		//기본주소
+	private String member_addr3;		//동
+	private String member_addr4;		//상세주소
 	// ex) 1 @ 2
-	private String memberEmail1;	//email1 
-	private String memberEmail2;	//email2
-	private boolean memberSex;		//성별
-	private Date singupDate; 		//가입날짜
+	private String member_email1;	//email1 
+	private String member_email2;	//email2
+	private boolean member_sex;		//성별
+	private Date singup_date; 		//가입날짜
 	
+	
+	
+	public String getMember_id() {
+		return member_id;
+	}
 
-	public String getMemberId() {
-		return memberId;
+
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+
+
+
+	public String getMember_pw() {
+		return member_pw;
 	}
-	public String getMemberPw() {
-		return memberPw;
+
+
+
+	public void setMember_pw(String member_pw) {
+		this.member_pw = member_pw;
 	}
-	public void setMemberPw(String memberPw) {
-		this.memberPw = memberPw;
+
+
+
+	public String getMember_phone() {
+		return member_phone;
 	}
-	public String getMemberPhone() {
-		return memberPhone;
+
+
+
+	public void setMember_phone(String member_phone) {
+		this.member_phone = member_phone;
 	}
-	public void setMemberPhone(String memberPhone) {
-		this.memberPhone = memberPhone;
+
+
+
+	public String getMember_addr1() {
+		return member_addr1;
 	}
-	public String getMemberAddr1() {
-		return memberAddr1;
+
+
+
+	public void setMember_addr1(String member_addr1) {
+		this.member_addr1 = member_addr1;
 	}
-	public void setMemberAddr1(String memberAddr1) {
-		this.memberAddr1 = memberAddr1;
+
+
+
+	public String getMember_addr2() {
+		return member_addr2;
 	}
-	public String getMemberAddr2() {
-		return memberAddr2;
+
+
+
+	public void setMember_addr2(String member_addr2) {
+		this.member_addr2 = member_addr2;
 	}
-	public void setMemberAddr2(String memberAddr2) {
-		this.memberAddr2 = memberAddr2;
+
+
+
+	public String getMember_addr3() {
+		return member_addr3;
 	}
-	public String getMemberAddr3() {
-		return memberAddr3;
+
+
+
+	public void setMember_addr3(String member_addr3) {
+		this.member_addr3 = member_addr3;
 	}
-	public void setMemberAddr3(String memberAddr3) {
-		this.memberAddr3 = memberAddr3;
+
+
+
+	public String getMember_addr4() {
+		return member_addr4;
 	}
-	public String getMemberAddr4() {
-		return memberAddr4;
+
+
+
+	public void setMember_addr4(String member_addr4) {
+		this.member_addr4 = member_addr4;
 	}
-	public void setMemberAddr4(String memberAddr4) {
-		this.memberAddr4 = memberAddr4;
+
+
+
+	public String getMember_email1() {
+		return member_email1;
 	}
-	public String getMemberEmail1() {
-		return memberEmail1;
+
+
+
+	public void setMember_email1(String member_email1) {
+		this.member_email1 = member_email1;
 	}
-	public void setMemberEmail1(String memberEmail1) {
-		this.memberEmail1 = memberEmail1;
+
+
+
+	public String getMember_email2() {
+		return member_email2;
 	}
-	public String getMemberEmail2() {
-		return memberEmail2;
+
+
+
+	public void setMember_email2(String member_email2) {
+		this.member_email2 = member_email2;
 	}
-	public void setMemberEmail2(String memberEmail2) {
-		this.memberEmail2 = memberEmail2;
+
+
+
+	public boolean isMember_sex() {
+		return member_sex;
 	}
-	public boolean isMemberSex() {
-		return memberSex;
+
+
+
+	public void setMember_sex(boolean member_sex) {
+		this.member_sex = member_sex;
 	}
-	public void setMemberSex(boolean memberSex) {
-		this.memberSex = memberSex;
+
+
+
+	public Date getSingup_date() {
+		return singup_date;
 	}
-	public Date getSingupDate() {
-		return singupDate;
+
+
+
+	public void setSingup_date(Date singup_date) {
+		this.singup_date = singup_date;
 	}
-	public void setSingupDate(Date singupDate) {
-		this.singupDate = singupDate;
-	}
-	
+
+
+
 	@Override
 	public String toString() {
-		return "MemberVO [memberId=" + memberId + ", memberPw=" + memberPw + ", memberPhone=" + memberPhone
-				+ ", memberAddr1=" + memberAddr1 + ", memberAddr2=" + memberAddr2 + ", memberAddr3=" + memberAddr3
-				+ ", memberAddr4=" + memberAddr4 + ", memberEmail1=" + memberEmail1 + ", memberEmail2=" + memberEmail2
-				+ ", memberSex=" + memberSex + ", singupDate=" + singupDate + "]";
+		return "MemberVO [member_id=" + member_id + ", member_pw=" + member_pw + ", member_phone=" + member_phone
+				+ ", member_addr1=" + member_addr1 + ", member_addr2=" + member_addr2 + ", member_addr3=" + member_addr3
+				+ ", member_addr4=" + member_addr4 + ", member_email1=" + member_email1 + ", member_email2="
+				+ member_email2 + ", member_sex=" + member_sex + ", singup_date=" + singup_date + "]";
 	}
+	
 	
 }
