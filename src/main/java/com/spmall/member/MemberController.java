@@ -22,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	@Inject
-	MemberService memberService;
+	//@Inject
+	//MemberService memberService;
 	
 	
 	//회원가입 페이지로 이동
@@ -36,13 +36,13 @@ public class MemberController {
 	@RequestMapping(value ="/idcheck.do", method = RequestMethod.POST)
 	public void idoverlap(@RequestParam("member_id") String member_id) {
 		
-		String a = memberService.idcheck(member_id);
+		//String a = memberService.idcheck(member_id);
 	}
 	
 	//회원가입 로직 
 	@RequestMapping(value="/membersignup.do", method = RequestMethod.POST)
 	public ModelAndView membersignup(@ModelAttribute("membervo") MemberVO vo) {
-		memberService.signupMember(vo);
+		//memberService.signupMember(vo);
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
