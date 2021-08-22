@@ -29,7 +29,7 @@ public class MemberController {
 	//회원가입 페이지로 이동
 	@RequestMapping(value ="/membersignupform.do", method = RequestMethod.GET)
 	public String membersignupform() {
-		return "membersignupform";
+		return "member/membersignupform";
 	}
 	
 	//id 겹치는지 확인
