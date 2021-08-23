@@ -45,14 +45,14 @@
 						<div class="form-group row">
 							<div class="col-md-12">
 								<label for="c_companyname" class="text-black">비밀번호</label> <input
-									type="password" class="form-control" id="pwd1">
+									type="password" class="form-control" id="member_pw1">
 							</div>
 						</div>
 
 						<div class="form-group row">
 							<div class="col-md-12">
 								<label for="c_companyname" class="text-black">비밀번호 확인</label> <input
-									type="password" class="form-control" id="pwd2"
+									type="password" class="form-control" id="member_pw2"
 									name="member_pwd">
 								<div id="password_check" style="color: red;"></div>
 							</div>
@@ -84,6 +84,9 @@
 						<!--휴대전화-->
 						<div class="form-group row">
 							<div class="col-md-4">
+								<div>
+									<input type="hidden" name = "member_phone" id = "phone">
+								</div>
 								<div class="form-group">
 									<label for="c_country" class="text-black">휴대전화</label> <select
 										name="member_cp1" id="member_cp1" class="form-control">
@@ -162,11 +165,11 @@
 
 						<div class="form-group">
 							<input type="text" class="form-control" name="member_addr2"
-								id="loadaddr" placeholder="주소">
+								id="basicaddr" placeholder="기본주소">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="member_addr3"
-								id="jiaddr" placeholder="동">
+								id="dongaddr" placeholder="동">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="member_addr4"
