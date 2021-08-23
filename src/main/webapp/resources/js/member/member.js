@@ -1,3 +1,5 @@
+// 회원가입 유효성 검사
+
 //회원가입(주소검색 처리)
 function find_addr() {
    new daum.Postcode({
@@ -47,4 +49,31 @@ function find_addr() {
       }
    }).open();
    
+}
+
+//Email 처리
+$(function(){
+			$('#email_select').change(function() { //이메일선택부분이 바뀌면
+				var email = $('#email_select').val();	//선택된값 저장
+				if (email == 'direct') { //이메일을 직접입력시
+					$('#_email2').attr('disabled', false); //
+					$('#_email2').val(''); 
+					$('#_email2').focus();
+				} else {
+					$('#_email2').attr('disabled',true);
+					$('#_email2').val($('#email_select').val());
+					$('#email2').val($('#email_select').val());
+				}
+			});
+});
+
+function Sub(){
+	var num = 0;
+	var list = new Array();
+	var phone = '#member_cp1' + '#member_cp2' + '#member_cp3'
+	
+	$('#phone').val(phone);
+	document.signupform.action = "membersignup.do";
+	document.signupform.submit();
+	
 }
