@@ -41,7 +41,10 @@ public class MemberController {
 	
 	//회원가입 로직 
 	@RequestMapping(value="/membersignup.do", method = RequestMethod.POST)
-	public ModelAndView membersignup(@ModelAttribute("membervo") MemberVO vo) {
+	public ModelAndView membersignup(MemberVO vo) {
+		System.out.println(vo.getMember_id());
+		System.out.println("기본주소 " + vo.getMember_addr2());
+		System.out.println("동 " + vo.getMember_addr3());
 		memberService.signupMember(vo);
 		ModelAndView mav = new ModelAndView();
 		return mav;

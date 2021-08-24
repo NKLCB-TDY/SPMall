@@ -14,8 +14,7 @@
 <!-- jquery 최신버전사용하기 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 주소처리 js -->
-<script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/member/member.js"></script>
 </head>
@@ -45,14 +44,14 @@
 						<div class="form-group row">
 							<div class="col-md-12">
 								<label for="c_companyname" class="text-black">비밀번호</label> <input
-									type="password" class="form-control" id="member_pw1">
+									type="password" class="form-control" id="member_pwd">
 							</div>
 						</div>
 
 						<div class="form-group row">
 							<div class="col-md-12">
 								<label for="c_companyname" class="text-black">비밀번호 확인</label> <input
-									type="password" class="form-control" id="member_pw2"
+									type="password" class="form-control" id="member_pwd2"
 									name="member_pwd">
 								<div id="password_check" style="color: red;"></div>
 							</div>
@@ -71,12 +70,12 @@
 						<div class="form-group row">
 							<div class="col-md-1">
 								<label for="c_companyname" class="text-black">남성</label><br>
-								<input type="radio" name="member_gender" value="남성"
+								<input type="radio" name="member_gender" value="M"
 									id="member_gender">
 							</div>
 							<div class="col-md-1">
 								<label for="c_companyname" class="text-black">여성</label><br>
-								<input type="radio" name="member_gender" value="여성"
+								<input type="radio" name="member_gender" value="F"
 									id="member_gender">
 							</div>
 						</div>
@@ -85,11 +84,11 @@
 						<div class="form-group row">
 							<div class="col-md-4">
 								<div>
-									<input type="hidden" name = "member_phone" id = "phone">
+									<input type="hidden" name = "member_phone" id = "member_phone">
 								</div>
 								<div class="form-group">
 									<label for="c_country" class="text-black">휴대전화</label> <select
-										name="member_cp1" id="member_cp1" class="form-control">
+										id="member_cp1" class="form-control">
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="016">016</option>
@@ -101,14 +100,14 @@
 							</div>
 							<div class="col-md-4">
 								<label for="c_fname" class="text-black"><br></label> <input
-									type="text" class="form-control" name="member_cp2" size="4"
+									type="text" class="form-control"  size="4"
 									maxlength="4" id="member_cp2"
 									onkeypress="if (event.keyCode<48|| event.keyCode>57)  event.returnValue=false;"
 									style='IME-MODE: disabled;'>
 							</div>
 							<div class="col-md-4">
 								<label for="c_fname" class="text-black"><br></label> <input
-									type="text" name="member_cp3" class="form-control" size="4"
+									type="text" class="form-control" size="4"
 									maxlength="4" id="member_cp3"
 									onkeypress="if (event.keyCode<48|| event.keyCode>57)  event.returnValue=false;"
 									style='IME-MODE: disabled;'>
@@ -120,7 +119,7 @@
 							<div class="col-md-4">
 								<label for="c_country" class="text-black">이메일 <span
 									class="text-danger">*</span>
-								</label> <input type="text" class="form-control" id="email1"
+								</label> <input type="text" class="form-control" id="member_email1"
 									name="member_email1" size="6">
 							</div>
 
@@ -128,7 +127,7 @@
 								<label for="c_country" class="text-black"><br></label> <input
 									type="text" class="form-control" id="_email2" size="6"
 									disabled="disabled"> <input type="hidden"
-									name="member_email2" id="email2">
+									name="member_email2" id="member_email2">
 							</div>
 
 
@@ -151,9 +150,9 @@
 						<!--주소-->
 						<div class="form-group row">
 							<div class="col-md-8">
-								<label for="c_diff_address" class="text-black">주소<span
-									class="text-danger">*</span></label> <input type="text"
-									class="form-control" name="member_addr1" id="postaddr"
+								<label for="c_diff_address" class="text-black">주소</label> 
+								<input type="text"
+									class="form-control" name="member_addr1" id="postCode"
 									placeholder="우편번호">
 							</div>
 							<div class="col-md-4">
@@ -165,15 +164,15 @@
 
 						<div class="form-group">
 							<input type="text" class="form-control" name="member_addr2"
-								id="basicaddr" placeholder="기본주소">
+								id="basicAddr" placeholder="기본주소">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="member_addr3"
-								id="dongaddr" placeholder="동">
+								id="dongAddr" placeholder="동">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="member_addr4"
-								id="detailaddr" placeholder="상세주소">
+								id="detailAddr" placeholder="상세주소">
 						</div>
 
 						<br> <br> <br>

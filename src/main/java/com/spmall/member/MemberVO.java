@@ -1,13 +1,14 @@
 package com.spmall.member;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class MemberVO {
 	private String member_id;		//아이디
 	private String member_pwd;		//비밀번호
-	private String member_name;
-	private boolean member_gender;	//전화번호
-	private String member_phone;		//성별
+	private String member_name;		//이름
+	private String member_gender;	//성별
+	private String member_phone;	//전화번호
+	
 	// ex) 1 @ 2
 	
 	private String member_email1;	//email1 
@@ -18,12 +19,13 @@ public class MemberVO {
 	private String member_addr3;		//동
 	private String member_addr4;		//상세주소
 	
-	private Date memeber_create_at; 		//가입날짜
 	private Integer member_point;
-	private Date member_lately_date;
-	private Integer member_total_login;
-	private Integer member_total_buy;
-	private Integer member_del_yn;
+	private Timestamp memeber_create_at; 		//가입날짜
+	private Timestamp member_lately_date;		//최근접속날짜
+	private Integer member_total_login;			//로그인 횟수
+	private Integer member_total_buy;			//구매횟수
+	private String member_del_yn;				//회원 탈퇴 : N
+	
 	
 	public String getMember_id() {
 		return member_id;
@@ -43,10 +45,10 @@ public class MemberVO {
 	public void setMember_name(String member_name) {
 		this.member_name = member_name;
 	}
-	public boolean isMember_gender() {
+	public String getMember_gender() {
 		return member_gender;
 	}
-	public void setMember_gender(boolean member_gender) {
+	public void setMember_gender(String member_gender) {
 		this.member_gender = member_gender;
 	}
 	public String getMember_phone() {
@@ -91,22 +93,22 @@ public class MemberVO {
 	public void setMember_addr4(String member_addr4) {
 		this.member_addr4 = member_addr4;
 	}
-	public Date getMemeber_create_at() {
-		return memeber_create_at;
-	}
-	public void setMemeber_create_at(Date memeber_create_at) {
-		this.memeber_create_at = memeber_create_at;
-	}
 	public Integer getMember_point() {
 		return member_point;
 	}
 	public void setMember_point(Integer member_point) {
 		this.member_point = member_point;
 	}
-	public Date getMember_lately_date() {
+	public Timestamp getMemeber_create_at() {
+		return memeber_create_at;
+	}
+	public void setMemeber_create_at(Timestamp memeber_create_at) {
+		this.memeber_create_at = memeber_create_at;
+	}
+	public Timestamp getMember_lately_date() {
 		return member_lately_date;
 	}
-	public void setMember_lately_date(Date member_lately_date) {
+	public void setMember_lately_date(Timestamp member_lately_date) {
 		this.member_lately_date = member_lately_date;
 	}
 	public Integer getMember_total_login() {
@@ -121,34 +123,23 @@ public class MemberVO {
 	public void setMember_total_buy(Integer member_total_buy) {
 		this.member_total_buy = member_total_buy;
 	}
-	public Integer getMember_del_yn() {
+	public String getMember_del_yn() {
 		return member_del_yn;
 	}
-	public void setMember_del_yn(Integer member_del_yn) {
+	public void setMember_del_yn(String member_del_yn) {
 		this.member_del_yn = member_del_yn;
 	}
-	
 	@Override
 	public String toString() {
 		return "MemberVO [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_name=" + member_name
 				+ ", member_gender=" + member_gender + ", member_phone=" + member_phone + ", member_email1="
 				+ member_email1 + ", member_email2=" + member_email2 + ", member_addr1=" + member_addr1
 				+ ", member_addr2=" + member_addr2 + ", member_addr3=" + member_addr3 + ", member_addr4=" + member_addr4
-				+ ", memeber_create_at=" + memeber_create_at + ", member_point=" + member_point
+				+ ", member_point=" + member_point + ", memeber_create_at=" + memeber_create_at
 				+ ", member_lately_date=" + member_lately_date + ", member_total_login=" + member_total_login
-				+ ", member_total_buy=" + member_total_buy + ", member_del_yn=" + member_del_yn + ", getMember_id()="
-				+ getMember_id() + ", getMember_pwd()=" + getMember_pwd() + ", getMember_name()=" + getMember_name()
-				+ ", isMember_gender()=" + isMember_gender() + ", getMember_phone()=" + getMember_phone()
-				+ ", getMember_email1()=" + getMember_email1() + ", getMember_email2()=" + getMember_email2()
-				+ ", getMember_addr1()=" + getMember_addr1() + ", getMember_addr2()=" + getMember_addr2()
-				+ ", getMember_addr3()=" + getMember_addr3() + ", getMember_addr4()=" + getMember_addr4()
-				+ ", getMemeber_create_at()=" + getMemeber_create_at() + ", getMember_point()=" + getMember_point()
-				+ ", getMember_lately_date()=" + getMember_lately_date() + ", getMember_total_login()="
-				+ getMember_total_login() + ", getMember_total_buy()=" + getMember_total_buy() + ", getMember_del_yn()="
-				+ getMember_del_yn() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+				+ ", member_total_buy=" + member_total_buy + ", member_del_yn=" + member_del_yn + "]";
 	}
 	
-
+	
 	
 }
