@@ -13,7 +13,7 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public void signupMember(MemberVO vo) {
-		//sqlSession.insert();
+		sqlSession.insert("member.signupMember", vo);
 	}
 
 }
