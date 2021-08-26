@@ -1,5 +1,47 @@
 // 회원가입 유효성 검사
 
+// id 중복 검사
+$(function(){
+	$('#member_id').blur(function(){
+		let id = $('#member_id').val();
+		if(id == ''){
+			$('#id_check').text('아이디를 입력해 주세요.');
+		}else{
+			$.ajax({
+				type : 'POST',
+				url : 'idoverlap.do',
+				dataType : "json", //text 타입으로 하니 map key(data.result)가 undefiend뜸 그래서 json으로 하니됨 
+				data : {
+					member_id : id
+				},
+				
+				success : function(data){
+					if(data.result == true){
+						$('#id_check').text('사용이 가능한 아이디 입니다.');
+					}else{
+						$('#id_check').text('사용이 불가능한 아이디 입니다. (변경필요)');
+					}
+				},
+				error :function(error){
+					$('#id_check').text('오류');
+					console.log(error);
+				}
+			});
+		}
+	});
+});
+
+//비밀번호 확인
+$(function(){
+	$('#member_pwd2').blur(function(){
+		if($('#member_pwd1').val() != $('#member_pwd2').val()){
+			$('#password_check').text('비밀번호가 틀립니다. 확인해주세요');
+		}else{
+			$('#password_check').text('비밀번호 일치!');
+		}
+	});	
+});
+
 //회원가입(주소검색 처리)
 function find_addr() {
    new daum.Postcode({
