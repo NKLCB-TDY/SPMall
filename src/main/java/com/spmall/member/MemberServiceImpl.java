@@ -15,12 +15,17 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.signupMember(vo);
 	}
 
+	//id 중복 체크 
+	@Override
+	public int idoverlap(String member_id) {
+		int result = memberDAO.idoverlap(member_id);
+		return result;
+	}
+
 	/*
 	 * @Override public void updateMember(MemberVO vo) { // TODO Auto-generated
 	 * method stub }
-	 * 
-	 * @Override public String idcheck(String member_id) { // TODO Auto-generated
-	 * method stub return null; }
+	
 	 */
 
 }

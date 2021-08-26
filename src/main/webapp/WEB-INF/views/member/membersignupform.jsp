@@ -44,7 +44,7 @@
 						<div class="form-group row">
 							<div class="col-md-12">
 								<label for="c_companyname" class="text-black">비밀번호</label> <input
-									type="password" class="form-control" id="member_pwd">
+									type="password" class="form-control" id="member_pwd1">
 							</div>
 						</div>
 
@@ -126,15 +126,15 @@
 							<div class="col-md-4">
 								<label for="c_country" class="text-black"><br></label> <input
 									type="text" class="form-control" id="_email2" size="6"
-									disabled="disabled"> <input type="hidden"
-									name="member_email2" id="member_email2">
+									disabled="disabled" value="naver.com"> <input type="hidden"
+									name="member_email2" id="member_email2" value="naver.com">
 							</div>
 
 
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="c_fname" class="text-black"><br></label> <select
-										id="email_select" class="form-control">
+										id="email_select" class="form-control" >
 										<option value="naver.com" selected>naver.com</option>
 										<option value="gmail.com">gmail.com</option>
 										<option value="hanmail.net">hanmail.net</option>
@@ -182,13 +182,13 @@
 						<div class="form-group row">
 							<div class="col-md-6">
 								<input
-									style="background-color: #ff084e; border: 1px solid #ff084e;"
+									style="background-color: #3b5999; border: 1px solid #3b5999;"
 									type="button" class="btn btn-primary btn-lg py-3 btn-block"
 									value="회원가입" id="joinMember" onclick="Sub()">
 							</div>
 							<div class="col-md-6">
 								<input
-									style="background-color: #ff084e; border: 1px solid #ff084e;"
+									style="background-color: #3b5999; border: 1px solid #3b5999;"
 									type="button" class="btn btn-primary btn-lg py-3 btn-block"
 									value="취소"
 									onclick="location.href='${contextPath}/member/memberinfo.do'">

@@ -1,6 +1,8 @@
 package com.spmall.member;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -33,10 +36,20 @@ public class MemberController {
 	}
 	
 	//id 겹치는지 확인
-	@RequestMapping(value ="/idcheck.do", method = RequestMethod.POST)
-	public void idoverlap(@RequestParam("member_id") String member_id) {
-		
-		//String a = memberService.idcheck(member_id);
+	@ResponseBody
+	@RequestMapping(value ="/idoverlap.do", method = RequestMethod.POST)
+	public Map<String, Boolean> idoverlap(@RequestParam(value ="member_id") String member_id) {
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		int result = memberService.idoverlap(member_id);
+
+		//result   0 가입할수있는 id  
+		// 		   1 중복 	  id
+		if(result == 0) {
+			map.put("result", true);
+		}else {
+			map.put("result", false);
+		}
+		return map;
 	}
 	
 	//회원가입 로직 

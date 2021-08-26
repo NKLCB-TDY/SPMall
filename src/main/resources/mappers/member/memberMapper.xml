@@ -20,4 +20,10 @@
 			)
 		]]>
 	</insert>
+	
+	<select id = "idoverlap" parameterType="String" resultType ="int">
+		select Count(*)
+		from member
+		where member_id = #{member_id};
+	</select>
 </mapper>
