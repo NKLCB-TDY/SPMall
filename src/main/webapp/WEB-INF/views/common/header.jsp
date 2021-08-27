@@ -1,353 +1,63 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>°¡Áî¾Æ¾Æ</title>
-	
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>ë‹¹ê·¼ë‹¹ê·¼</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/common.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header/header.css">
-	
 </head>
 <body>
-
-	<div class="wrap">
-		<header id="header">
-			<div class="top">
-				<h1>
-					<a href="/"> <img src="" alt="¸ÞÀÎ·Î°í" width="140px">
-					</a>
-				</h1>
-
-				<ul class="toplink">
-					<li><a href="/">È¸¿ø°¡ÀÔ<em>(<font
-								style="color: #ff7d9e;">+ 500 ¹é¿ø</font>)
-						</em></a></li>
-					<li><a href="/">°í°´¼¾ÅÍ</a></li>
-					<li><a href="">
-							<div class="login-btn">
-								<span>·Î±×ÀÎ</span>
-							</div>
-					</a></li>
-					<li><a href="/">Àå¹Ù±¸´Ï</a></li>
-					<li><a href="/">°í°´¼¾ÅÍ</a></li>
-				</ul>
-
-
-
-				<div class="search">
-					<form name="search" action="/shop/search.php" method="get"
-						onsubmit="return searchCheck(this)">
-						<fieldset>
-							<div class="inform">
-								<input type="hidden" name="searchOrder" value=""> <input
-									type="text" title="°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä" id="keyword" name="keyword"
-									value="" autocomplete="off" class="ui-autocomplete-input">
-								<button type="submit" class="btn-search">°Ë»ö</button>
-							</div>
-						</fieldset>
-					</form>
-				</div>
-
-				<ul class="mymenu">
-					<!--
-                    <li class="l1"><a href="/"><img
-                                src="https://img.sonyunara.com/2020/asset/pc/img/common/header/my_icon1.png" alt="ÃâÃ½"
-                                class="icon"><strong>ÃâÃ½</strong></a></li>
-                    <li class="l2"><a href="/member/wish.php"><img
-                                src="https://img.sonyunara.com/2020/asset/pc/img/common/header/my_icon2.png" alt="ÁÁ¾Æ¿ä"
-                                class="icon"><strong>ÁÁ¾Æ¿ä</strong></a></li> -->
-
-					<li class="l3" style="margin-left: 23px;"><a
-						href="/member/cart.php"><img
-							src="https://img.sonyunara.com/2020/asset/pc/img/common/header/my_icon3.png"
-							alt="Àå¹Ù±¸´Ï" class="icon"
-							style="margin-left: -19px; margin-top: 0px;"><strong>Àå¹Ù±¸´Ï</strong></a>
-						<span>0</span></li>
-					<li class="l4">
-						<div class="table">
-							<div class="wrap" style="top: -58px;">
-								<div>
-									<a href="/shop/search.php?searchOrder=&amp;keyword=Å©·Ó"
-										target="_self"> <strong>1.</strong> Å©·Ó
-									</a>
-								</div>
-								<div>
-									<a href="/shop/new.php" target="_self"> <strong>2.</strong>
-										°¡À»½Å»ó
-									</a>
-								</div>
-								<div>
-									<a href="/shop/search.php?searchOrder=1&amp;keyword=¼¼Æ®"
-										target="_self"> <strong>3.</strong> SET
-									</a>
-								</div>
-								<div>
-									<a href="/shop/search.php?searchOrder=1&amp;keyword=¿À¹öÇÍ"
-										target="_self"> <strong>4.</strong> ¿À¹öÇÍ
-									</a>
-								</div>
-								<div>
-									<a href="/shop/list.php?page=1&amp;cate=010403" target="_self">
-										<strong>5.</strong> ÈÄµåÁý¾÷
-									</a>
-								</div>
-								<div>
-									<a href="/shop/list.php?cate=0103" target="_self"> <strong>6.</strong>
-										¿øÇÇ½º
-									</a>
-								</div>
-								<div>
-									<a href="/shop/list.php?cate=010201" target="_self"> <strong>7.</strong>
-										¼ÅÃ÷
-									</a>
-								</div>
-								<div>
-									<a href="/shop/search.php?searchOrder=2&amp;keyword=Å°ÀÛ³à"
-										target="_self"> <strong>8.</strong> Å°ÀÛ³à
-									</a>
-								</div>
-								<div>
-									<a href="/shop/list.php?cate=0105" target="_self"> <strong>9.</strong>
-										Æ®·¹ÀÌ´×
-									</a>
-								</div>
-								<div>
-									<a href="/shop/search.php?searchOrder=&amp;keyword=½½·¢½º"
-										target="_self"> <strong>10.</strong> ½½·¢½º
-									</a>
-								</div>
-								<div>
-									<a href="/shop/search.php?searchOrder=&amp;keyword=Å©·Ó"
-										target="_self"> <strong>1.</strong> Å©·Ó
-									</a>
-								</div>
-							</div>
-						</div>
-						<button type="button">
-							<i class="fa fa-caret-down"></i>
-						</button>
-						<div class="popular-search-ward" style="display: none;">
-							<table>
-								<caption>ÀÎ±â°Ë»ö¾î</caption>
-								<tbody>
-									<tr class="rank">
-										<td><strong>1.</strong><a
-											href="/shop/search.php?searchOrder=&amp;keyword=Å©·Ó"
-											target="_self">Å©·Ó</a></td>
-										<td class="up"><small><i class="fa fa-caret-up"></i>999</small>
-										</td>
-									</tr>
-									<tr class="rank">
-										<td><strong>2.</strong><a href="/shop/new.php"
-											target="_self">°¡À»½Å»ó</a></td>
-										<td class="up"><small><i class="fa fa-caret-up"></i>NEW</small>
-										</td>
-									</tr>
-									<tr class="rank">
-										<td><strong>3.</strong><a
-											href="/shop/search.php?searchOrder=1&amp;keyword=¼¼Æ®"
-											target="_self">SET</a></td>
-										<td class="up"><small><i class="fa fa-caret-up"></i>951</small>
-										</td>
-									</tr>
-									<tr>
-										<td><strong>4.</strong><a
-											href="/shop/search.php?searchOrder=1&amp;keyword=¿À¹öÇÍ"
-											target="_self">¿À¹öÇÍ</a></td>
-										<td class="up"><small><i class="fa fa-caret-up"></i>911</small>
-										</td>
-									</tr>
-									<tr>
-										<td><strong>5.</strong><a
-											href="/shop/list.php?page=1&amp;cate=010403" target="_self">ÈÄµåÁý¾÷</a>
-										</td>
-										<td class="up"><small><i class="fa fa-caret-up"></i>±Þ»ó½Â</small>
-										</td>
-									</tr>
-									<tr>
-										<td><strong>6.</strong><a href="/shop/list.php?cate=0103"
-											target="_self">¿øÇÇ½º</a></td>
-										<td class="up"><small><i class="fa fa-caret-up"></i>866</small>
-										</td>
-									</tr>
-									<tr>
-										<td><strong>7.</strong><a
-											href="/shop/list.php?cate=010201" target="_self">¼ÅÃ÷</a></td>
-										<td class="up"><small><i class="fa fa-caret-up"></i>847</small>
-										</td>
-									</tr>
-									<tr>
-										<td><strong>8.</strong><a
-											href="/shop/search.php?searchOrder=2&amp;keyword=Å°ÀÛ³à"
-											target="_self">Å°ÀÛ³à</a></td>
-										<td class="up"><small><i class="fa fa-caret-up"></i>782</small>
-										</td>
-									</tr>
-									<tr>
-										<td><strong>9.</strong><a href="/shop/list.php?cate=0105"
-											target="_self">Æ®·¹ÀÌ´×</a></td>
-										<td class="up"><small><i class="fa fa-caret-up"></i>755</small>
-										</td>
-									</tr>
-									<tr>
-										<td><strong>10.</strong><a
-											href="/shop/search.php?searchOrder=&amp;keyword=½½·¢½º"
-											target="_self">½½·¢½º</a></td>
-										<td class="up"><small><i class="fa fa-caret-up"></i>NEW</small>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</li>
-				</ul>
-				<!-- //mymenu -->
-			</div>
-			<!-- //top -->
-
-			<nav id="gnb" class="bottom">
-				<button type="button" class="btn-all" id="btnAll">
-					<span>ÀüÃ¼¸Þ´º</span>
-				</button>
-				<div id="allMenu">
-					<div class="box">
-						<ul class="list import">
-							<li><a href="/shop/new.php">½Å»ó</a></li>
-							<li><a href="/shop/best.php">º£½ºÆ®</a></li>
-							<li><a href="/shop/delivery.php">¿À´ÃÃâ¹ß</a></li>
-							<li><a href="/shop/list.php?cate=3001">µæÅÛÂù½º</a></li>
-						</ul>
-						<div class="list-wrap">
-							<h2>¼ÒÈ£¼¥</h2>
-							<ul>
-								<li><a href="/shop/list.php?cate=0104">¾Æ¿ìÅÍ</a></li>
-								<li><a href="/shop/list.php?cate=0101">»óÀÇ</a></li>
-								<li><a href="/shop/list.php?cate=0102">¼ÅÃ÷/ºí¶ó¿ì½º</a></li>
-								<li><a href="/shop/list.php?cate=0105">Æ®·¹ÀÌ´×/È¨¿þ¾î</a></li>
-								<li><a href="/shop/list.php?cate=0407">º£ÀÌÁ÷</a></li>
-								<li><a href="/shop/list.php?cate=0103">¿øÇÇ½º</a></li>
-								<li><a href="/shop/list.php?cate=0202">½ºÄ¿Æ®</a></li>
-								<li><a href="/shop/list.php?cate=0201">ÆÒÃ÷/µ¥´Ô</a></li>
-								<li><a href="/shop/list.php?cate=0601">°¡¹æ</a></li>
-								<li><a href="/shop/list.php?cate=0501">½Å¹ß</a></li>
-								<li><a href="/shop/list.php?cate=0701">¾Ç¼¼»ç¸®</a></li>
-								<li><a href="/shop/list.php?cate=0301">¼Ò³ª¶óº§</a></li>
-							</ul>
-						</div>
-						<div class="list-wrap">
-							<h2>Ä¿¹Â´ÏÆ¼</h2>
-							<ul>
-								<li><a href="/shop/list_promotion.php">±âÈ¹Àü</a></li>
-								<li><a href="/event/list.php">ÀÌº¥Æ®</a></li>
-								<li><a href="/board/list.php?boardid=event_notice">ÀÌº¥Æ®
-										´çÃ·ÀÚ¹ßÇ¥</a></li>
-								<li><a href="/board/list.php?boardid=event_after">ÀÌº¥Æ®
-										´çÃ·ÈÄ±â</a></li>
-								<li><a href="/member/attend.php">Ãâ¼®Ã¼Å©</a></li>
-								<li><a href="/review/review_index.php">¼Ò³ªÈÄ±â</a></li>
-								<li><a href="/review/review_muse.php">¹ÂÁîÈÄ±â</a></li>
-							</ul>
-						</div>
-						<div class="list-wrap">
-							<h2>¸¶ÀÌÆäÀÌÁö</h2>
-							<ul>
-								<li><a href="/member/order.php">ÁÖ¹®¹è¼Û</a></li>
-								<li><a href="/member/cart.php">Àå¹Ù±¸´Ï</a></li>
-								<li><a href="/member/coupon.php">Àû¸³±Ý/ÄíÆù</a></li>
-								<li><a href="/member/order.php">±³È¯/¹ÝÇ°½ÅÃ»</a></li>
-								<li><a href="/member/wish.php">ÁÁ¾Æ¿ä</a></li>
-							</ul>
-						</div>
-						<div class="list-wrap">
-							<h2>°í°´¼¾ÅÍ</h2>
-							<ul>
-								<li><a href="/board/list.php?boardid=csnotice">°øÁö»çÇ×</a></li>
-								<li><a href="/cs/index.php">ÀÚÁÖ¹¯´Â Áú¹®</a></li>
-								<li><a href="/cs/inquiry.php">1:1¹®ÀÇÇÏ±â</a></li>
-								<li><a href="/member/search_id_pw.php">¾ÆÀÌµð/ºñ¹øÃ£±â</a></li>
-								<li><a href="/member/login.php">ºñÈ¸¿ø ÁÖ¹®Á¶È¸</a></li>
-								<li><a href="/cs/inquiry_no.php">ºñÈ¸¿ø ¹®ÀÇ</a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- //box -->
-				</div>
-				<!-- //allMenu -->
-
-				<ul class="menu">
-					<li style="color: #9F3FF8;"><a href="/shop/best.php">º£½ºÆ®<span
-							class="over" style="display: none; opacity: 1;">º£½ºÆ®</span></a></li>
-					<li style="color: #FF416F;"><a href="/shop/new.php">½Å»ó<span
-							class="over" style="display: none; opacity: 1;">½Å»ó</span></a></li>
-					<li><a href="/shop/list.php?cate=0104">¾Æ¿ìÅÍ<span
-							class="over">¾Æ¿ìÅÍ</span></a>
-						<ul class="sub">
-							<li><a href="/shop/list.php?cate=010401">°¡µð°Ç/Á¶³¢</a></li>
-							<li><a href="/shop/list.php?cate=010403">¾ß»ó/Á¡ÆÛ</a></li>
-							<li><a href="/shop/list.php?cate=010404">ÀÚÄÏ/ÄÚÆ®</a></li>
-							<li><a href="/shop/list.php?cate=010405">ÆÐµù</a></li>
-							<li><a href="/shop/list.php?cate=010406">ÇÃ¸®½º</a></li>
-						</ul></li>
-					<li><a href="/shop/list.php?cate=0101">»óÀÇ<span
-							class="over">»óÀÇ</span></a>
-						<ul class="sub">
-							<li><a href="/shop/list.php?cate=010102">±äÆÈÆ¼¼ÅÃ÷</a></li>
-							<li><a href="/shop/list.php?cate=010104">¸ÇÅõ¸Ç</a></li>
-							<li><a href="/shop/list.php?cate=010103">ÈÄµå</a></li>
-							<li><a href="/shop/list.php?cate=010101">¹ÝÆÈ/¹Î¼Ò¸ÅÆ¼¼ÅÃ÷</a></li>
-							<li><a href="/shop/list.php?cate=010105">´ÏÆ®</a></li>
-						</ul></li>
-					<li><a href="/shop/list.php?cate=0102">¼ÅÃ÷/ºí¶ó¿ì½º<span
-							class="over">¼ÅÃ÷/ºí¶ó¿ì½º</span></a></li>
-					<li><a href="/shop/list.php?cate=0105">Æ®·¹ÀÌ´×<span
-							class="over">Æ®·¹ÀÌ´×</span></a></li>
-					<li><a href="/shop/list.php?cate=0407">º£ÀÌÁ÷<span
-							class="over">º£ÀÌÁ÷</span></a></li>
-					<li><a href="/shop/list.php?cate=0103">¿øÇÇ½º<span
-							class="over">¿øÇÇ½º</span></a></li>
-					<li><a href="/shop/list.php?cate=0202">½ºÄ¿Æ®<span
-							class="over">½ºÄ¿Æ®</span></a></li>
-					<li><a href="/shop/list.php?cate=0201">ÆÒÃ÷<span
-							class="over">ÆÒÃ÷</span></a>
-						<ul class="sub">
-							<li><a href="/shop/list.php?cate=020103">Ã»¹ÙÁö</a></li>
-							<li><a href="/shop/list.php?cate=020102">·ÕÆÒÃ÷</a></li>
-							<li><a href="/shop/list.php?cate=020104">¸é¹ÙÁö</a></li>
-							<li><a href="/shop/list.php?cate=020106">½½·¢½º</a></li>
-							<li><a href="/shop/list.php?cate=020105">·¹±ë½º</a></li>
-							<li><a href="/shop/list.php?cate=020101">¼ôÆÒÃ÷</a></li>
-						</ul></li>
-					<li><a href="/shop/list.php?cate=0601">°¡¹æ<span
-							class="over">°¡¹æ</span></a>
-						<ul class="sub">
-							<li><a href="/shop/list.php?cate=060101">¹éÆÑ/½ºÄð¹é</a></li>
-							<li><a href="/shop/list.php?cate=060102">Å©·Î½º/ÅäÆ®¹é</a></li>
-						</ul></li>
-					<li><a href="/shop/list.php?cate=0501">½Å¹ß<span
-							class="over">½Å¹ß</span></a>
-						<ul class="sub">
-							<li><a href="/shop/list.php?cate=050101">¿îµ¿È­/´ÜÈ­</a></li>
-							<li><a href="/shop/list.php?cate=050102">±¸µÎ/¿öÄ¿</a></li>
-							<li><a href="/shop/list.php?cate=050103">»÷µé/½½¸®ÆÛ/ÀåÈ­</a></li>
-						</ul></li>
-					<li><a href="/shop/list.php?cate=0701">¾Ç¼¼»ç¸®<span
-							class="over">¾Ç¼¼»ç¸®</span></a>
-						<ul class="sub">
-							<li><a href="/shop/list.php?cate=070101">ÁÖ¾ó¸®</a></li>
-							<li><a href="/shop/list.php?cate=070104">¸ðÀÚ/º§Æ®</a></li>
-							<li><a href="/shop/list.php?cate=070105">¾ç¸»/½ºÅ¸Å·</a></li>
-						</ul></li>
-				</ul>
-				<!-- //menu -->
-				<ul class="cateogry">
-					<!-- 				<li class="c6"><a href="/shop/list.php?cate=3101"><span>¼±¿ÀÇÂ 10%</span></a><em>33</em></li> -->
-					<!-- 				<li class="c1"><a href="/shop/new.php"><span>¿À´Ã½Å»ó</span></a><em>39</em></li> -->
-					<!-- 				<li class="c2"><a href="/shop/best_new.php"><span>º£½ºÆ®</span></a></li> -->
-					<li class="c3"><a href="/shop/delivery.php"></a></li>
-				</ul>
-			</nav>
-			<!-- //bottom -->
-		</header>
-	</div>
+	<!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <div class="container px-4 px-lg-5">
+             <a class="navbar-brand" href="#!">ë‹¹ê·¼ì‡¼í•‘</a>
+             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                     <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                     <li class="nav-item dropdown">
+                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <li><a class="dropdown-item" href="#!">All Products</a></li>
+                             <li><hr class="dropdown-divider" /></li>
+                             <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                             <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                         </ul>
+                     </li>
+                 </ul>
+                 <form class="d-flex">
+                     <button class="btn btn-outline-dark" type="submit">
+                         <i class="bi bi-person-circle me-1"></i>
+                         Login
+                     </button>
+                     
+                     <button class="btn btn-outline-dark" type="submit">
+                         <i class="bi-cart-fill me-1"></i>
+                         Cart
+                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                     </button>
+                 </form>
+             </div>
+         </div>
+     </nav>
+        <!-- Header-->
+        <!-- <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">SP MaLL</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">this page is ì‡¼í•‘ëª°</p>
+                </div>
+            </div>
+        </header> -->
 </body>
-</html>
