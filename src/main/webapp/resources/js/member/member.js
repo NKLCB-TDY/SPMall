@@ -10,12 +10,13 @@ $(function(){
 			$.ajax({
 				type : 'POST',
 				url : 'idoverlap.do',
-				dataType : "json", //text 타입으로 하니 map key(data.result)가 undefiend뜸 그래서 json으로 하니됨 
+				dataType : "json", //text 타입으로 하니 map key(data.result)가 undefiend뜸 그래서 json으로 하니됨	 
 				data : {
 					member_id : id
 				},
 				
-				success : function(data){
+				success : function(data){//spring version을 낮추니 data 값이안들어옴
+					console.log(data);
 					if(data.result == true){
 						$('#id_check').text('사용이 가능한 아이디 입니다.');
 					}else{

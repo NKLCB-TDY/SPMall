@@ -14,9 +14,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/common.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header/header.css">
+	
 </head>
 <body>
+	
 	<!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
          <div class="container px-4 px-lg-5">
@@ -60,4 +61,8 @@
                 </div>
             </div>
         </header> -->
+    <!-- jsdelivr CDN 
+    	- header 스크롤 동작-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>

@@ -14,6 +14,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 주소처리 js -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 회원가입 유효성검사 -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/member/member.js"></script>
 </head>
