@@ -31,7 +31,7 @@ public class MemberController {
 	
 	//회원가입 페이지로 이동
 	@RequestMapping(value ="/membersignupform.do", method = RequestMethod.GET)
-	public String membersignupform() {
+	public String memberSignupForm() {
 		return "member/membersignupform";
 	}
 	
@@ -54,11 +54,8 @@ public class MemberController {
 	
 	//회원가입 로직 
 	@RequestMapping(value="/membersignup.do", method = RequestMethod.POST)
-	public ModelAndView membersignup(MemberVO vo) {
-		System.out.println(vo.getMember_id());
-		System.out.println("기본주소 " + vo.getMember_addr2());
-		System.out.println("동 " + vo.getMember_addr3());
-		memberService.signupMember(vo);
+	public ModelAndView memberSignup(MemberVO vo) {
+		memberService.memberSignup(vo);
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
@@ -69,12 +66,6 @@ public class MemberController {
 		return "memberloginform";
 	}
 	
-	//로그인 처리
-	@RequestMapping(value = "/memberlogin.do", method = RequestMethod.POST)
-	public void login(@RequestParam("member_id") String member_id,
-					  @RequestParam("member_pwd") String member_pwd) throws IOException{
-		
-	}
 	
 	//회원 정보 업데이트 폼 이동
 	@RequestMapping(value = "/memberupdateform.do", method = RequestMethod.POST)
@@ -91,6 +82,15 @@ public class MemberController {
 		return mav;
 	}
 	
+	//로그인 처리
+		@RequestMapping(value = "/memberlogin.do", method = RequestMethod.POST)
+		public void login(@RequestParam("member_id") String member_id,
+						  @RequestParam("member_pwd") String member_pwd) throws IOException{
+			
+			MemberVO vo = new MemberVO();
+			vo = memberService.memberLogin(member_id);
+	}
+		
 	//로그아웃 처리
 	@RequestMapping(value = "/memberlogout.do", method = RequestMethod.GET)
 	public ModelAndView memberlogout(HttpServletRequest request) {

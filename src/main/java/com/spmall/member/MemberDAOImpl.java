@@ -12,8 +12,8 @@ public class MemberDAOImpl implements MemberDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public void signupMember(MemberVO vo) {
-		sqlSession.insert("member.signupMember", vo);
+	public void memberSignup(MemberVO vo) {
+		sqlSession.insert("member.memberSignup", vo);
 	}
 
 
@@ -21,6 +21,13 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int idoverlap(String member_id) {
 		return sqlSession.selectOne("member.idoverlap", member_id);
+	}
+
+	
+	//회원 로그인
+	@Override
+	public MemberVO memberLogin(String member_id) {
+		return sqlSession.selectOne("member.memberLogin", member_id);
 	}
 
 }
