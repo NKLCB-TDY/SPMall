@@ -39,9 +39,10 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value ="/idoverlap.do", method = RequestMethod.POST)
 	public Map<String, Boolean> idoverlap(@RequestParam(value ="member_id") String member_id) {
+
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		int result = memberService.idoverlap(member_id);
-
+		System.out.println(result);
 		//result   0 가입할수있는 id  
 		// 		   1 중복 	  id
 		if(result == 0) {

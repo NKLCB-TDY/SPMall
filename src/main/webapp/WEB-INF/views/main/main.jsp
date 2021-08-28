@@ -244,8 +244,7 @@
      
      <!-- footer -->
      <jsp:include page="../common/footer.jsp"></jsp:include>
-     <!-- Bootstrap core JS-->
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+     
      <!-- Core theme JS -->
      <!-- 필요시 js파일추가할것 -->
      <script src=""></script>
