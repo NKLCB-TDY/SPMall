@@ -11,8 +11,8 @@ public class MemberServiceImpl implements MemberService {
 	MemberDAO memberDAO;
 	
 	@Override
-	public void signupMember(MemberVO vo) {
-		memberDAO.signupMember(vo);
+	public void memberSignup(MemberVO vo) {
+		memberDAO.memberSignup(vo);
 	}
 
 	//id 중복 체크 
@@ -20,6 +20,12 @@ public class MemberServiceImpl implements MemberService {
 	public int idoverlap(String member_id) {
 		int result = memberDAO.idoverlap(member_id);
 		return result;
+	}
+
+	@Override
+	public MemberVO memberLogin(String member_id) {
+		return memberDAO.memberLogin(member_id);
+		
 	}
 
 	/*
