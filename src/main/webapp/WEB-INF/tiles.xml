@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="base-definition"
+		template="/WEB-INF/views/tiles/defaultLayout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/views/tiles/defaultHeader.jsp" />
+		<put-attribute name="body" 
+			value="/WEB-INF/views/tiles/defaultBody.jsp" />	
+		<put-attribute name="footer"
+			value="/WEB-INF/views/tiles/defaultFooter.jsp" />
+	</definition>
+	
+	
+	<!-- definition name은 리턴타입을 의미 -->
+	<definition name="member/*" extends="base-definition">
+		<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp"> </put-attribute>
+	</definition> 
+	
+	<definition name="main/*" extends="base-definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/{1}.jsp"> </put-attribute>
+	</definition>
+	
+	<definition name="cs/*" extends="base-definition">
+		<put-attribute name="body" value="/WEB-INF/views/cs/{1}.jsp"> </put-attribute>
+	</definition>
+	
+</tiles-definitions>

@@ -11,16 +11,13 @@
 
 <body>
 <!-- FAQ 자주하는 질문 -->
-<jsp:include page="../common/header.jsp"></jsp:include>
 
 <br><br>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
 				<div class="faq-body">
-				
 						<h5>입금확인</h5>
-						
 						<div class="card">
 							<div class="card-header">
 								

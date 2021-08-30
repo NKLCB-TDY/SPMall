@@ -61,10 +61,10 @@ public class MemberController {
 		return mav;
 	}
 	
-	//로그인 폼 이동
+	//로그인 페이지 이동
 	@RequestMapping("/memberloginform.do")
-	public String memberloginform() {
-		return "memberloginform";
+	public String memberLoginForm() {
+		return "member/memberloginform";
 	}
 	
 	
@@ -83,13 +83,15 @@ public class MemberController {
 		return mav;
 	}
 	
+	
+	
 	//로그인 처리
-		@RequestMapping(value = "/memberlogin.do", method = RequestMethod.POST)
-		public void login(@RequestParam("member_id") String member_id,
-						  @RequestParam("member_pwd") String member_pwd) throws IOException{
-			
-			MemberVO vo = new MemberVO();
-			vo = memberService.memberLogin(member_id);
+	@RequestMapping(value = "/memberlogin.do", method = RequestMethod.POST)
+	public void login(@RequestParam("member_id") String member_id,
+					  @RequestParam("member_pwd") String member_pwd) throws IOException{
+		
+	MemberVO vo = new MemberVO();
+	vo = memberService.memberLogin(member_id);
 	}
 		
 	//로그아웃 처리

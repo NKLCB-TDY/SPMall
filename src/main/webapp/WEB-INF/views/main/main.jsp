@@ -7,7 +7,6 @@
 </head>
 <body>
 	
-	 <jsp:include page="../common/header.jsp"></jsp:include>
      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
          <div class="carousel-indicators">
            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -241,9 +240,6 @@
              </div>
          </div>
      </section>
-     
-     <!-- footer -->
-     <jsp:include page="../common/footer.jsp"></jsp:include>
      
      <!-- Core theme JS -->
      <!-- 필요시 js파일추가할것 -->
