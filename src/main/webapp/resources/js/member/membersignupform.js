@@ -35,11 +35,16 @@ $(function(){
 //비밀번호 확인
 $(function(){
 	$('#member_pwd2').blur(function(){
-		if($('#member_pwd1').val() != $('#member_pwd2').val()){
-			$('#password_check').text('비밀번호가 틀립니다. 확인해주세요');
+		if($('#member_pwd2').val() == ''){
+			$('#password_check').text('비밀번호를 입력해주세요.');
 		}else{
-			$('#password_check').text('비밀번호 일치!');
+			if($('#member_pwd1').val() != $('#member_pwd2').val()){
+				$('#password_check').text('비밀번호가 틀립니다. 확인해주세요');
+			}else{
+				$('#password_check').text('비밀번호 일치!');
+			}
 		}
+		
 	});	
 });
 
