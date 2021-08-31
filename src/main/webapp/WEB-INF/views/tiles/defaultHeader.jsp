@@ -17,7 +17,6 @@
 	
 </head>
 <body>
-	
 	<!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
          <div class="container px-4 px-lg-5">
@@ -36,6 +35,7 @@
                              <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                          </ul>
                      </li>
+                     
                      <li class="nav-item">
                      	<input type="text" id="keyword" name="keyword" class="form-control" aria-label="Large" autocomplete="off" placeholder="검색어를 입력하세요."></input>
                      </li>
@@ -59,15 +59,7 @@
              </div>
          </div>
      </nav>
-        <!-- Header-->
-        <!-- <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">SP MaLL</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">this page is 쇼핑몰</p>
-                </div>
-            </div>
-        </header> -->
+     
     <!-- jsdelivr CDN 
     	- header 스크롤 동작-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

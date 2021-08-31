@@ -14,9 +14,9 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 주소처리 js -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- 회원가입 유효성검사 -->
+<!-- 회원가입 유효성검사 .js  -->
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/member/member.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/member/membersignupform.js"></script>
 </head>
 
 <body>
@@ -134,7 +134,8 @@
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="c_fname" class="text-black"><br></label> <select
+									<label for="c_fname" class="text-black"><br></label> 
+									<select
 										id="email_select" class="form-control" >
 										<option value="naver.com" selected>naver.com</option>
 										<option value="gmail.com">gmail.com</option>

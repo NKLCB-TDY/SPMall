@@ -5,7 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/member/memberlogin.css">
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/member/memberloginform.css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/member/memberloginform.js"></script>
+	
+<!-- front 단 link, -->
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+ <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
 	<div class="container">
@@ -20,16 +26,14 @@
 					</div>
                    <form action="" method="post" name="login">
                            <div class="form-group">
-                              <label for="exampleInputEmail1">Email address</label>
+                              <label for="exampleInputEmail1">아이디 ID</label>
                               <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
                            </div>
                            <div class="form-group">
-                              <label for="exampleInputEmail1">Password</label>
+                              <label for="exampleInputEmail1">패스워드 PW</label>
                               <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
                            </div>
-                           <div class="form-group">
-                              <p class="text-center">By signing up you accept our <a href="#">Terms Of Use</a></p>
-                           </div>
+                           
                            <div class="col-md-12 text-center ">
                               <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
                            </div>
@@ -46,48 +50,14 @@
                                  </a>
                               </p>
                            </div>
+                           
                            <div class="form-group">
-                              <p class="text-center">Don't have account? <a href="#" id="signup">Sign up here</a></p>
+                              <p class="text-center">계정이 없으신가요? <a href="membersignupform.do" id="signup">회원가입 하기</a></p>
                            </div>
                         </form>
                  
 				</div>
 			</div>
-			  <div id="second">
-			      <div class="myform form ">
-                        <div class="logo mb-3">
-                           <div class="col-md-12 text-center">
-                              <h1 >Signup</h1>
-                           </div>
-                        </div>
-                        <form action="#" name="registration">
-                           <div class="form-group">
-                              <label for="exampleInputEmail1">First Name</label>
-                              <input type="text"  name="firstname" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Enter Firstname">
-                           </div>
-                           <div class="form-group">
-                              <label for="exampleInputEmail1">Last Name</label>
-                              <input type="text"  name="lastname" class="form-control" id="lastname" aria-describedby="emailHelp" placeholder="Enter Lastname">
-                           </div>
-                           <div class="form-group">
-                              <label for="exampleInputEmail1">Email address</label>
-                              <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-                           </div>
-                           <div class="form-group">
-                              <label for="exampleInputEmail1">Password</label>
-                              <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
-                           </div>
-                           <div class="col-md-12 text-center mb-3">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Get Started For Free</button>
-                           </div>
-                           <div class="col-md-12 ">
-                              <div class="form-group">
-                                 <p class="text-center"><a href="#" id="signin">Already have an account?</a></p>
-                              </div>
-                           </div>
-                            </div>
-                        </form>
-                     </div>
 			</div>
 		</div>
       </div>

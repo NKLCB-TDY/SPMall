@@ -1,6 +1,4 @@
 body {
-	padding-top: 4.2rem;
-	padding-bottom: 4.2rem;
 	background: rgba(0, 0, 0, 0.76);
 }
 
@@ -13,6 +11,8 @@ h1, h2, h3 {
 }
 
 .myform {
+	margin-top: 38%;
+	margin-bottom: 38%;
 	position: relative;
 	display: -ms-flexbox;
 	display: flex;
@@ -34,7 +34,9 @@ h1, h2, h3 {
 }
 
 .mybtn {
+	margin-top: 10px;
 	border-radius: 50px;
+	width: 100%;
 }
 
 .login-or {

@@ -62,7 +62,7 @@ public class MemberController {
 	}
 	
 	//로그인 페이지 이동
-	@RequestMapping("/memberloginform.do")
+	@RequestMapping(value = "/memberloginform.do", method = RequestMethod.GET)
 	public String memberLoginForm() {
 		return "member/memberloginform";
 	}

@@ -5,18 +5,18 @@
 <mapper namespace="member">
 	<insert id="memberSignup" parameterType="com.spmall.member.MemberVO">
 		<![CDATA[
-			insert into `member`(member_id, member_pwd, member_name, member_gender, member_phone, member_email1, member_eamil2, member_addr1, member_addr2, member_addr3, member_addr4)
-			values(	#{member_id},
-					#{member_pwd},
-					#{member_name},
-					#{member_gender},
-					#{member_phone},
-					#{member_email1},
-					#{member_email2},
-					#{member_addr1},
-					#{member_addr2},
-					#{member_addr3},
-					#{member_addr4}
+			INSERT INTO `MEMBER`(MEMBER_ID, MEMBER_PWD, MEMBER_NAME, MEMBER_GENDER, MEMBER_PHONE, MEMBER_EMAIL1, MEMBER_EAMIL2, MEMBER_ADDR1, MEMBER_ADDR2, MEMBER_ADDR3, MEMBER_ADDR4)
+			VALUES(	#{MEMBER_ID},
+					#{MEMBER_PWD},
+					#{MEMBER_NAME},
+					#{MEMBER_GENDER},
+					#{MEMBER_PHONE},
+					#{MEMBER_EMAIL1},
+					#{MEMBER_EMAIL2},
+					#{MEMBER_ADDR1},
+					#{MEMBER_ADDR2},
+					#{MEMBER_ADDR3},
+					#{MEMBER_ADDR4}
 			)
 		]]>
 	</insert>
