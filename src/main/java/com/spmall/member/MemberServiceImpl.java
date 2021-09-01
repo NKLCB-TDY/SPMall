@@ -28,6 +28,16 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public MemberVO memberInfo(String member_id) {
+		return memberDAO.memberInfo(member_id);
+	}
+
+	@Override
+	public void memberUpdate(MemberVO vo) {
+		memberDAO.memberUpdate(vo);
+	}
+
 	/*
 	 * @Override public void updateMember(MemberVO vo) { // TODO Auto-generated
 	 * method stub }

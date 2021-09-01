@@ -32,4 +32,23 @@
 		from member
 		where member_id = #{member_id}
 	</select>
+	
+	<select id ="memberInfo" resultType="com.spmall.member.MemberVO">
+		select *
+		from member
+		where member_id = #{member_id}
+	</select>
+	
+	<update id="memberUpdate">
+		update member 
+		set 
+			member_phone = #{member_phone},
+			member_email1 = #{member_email1},
+			member_eamil2 = #{member_eamil2},
+			member_addr1 = #{member_addr1},
+			member_addr2 = #{member_addr2},
+			member_addr3 = #{member_addr3},
+			member_addr4 = #{member_addr4}
+		where member_id = #{member_id}
+	</update>
 </mapper>
