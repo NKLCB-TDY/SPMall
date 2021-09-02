@@ -70,19 +70,24 @@ public class MemberController {
 	
 	//회원 정보 페이지
 	@RequestMapping(value = "/memberinfoform.do", method = RequestMethod.GET)
-	public String memberInfo(@RequestParam("member_id") String memberId, Model model) {
+	public ModelAndView memberInfoForm() {
 		//로그인처리를 먼저해야 개발가능 로그인한 아이디 값을 가져와야하기에..
-		model.addAttribute(memberService.memberInfo(memberId));
-		return "member/memberinfoform";
+		String member_id = "sdfsdfsdf"; //임시id
+		ModelAndView mv = new ModelAndView();
+		mv.addObject(memberService.memberInfo(member_id));
+		mv.setViewName("member/memberinfoform");
+		return mv;
 	}
 	
-	//회원 업데이트 페이지
+	//회원정보 수정 페이지
 	@RequestMapping(value = "/memberupdateform.do", method = RequestMethod.GET)
-	public String memberUpdateForm(@ModelAttribute("membervo") MemberVO vo) {
-		return "member/memberupdateform";
+	public ModelAndView memberUpdateForm(@ModelAttribute("member_id") String member_id) {
+		ModelAndView mv = new ModelAndView();
+		memberService.memberInfo(member_id);
+		return mv;
 	}
 	
-	//회원 업데이트 처리
+	//회원정보 수정 처리
 	@RequestMapping(value = "/memberupdate.do", method = RequestMethod.POST)
 	public String memberUpdate(@ModelAttribute("membervo") MemberVO vo) {
 		logger.info("회원정보수정");
