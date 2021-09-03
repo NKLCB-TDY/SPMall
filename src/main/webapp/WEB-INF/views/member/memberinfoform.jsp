@@ -16,17 +16,18 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 회원가입 유효성검사 .js  -->
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/member/membersignupform.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/member/memberinfoform.js"></script>
 </head>
 
 <body>
 	
-	<form method="post" name="signupform">
+	<form method="post" name="updateform">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 mb-5 mb-md-0">
+				
 					<center>
-						<h2 class="h3 mb-3 text-black">회원정보</h2>
+						<h2 class="h3 mb-3 text-black">회원정보 및 정보수정</h2>
 					</center>
 					<br> <br>
 					<div style="border: 1px solid #AAAAAA; border-radius: 30px 30px"
@@ -36,7 +37,7 @@
 							<div class="col-md-12">
 								<label for="c_companyname" class="text-black">아이디</label> <input
 									type="text" class="form-control" id="member_id"
-									readonly="readonly" value="${memberVO.member_id}">
+									readonly="readonly" name="member_id" value="${memberVO.member_id}">
 							</div>
 						</div>
 
@@ -50,32 +51,34 @@
 							</div>
 						</div>
 
-						<label for="c_companyname" class="text-black">성별</label><br>
-						<div class="form-group row">
-							<div class="col-md-1">
-								<label for="c_companyname" class="text-black">남성</label><br>
-								<input type="radio" name="member_gender" value="M"
-									id="member_gender">
-							</div>
-							<div class="col-md-1">
-								<label for="c_companyname" class="text-black">여성</label><br>
-								<input type="radio" name="member_gender" value="F"
-									id="member_gender">
-							</div>
-						</div>
-
-						<!--휴대전화-->
+						<!--휴대전화 -->
+						<!--js로 기존번호 출력 -->
 						<script>
-							const num = '${memberVO.member_phone}';
-							const phone1 = num.substr(0,3);
-							const phone2 = num.substr(3,4);
-							const phone3 = num.substr(7,4);
-							console.log(phone1);
-							console.log(phone2);
-							console.log(phone3);
+							$(function(){
+								const num = '${memberVO.member_phone}';
+								
+								const phone1 = num.substr(0,3);
+								const phone2 = num.substr(3,4);
+								const phone3 = num.substr(7,4);
+								let option_values = document.getElementById("member_cp1");
+								option_length = option_values.options.length;
+								
+								for(let i=0; i< option_length; i++){
+									if(phone1 == option_values.options[i].value){
+										option_values[i].selected = true;
+									}
+								}
+								
+								document.getElementById("member_cp2").value = phone2;
+								document.getElementById("member_cp3").value = phone3;
+							});
 						</script>
+						
 						<div class="form-group row">
 							<div class="col-md-4">
+								<div>
+									<input type="hidden" name = "member_phone" id = "member_phone">
+								</div>
 								<div class="form-group">
 									<label for="c_country" class="text-black">휴대전화</label> <select
 										id="member_cp1" class="form-control">
@@ -109,17 +112,35 @@
 							<div class="col-md-4">
 								<label for="c_country" class="text-black">이메일
 								</label> <input type="text" class="form-control" id="member_email1"
-									name="member_email1" size="6">
+									name="member_email1" size="6" value="${memberVO.member_email1}">
 							</div>
 
 							<div class="col-md-4">
 								<label for="c_country" class="text-black"><br></label> <input
 									type="text" class="form-control" id="_email2" size="6"
-									disabled="disabled" value="naver.com"> <input type="hidden"
-									name="member_email2" id="member_email2" value="naver.com">
+									disabled="disabled"> <input type="hidden"
+									name="member_email2" id="member_email2">
 							</div>
 
 
+							<!--js로 member_email2 출력 -->
+							<script>
+								$(function(){
+									const email_behind = '${memberVO.member_email2}';
+									
+									let option_values = document.getElementById("email_select");
+									option_length = option_values.options.length;
+									
+									for(let i=0; i< option_length; i++){
+										if(email_behind == option_values.options[i].value){
+											option_values[i].selected = true;
+											document.getElementById("_email2").value = option_values.options[i].value;
+											document.getElementById("member_email2").value = option_values.options[i].value;
+										}
+									}
+								});
+							</script>
+							
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="c_fname" class="text-black"><br></label> 
@@ -143,7 +164,7 @@
 								<label for="c_diff_address" class="text-black">주소</label> 
 								<input type="text"
 									class="form-control" name="member_addr1" id="postCode"
-									placeholder="우편번호">
+									placeholder="우편번호" value="${memberVO.member_addr1}">
 							</div>
 							<div class="col-md-4">
 								<label for="c_diff_address" class="text-black"><br></label>
@@ -154,15 +175,15 @@
 
 						<div class="form-group">
 							<input type="text" class="form-control" name="member_addr2"
-								id="basicAddr" placeholder="기본주소">
+								id="basicAddr" placeholder="기본주소" value="${memberVO.member_addr2}">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="member_addr3"
-								id="dongAddr" placeholder="동">
+								id="dongAddr" placeholder="동" value="${memberVO.member_addr3}">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="member_addr4"
-								id="detailAddr" placeholder="상세주소">
+								id="detailAddr" placeholder="상세주소" value="${memberVO.member_addr4}">
 						</div>
 
 						<br> <br> <br>
@@ -174,7 +195,7 @@
 								<input
 									style="background-color: #3b5999; border: 1px solid #3b5999;"
 									type="button" class="btn btn-primary btn-lg py-3 btn-block"
-									value="회원가입" id="joinMember" onclick="Sub()">
+									value="회원정보수정" id="updateMember" onclick="Sub()">
 							</div>
 							<div class="col-md-6">
 								<input

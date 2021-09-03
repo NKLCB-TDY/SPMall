@@ -56,10 +56,10 @@ public class MemberController {
 	
 	//회원가입 로직 
 	@RequestMapping(value="/membersignup.do", method = RequestMethod.POST)
-	public ModelAndView memberSignup(MemberVO vo) {
+	public String memberSignup(MemberVO vo) {
+		logger.info(vo.getMember_addr1());
 		memberService.memberSignup(vo);
-		ModelAndView mav = new ModelAndView();
-		return mav;
+		return "redirect:/main/main.do";
 	}
 	
 	//로그인 페이지 
@@ -68,7 +68,7 @@ public class MemberController {
 		return "member/memberloginform";
 	}
 	
-	//회원 정보 페이지
+	//회원 정보 & 수정 페이지
 	@RequestMapping(value = "/memberinfoform.do", method = RequestMethod.GET)
 	public ModelAndView memberInfoForm() {
 		//로그인처리를 먼저해야 개발가능 로그인한 아이디 값을 가져와야하기에..
@@ -79,20 +79,13 @@ public class MemberController {
 		return mv;
 	}
 	
-	//회원정보 수정 페이지
-	@RequestMapping(value = "/memberupdateform.do", method = RequestMethod.GET)
-	public ModelAndView memberUpdateForm(@ModelAttribute("member_id") String member_id) {
-		ModelAndView mv = new ModelAndView();
-		memberService.memberInfo(member_id);
-		return mv;
-	}
-	
 	//회원정보 수정 처리
 	@RequestMapping(value = "/memberupdate.do", method = RequestMethod.POST)
-	public String memberUpdate(@ModelAttribute("membervo") MemberVO vo) {
+	public String memberUpdate(MemberVO vo) {
 		logger.info("회원정보수정");
-		
-		return "redirect:/member/read";
+		System.out.println("NONONONO");
+		memberService.memberUpdate(vo);
+		return "redirect:/main/main.do";
 	}
 	
 	
