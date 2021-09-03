@@ -1,5 +1,6 @@
 // 회원수정 유효성 검사
 
+							
 //주소검색 처리
 function find_addr() {
    new daum.Postcode({
@@ -66,12 +67,11 @@ $(function(){
 });
 
 function Sub(){
-	var num = 0;
-	var list = new Array();
+	
 	var phone = $('#member_cp1').val() + $('#member_cp2').val() + $('#member_cp3').val()
 	console.log(phone);
 	$('#member_phone').val(phone);
-	document.signupform.action = "membersignup.do";
-	document.signupform.submit();
+	document.updateform.action = "/member/memberupdate.do";
+	document.updateform.submit();
 	
 }
