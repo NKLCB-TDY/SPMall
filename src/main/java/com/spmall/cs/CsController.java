@@ -11,4 +11,6 @@ public class CsController {
 	public String faq() {
 		return "cs/faq";
 	}
+	
+	
 }
