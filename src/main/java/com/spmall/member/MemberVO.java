@@ -27,6 +27,9 @@ public class MemberVO {
 	private String member_del_yn;				//È¸¿ø Å»Åð : N
 	
 	
+	private String RoleName;		//±ÇÇÑÀÌ¸§
+	
+	
 	public String getMember_id() {
 		return member_id;
 	}
@@ -128,6 +131,12 @@ public class MemberVO {
 	}
 	public void setMember_del_yn(String member_del_yn) {
 		this.member_del_yn = member_del_yn;
+	}
+	public String getRoleName() {
+		return RoleName;
+	}
+	public void setRoleName(String roleName) {
+		RoleName = roleName;
 	}
 	@Override
 	public String toString() {

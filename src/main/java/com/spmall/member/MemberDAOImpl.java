@@ -24,12 +24,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	
-	//회원 로그인
-	@Override
-	public MemberVO memberLogin(String member_id) {
-		return sqlSession.selectOne("member.memberLogin", member_id);
-	}
-
 
 	@Override
 	public MemberVO memberInfo(String member_id) {
@@ -41,5 +35,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public void memberUpdate(MemberVO vo) {
 		sqlSession.update("member.memberUpdate", vo);
 	}
+	
+	//통합 로그인
+		@Override
+		public MemberVO commonLogin(MemberVO vo) {
+			return sqlSession.selectOne("member.commonLogin", vo);
+		}
 
 }

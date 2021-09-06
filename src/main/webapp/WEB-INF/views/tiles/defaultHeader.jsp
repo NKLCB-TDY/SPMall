@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +45,7 @@
                      	<button type="submit" class="btn btn-light">검색</button>
                      </li>
                  </ul>
+                 
                  <form class="d-flex">
                      <button type="button" class="btn btn-outline-dark" 
                      	onclick="location.href='/member/memberloginform.do'">

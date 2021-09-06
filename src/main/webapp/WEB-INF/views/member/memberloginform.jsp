@@ -24,19 +24,20 @@
 							<h1>Login</h1>
 						 </div>
 					</div>
-                   <form action="" method="post" name="login">
+                   <form action="processlogin.do" method="POST" name="login">
                            <div class="form-group">
                               <label for="exampleInputEmail1">아이디 ID</label>
-                              <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                              <input type="text" name="member_id"  class="form-control" id="email" placeholder="Enter email">
                            </div>
                            <div class="form-group">
                               <label for="exampleInputEmail1">패스워드 PW</label>
-                              <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
+                              <input type="password" name="member_pwd" id="password"  class="form-control" placeholder="Enter Password">
                            </div>
                            
                            <div class="col-md-12 text-center ">
                               <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
                            </div>
+					</form>                           
                            <div class="col-md-12 ">
                               <div class="login-or">
                                  <hr class="hr-or">
@@ -54,7 +55,7 @@
                            <div class="form-group">
                               <p class="text-center">계정이 없으신가요? <a href="membersignupform.do" id="signup">회원가입 하기</a></p>
                            </div>
-                        </form>
+                        
                  
 				</div>
 			</div>

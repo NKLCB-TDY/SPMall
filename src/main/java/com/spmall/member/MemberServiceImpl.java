@@ -2,6 +2,7 @@ package com.spmall.member;
 
 import javax.inject.Inject;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,6 +10,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Inject
 	MemberDAO memberDAO;
+	
+	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 	
 	@Override
 	public void memberSignup(MemberVO vo) {
@@ -21,13 +24,7 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.idoverlap(member_id);
 		return result;
 	}
-
-	@Override
-	public MemberVO memberLogin(String member_id) {
-		return memberDAO.memberLogin(member_id);
-		
-	}
-
+	
 	@Override
 	public MemberVO memberInfo(String member_id) {
 		return memberDAO.memberInfo(member_id);
@@ -43,5 +40,19 @@ public class MemberServiceImpl implements MemberService {
 	 * method stub }
 	
 	 */
+	
+	//통합 로그인 구현
+	@Override
+	public MemberVO commonLogin(MemberVO vo) {
+		MemberVO user = memberDAO.commonLogin(vo);
+		String rawPw = vo.getMember_pwd();
+		//rawPW : 암호화 되지않은 비밀번호
+		//rawPw와 DB에 암호화 되어 저장되어있는 비밀번호 비교
+		if(scpwd.matches(rawPw, user.getMember_pwd())) {
+			return user;
+		}else {
+			return null;
+		}
+	}
 
 }
