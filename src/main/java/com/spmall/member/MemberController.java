@@ -33,7 +33,7 @@ public class MemberController {
 	//회원가입 페이지로 이동
 	@RequestMapping(value ="/membersignupform.do", method = RequestMethod.GET)
 	public String memberSignupForm() {
-		return "member/membersignupform";
+		return "member/member/membersignupform";
 	}
 	
 	//id 겹치는지 확인
@@ -65,7 +65,7 @@ public class MemberController {
 	//로그인 페이지 
 	@RequestMapping(value = "/memberloginform.do", method = RequestMethod.GET)
 	public String memberLoginForm() {
-		return "member/memberloginform";
+		return "member/member/memberloginform";
 	}
 	
 	//회원 정보 & 수정 페이지
@@ -75,7 +75,7 @@ public class MemberController {
 		String member_id = "sdfsdfsdf"; //임시id
 		ModelAndView mv = new ModelAndView();
 		mv.addObject(memberService.memberInfo(member_id));
-		mv.setViewName("member/memberinfoform");
+		mv.setViewName("member/member/memberinfoform");
 		return mv;
 	}
 	
@@ -93,10 +93,19 @@ public class MemberController {
 	
 	//로그인 처리
 	@RequestMapping(value = "/memberlogin.do", method = RequestMethod.POST)
-	public void login(@RequestParam("member_id") String member_id,
-					  @RequestParam("member_pwd") String member_pwd) throws IOException{
-		MemberVO vo = new MemberVO();
-		vo = memberService.memberLogin(member_id);
+	public String login(MemberVO vo, HttpSession session, Model model) throws IOException{
+		String page = "member/member/memberloginform";
+		
+		//로그인 정보 
+		MemberVO logininfo = memberService.commonLogin(vo);
+		if(logininfo != null) {
+			//
+			session.setAttribute("member", logininfo);
+			page ="redirect:/main/login_permissions_check.do";
+		}else {
+			model.addAttribute("loginFail", true);
+		}
+		return page;
 	}
 		
 	//로그아웃 처리

@@ -5,7 +5,7 @@
 <mapper namespace="member">
 	<insert id="memberSignup" parameterType="com.spmall.member.MemberVO">
 		<![CDATA[
-			insert into `member`(member_id, member_pwd, member_name, member_gender, member_phone, member_email1, member_email2, member_addr1, member_addr2, member_addr3, member_addr4)
+			insert into tbl_member(member_id, member_pwd, member_name, member_gender, member_phone, member_email1, member_email2, member_addr1, member_addr2, member_addr3, member_addr4)
 			values(	#{member_id},
 					#{member_pwd},
 					#{member_name},
@@ -23,14 +23,15 @@
 	
 	<select id = "idoverlap" parameterType="String" resultType ="int">
 		select Count(*)
-		from member
+		from tbl_member
 		where member_id = #{member_id};
 	</select>
 	
-	<select id ="memberLogin" parameterType="String" resultType="com.spmall.member.MemberVO">
+	<select id ="commonLogin" resultType="com.spmall.member.MemberVO">
 		select *
-		from member
-		where member_id = #{member_id}
+		from (select member_id, member_pwd, 'ROLE_USER' ROLE_NAME
+			 from tbl_member)tbl_All
+		where member_id = #{member_id};
 	</select>
 	
 	<select id ="memberInfo" resultType="com.spmall.member.MemberVO">
@@ -38,13 +39,13 @@
 			member_id, member_name, member_gender, member_phone, member_email1, member_email2,
 			member_addr1, member_addr2, member_addr3, member_addr4, memeber_create_at
 		from 
-			member
+			tbl_member
 		where 
 			member_id = #{member_id}
 	</select>
 	
 	<update id="memberUpdate">
-		update member 
+		update tbl_member 
 		set 
 			member_phone = #{member_phone},
 			member_email1 = #{member_email1},
