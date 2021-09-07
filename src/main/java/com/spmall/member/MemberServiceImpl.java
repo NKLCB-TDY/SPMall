@@ -15,6 +15,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void memberSignup(MemberVO vo) {
+		vo.setMember_pwd(scpwd.encode(vo.getMember_pwd()));
 		memberDAO.memberSignup(vo);
 	}
 
