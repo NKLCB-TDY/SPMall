@@ -9,6 +9,7 @@ public class CustomerUser extends User {
 
     private String roleName;
     private String fullName;
+    private String deptName;
 
     public String getFullName() {
 		return fullName;
@@ -19,7 +20,7 @@ public class CustomerUser extends User {
 		this.fullName = fullName;
 	}
 
-	private String deptName;
+	
 
     public CustomerUser(String username, String password,
             Collection<? extends GrantedAuthority> authorities) {

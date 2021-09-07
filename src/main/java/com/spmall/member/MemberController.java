@@ -101,7 +101,7 @@ public class MemberController {
 		if(logininfo != null) {
 			//
 			session.setAttribute("member", logininfo);
-			page ="redirect:/main/login_permissions_check.do";
+			page ="redirect:/main/main.do";
 		}else {
 			model.addAttribute("loginFail", true);
 		}

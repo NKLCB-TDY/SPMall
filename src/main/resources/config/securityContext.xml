@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-<security:http>
-	<security:intercept-url 
-		pattern="/" access="permitAll()" />
 	
+<security:http>
 	
 	<security:form-login
-		login-page="/memberlogin.do" login-processing-url="/processlogin.do"
-		default-target-url="/main.do"
-		authentication-failure-url="/memberloginform.do"
+		login-page="/member/memberloginform.do" login-processing-url="/member/processlogin.do"
+		default-target-url="/main/main.do"
+		authentication-failure-url="/member/memberloginform.do"
 		username-parameter="member_id" password-parameter="member_pwd" />
 	<security:logout logout-url="/logout"
-		logout-success-url="/main.do" />
+		logout-success-url="/main/main.do" />
 	<security:access-denied-handler
 		error-page="/accessDenied.jsp" />
-	
-	
+
 	<security:csrf disabled="true" />
 </security:http>
 
-<security:authentication-manager>
-
-</security:authentication-manager>
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="customerUserService">
+			<security:password-encoder hash="bcrypt" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	
 </beans>
