@@ -15,12 +15,12 @@ public class MainController {
 	public String Main(Authentication authentication) {
 		String page = "member/main/main";
 		if(authentication != null) {
+
 			CustomerUser user = (CustomerUser)authentication.getPrincipal();
-			System.out.println("OK!!!!");
 			for(GrantedAuthority item : user.getAuthorities()) {
 				
 				String roleName = item.getAuthority();
-				
+				System.out.println("roleName¿∫ " + roleName);
 				switch(roleName) {
 				case "ROLE_USER":
 					page = "member/main/main";

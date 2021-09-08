@@ -13,6 +13,7 @@
 	
 	<!-- definition name은 리턴타입을 의미 -->
 	<definition name="member/*/*" extends="base-definition">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/memberHeader.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"> </put-attribute>
 	</definition> 
 	

@@ -27,7 +27,7 @@ public class MemberVO {
 	private String member_del_yn;				//회원 탈퇴 : N
 	
 	
-	private String RoleName;		//권한이름
+	private String Role_Name;		//권한이름
 	
 	
 	public String getMember_id() {
@@ -132,12 +132,15 @@ public class MemberVO {
 	public void setMember_del_yn(String member_del_yn) {
 		this.member_del_yn = member_del_yn;
 	}
-	public String getRoleName() {
-		return RoleName;
+	
+	
+	public String getRole_Name() {
+		return Role_Name;
 	}
-	public void setRoleName(String roleName) {
-		RoleName = roleName;
+	public void setRole_Name(String role_Name) {
+		Role_Name = role_Name;
 	}
+	
 	@Override
 	public String toString() {
 		return "MemberVO [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_name=" + member_name
@@ -146,8 +149,13 @@ public class MemberVO {
 				+ ", member_addr2=" + member_addr2 + ", member_addr3=" + member_addr3 + ", member_addr4=" + member_addr4
 				+ ", member_point=" + member_point + ", memeber_create_at=" + memeber_create_at
 				+ ", member_lately_date=" + member_lately_date + ", member_total_login=" + member_total_login
-				+ ", member_total_buy=" + member_total_buy + ", member_del_yn=" + member_del_yn + "]";
+				+ ", member_total_buy=" + member_total_buy + ", member_del_yn=" + member_del_yn + ", Role_Name="
+				+ Role_Name + "]";
 	}
+	
+	
+	
+
 	
 	
 	

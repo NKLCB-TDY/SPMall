@@ -7,12 +7,28 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	
+	<security:http pattern="/resources/css/**" security="none"/>
+	<security:http pattern="/resources/js/**" security="none"/>
+	<security:http pattern="/resources/image/**" security="none"/>
 <security:http>
-	
+	<security:intercept-url 
+			pattern="/" access="permitAll()" />
+	<security:intercept-url
+			pattern="/main/main.do" access="permitAll()" />			
+	<security:intercept-url
+			pattern="/member/membersignupform.do" access="permitAll()" />
+	<security:intercept-url
+			pattern="/member/memberloginform.do" access="permitAll()" />
+	<security:intercept-url
+			pattern="/member/idoverlap.do" access="permitAll()" />
+			
+	<security:intercept-url pattern="/admin*"
+			access="hasAuthority('ROLE_ADMIN')" />
+	<security:intercept-url pattern="/**"
+			access="isAuthenticated()" />
 	<security:form-login
 		login-page="/member/memberloginform.do" login-processing-url="/member/processlogin.do"
-		default-target-url="/main/main.do"
+		default-target-url="/common/certificationapproval.do"
 		authentication-failure-url="/member/memberloginform.do"
 		username-parameter="member_id" password-parameter="member_pwd" />
 	<security:logout logout-url="/logout"
