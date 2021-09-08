@@ -43,7 +43,7 @@ public class MemberController {
 
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		int result = memberService.idoverlap(member_id);
-		System.out.println(result);
+		
 		//result   0 가입할수있는 id  
 		// 		   1 중복 	  id
 		if(result == 0) {
@@ -91,36 +91,5 @@ public class MemberController {
 	
 	//////////////////////////////////////////////////////
 	
-	//로그인 처리
-	@RequestMapping(value = "/memberlogin.do", method = RequestMethod.POST)
-	public String login(MemberVO vo, HttpSession session, Model model) throws IOException{
-		String page = "member/member/memberloginform";
-		
-		//로그인 정보 
-		MemberVO logininfo = memberService.commonLogin(vo);
-		if(logininfo != null) {
-			//
-			session.setAttribute("member", logininfo);
-			page ="redirect:/main/main.do";
-		}else {
-			model.addAttribute("loginFail", true);
-		}
-		return page;
-	}
-		
-	//로그아웃 처리
-	@RequestMapping(value = "/memberlogout.do", method = RequestMethod.GET)
-	public ModelAndView memberlogout(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/main/main.do");
-		HttpSession session = request.getSession();
-		session.removeAttribute("");
-		return mav; 
-	}
-	
-	//비회원 추가 한다면
-	/* public */
-	
-	
-	
+	//로그인 처리, 로그아웃 처리는 spring시큐리티로 처리, 비회원 기능추가는 메인 기능완료시 추가
 }

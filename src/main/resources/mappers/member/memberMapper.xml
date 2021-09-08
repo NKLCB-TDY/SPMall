@@ -29,9 +29,11 @@
 	
 	<select id ="commonLogin" resultType="com.spmall.member.MemberVO">
 		select *
-		from (select member_id, member_pwd, 'ROLE_USER' ROLE_NAME
-			 from tbl_member)tbl_All
-		where member_id = #{member_id};
+		from (
+				select member_id, member_pwd, 'ROLE_USER' ROLE_NAME
+			 	from tbl_member) tbl_all
+		where 
+			member_id = #{member_id};
 	</select>
 	
 	<select id ="memberInfo" resultType="com.spmall.member.MemberVO">
