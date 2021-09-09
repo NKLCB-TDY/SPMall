@@ -119,7 +119,7 @@ function Sub(){
 	var phone = $('#member_cp1').val() + $('#member_cp2').val() + $('#member_cp3').val()
 	console.log(phone);
 	$('#member_phone').val(phone);
-	document.signupform.action = "membersignup.do";
-	document.signupform.submit();
+	document.memberJoin.action = "memberJoin.do";
+	document.memberJoin.submit();
 	
 }

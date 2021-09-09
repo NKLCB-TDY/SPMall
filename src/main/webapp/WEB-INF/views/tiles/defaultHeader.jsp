@@ -48,7 +48,7 @@
                  
                  <form class="d-flex">
                      <button type="button" class="btn btn-outline-dark" 
-                     	onclick="location.href='/member/memberloginform.do'">
+                     	onclick="location.href='/main/mainLogin.do'">
                          <i class="bi bi-person-circle me-1"></i>
                          Login
                      </button>

@@ -56,7 +56,7 @@
                      </button>
                  <sec:authorize access="isAnonymous()">
                      <button type="button" class="btn btn-outline-dark" 
-                     	onclick="location.href='/member/memberloginform.do'">
+                     	onclick="location.href='/main/mainLogin.do'">
                          <i class="bi bi-person-circle me-1"></i>
                          Login
                      </button>
@@ -65,7 +65,7 @@
                  <sec:authorize access="hasRole('ROLE_USER')">
                  	
                  	<button type="button" class="btn btn-outline-dark" 
-                     	onclick="location.href='/member/memberloginform.do'">
+                     	onclick="location.href='/mypage/membermypage.do'">
                          <i class="bi bi-person-circle me-1"></i>
                          마이페이지
                      </button>

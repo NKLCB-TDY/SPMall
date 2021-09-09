@@ -16,9 +16,9 @@
 	<security:intercept-url
 			pattern="/main/main.do" access="permitAll()" />			
 	<security:intercept-url
-			pattern="/member/membersignupform.do" access="permitAll()" />
+			pattern="/member/memberJoin.do" access="permitAll()" />
 	<security:intercept-url
-			pattern="/member/memberloginform.do" access="permitAll()" />
+			pattern="/main/mainLogin.do" access="permitAll()" />
 	<security:intercept-url
 			pattern="/member/idoverlap.do" access="permitAll()" />
 			
@@ -27,9 +27,9 @@
 	<security:intercept-url pattern="/**"
 			access="isAuthenticated()" />
 	<security:form-login
-		login-page="/member/memberloginform.do" login-processing-url="/member/processlogin.do"
+		login-page="/main/mainLogin.do" login-processing-url="/main/processlogin.do"
 		default-target-url="/common/certificationapproval.do"
-		authentication-failure-url="/member/memberloginform.do"
+		authentication-failure-url="/main/mainLogin.do"
 		username-parameter="member_id" password-parameter="member_pwd" />
 	<security:logout logout-url="/logout"
 		logout-success-url="/main/main.do" />

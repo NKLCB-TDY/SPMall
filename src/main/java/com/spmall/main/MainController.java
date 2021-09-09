@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spmall.common.CustomerUser;
 
@@ -35,5 +36,12 @@ public class MainController {
 			}
 		}
 		return page;
+	}
+	
+	
+	//로그인 페이지 
+	@RequestMapping(value = "/mainLogin.do", method = RequestMethod.GET)
+	public String mainLogin() {
+		return "member/main/mainLogin";
 	}
 }

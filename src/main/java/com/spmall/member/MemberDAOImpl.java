@@ -12,8 +12,8 @@ public class MemberDAOImpl implements MemberDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public void memberSignup(MemberVO vo) {
-		sqlSession.insert("member.memberSignup", vo);
+	public void memberJoin(MemberVO vo) {
+		sqlSession.insert("member.memberJoin", vo);
 	}
 
 
