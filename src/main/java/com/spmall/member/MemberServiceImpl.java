@@ -14,9 +14,9 @@ public class MemberServiceImpl implements MemberService {
 	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 	
 	@Override
-	public void memberSignup(MemberVO vo) {
+	public void memberJoin(MemberVO vo) {
 		vo.setMember_pwd(scpwd.encode(vo.getMember_pwd()));
-		memberDAO.memberSignup(vo);
+		memberDAO.memberJoin(vo);
 	}
 
 	//id 중복 체크 

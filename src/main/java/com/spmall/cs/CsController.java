@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CsController {
 	@RequestMapping(value="/faq.do", method = RequestMethod.GET )
 	public String faq() {
-		return "cs/faq";
+		return "member/cs/faq"; //나중에 empty로 바꿀것
 	}
 	
 	

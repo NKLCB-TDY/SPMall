@@ -1,18 +1,13 @@
 package com.spmall.member;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,9 +26,17 @@ public class MemberController {
 	
 	
 	//회원가입 페이지로 이동
-	@RequestMapping(value ="/membersignupform.do", method = RequestMethod.GET)
-	public String memberSignupForm() {
-		return "member/member/membersignupform";
+	@RequestMapping(value ="/memberJoin.do", method = RequestMethod.GET)
+	public String memberJoin() {
+		return "member/member/memberJoin";
+	}
+	
+	//회원가입 로직 
+	@RequestMapping(value="/memberJoin.do", method = RequestMethod.POST)
+	public String memberJoin(MemberVO vo) {
+		logger.info(vo.getMember_addr1());
+		memberService.memberJoin(vo);
+		return "redirect:/main/main.do";
 	}
 	
 	//id 겹치는지 확인
@@ -54,19 +57,9 @@ public class MemberController {
 		return map;
 	}
 	
-	//회원가입 로직 
-	@RequestMapping(value="/membersignup.do", method = RequestMethod.POST)
-	public String memberSignup(MemberVO vo) {
-		logger.info(vo.getMember_addr1());
-		memberService.memberSignup(vo);
-		return "redirect:/main/main.do";
-	}
+
 	
-	//로그인 페이지 
-	@RequestMapping(value = "/memberloginform.do", method = RequestMethod.GET)
-	public String memberLoginForm() {
-		return "member/member/memberloginform";
-	}
+
 	
 	//회원 정보 & 수정 페이지
 	@RequestMapping(value = "/memberinfoform.do", method = RequestMethod.GET)

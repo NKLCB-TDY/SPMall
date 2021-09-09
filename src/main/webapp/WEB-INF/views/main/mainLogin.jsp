@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/member/memberloginform.css">
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main/mainLogin.css">
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/member/memberloginform.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/main/mainLogin.js"></script>
 	
 <!-- front 단 link, -->
 <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
@@ -53,7 +53,7 @@
                            </div>
                            
                            <div class="form-group">
-                              <p class="text-center">계정이 없으신가요? <a href="membersignupform.do" id="signup">회원가입 하기</a></p>
+                              <p class="text-center">계정이 없으신가요? <a href="/member/memberJoin.do" id="signup">회원가입 하기</a></p>
                            </div>
                         
                  
