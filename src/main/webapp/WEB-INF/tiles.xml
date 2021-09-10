@@ -8,7 +8,10 @@
 			value="/WEB-INF/views/tiles/defaultBody.jsp" />	
 		<put-attribute name="footer"
 			value="/WEB-INF/views/tiles/defaultFooter.jsp" />
+			
+		
 	</definition>
+	
 	
 	
 	<!-- definition name은 리턴타입을 의미 -->
@@ -17,12 +20,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"> </put-attribute>
 	</definition> 
 	
-	<definition name="main/*/*" extends="base-definition">
-		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"> </put-attribute>
-	</definition>
 	
-	<definition name="cs/*/*" extends="base-definition">
+	<definition name="admin/*/*" template="/WEB-INF/views/tiles/adminLayout.jsp">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"> </put-attribute>
-	</definition>
-	
+	</definition> 
 </tiles-definitions>
