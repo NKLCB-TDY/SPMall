@@ -31,7 +31,11 @@
 		select *
 		from (
 				select member_id, member_pwd, 'ROLE_USER' ROLE_NAME
-			 	from tbl_member) tbl_all
+			 	from tbl_member
+			 	 union all
+             	select admin_id, admin_pwd, 'ROLE_ADMIN' ROLE_NAME
+             	from tbl_admin) tbl_all
+			 	
 		where 
 			member_id = #{member_id};
 	</select>
