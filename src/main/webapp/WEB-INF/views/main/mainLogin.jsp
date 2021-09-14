@@ -55,8 +55,6 @@
                            <div class="form-group">
                               <p class="text-center">계정이 없으신가요? <a href="/member/memberJoin.do" id="signup">회원가입 하기</a></p>
                            </div>
-                        
-                 
 				</div>
 			</div>
 			</div>

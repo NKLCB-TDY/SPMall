@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+ <head>
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/admin/newPrs.css">
+</head>
 <div align="center">
 	<h1 class="h3 mb-1 text-gray-800">상품등록1</h1>
 	<div class="row">
@@ -175,7 +177,41 @@
 			<div class="card-header py-2">
 				<h6 class="m-0 font-weight-bold text-primary">사진 선택</h6>
 			</div>
+			<div class="fileDrop"> </div>
+			<div class="uploadedList"></div>
 			
 		</div>
 	</div>
 </div>
+<!-- 파일업로드를 위한 js -->
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>
+		$(".fileDrop").on("dragenter dragover", function(event){ 
+			event.preventDefault();
+		});
+		
+		$(".fileDrop").on("drop", function(event){
+			event.preventDefault();
+			
+			var files = event.originalEvent.dataTransfer.files;
+			var file = files[0];
+			
+			var formData = new FormData();
+			formData.append("file",file);
+			
+			
+			$.ajax({
+				url: '/uploadAjax',
+				data: formData,
+				dataType :'text',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				success: function(data){
+					alert(data);	
+				}
+			});
+		});
+	
+</script>
+<!-- 파일업로드를 위한 js end-->
