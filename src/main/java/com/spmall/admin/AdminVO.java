@@ -4,8 +4,9 @@ public class AdminVO {
 	private String category_code;
 	private String category_code_ref;
 	private String category_name;
-	private int level;
+	private int depth;
 	
+
 	
 	public String getCategory_code() {
 		return category_code;
@@ -25,12 +26,13 @@ public class AdminVO {
 	public void setCategory_name(String category_name) {
 		this.category_name = category_name;
 	}
-	public int getLevel() {
-		return level;
+	public int getDepth() {
+		return depth;
 	}
-	public void setLevel(int level) {
-		this.level = level;
+	public void setDepth(int depth) {
+		this.depth = depth;
 	}
+
 	
 	
 }

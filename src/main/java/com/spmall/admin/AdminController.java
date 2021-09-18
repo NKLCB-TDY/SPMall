@@ -1,5 +1,7 @@
 package com.spmall.admin;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
@@ -8,12 +10,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spmall.common.UploadFileUtils;
+
+import net.sf.json.JSONArray;
 
 
 @Controller
@@ -33,17 +39,30 @@ public class AdminController {
 	}
 	
 	//상품등록 부분 시작
+	//상품 카테고리 찾기
+	@RequestMapping(value = "searchCate", method = RequestMethod.POST)
+	public AdminVO searchCate(Model model) throws Exception {
+		
+		
+		return null;
+	}
+	
 	//새상품등록 페이지 new product register == prs
-	@RequestMapping(value = "newPrs.do", method =RequestMethod.GET)
-	public String newPrs(){
-		return "admin/admin/newPrs";
+	@RequestMapping(value = "newPrsInsert.do", method =RequestMethod.GET)
+	public ModelAndView newPrs() throws Exception{
+		
+		List<AdminVO> category = adminService.searchCate();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("category",JSONArray.fromObject(category));
+		mv.setViewName("admin/admin/newPrsInsert");
+		return mv;
 	}
 	
 	//상품등록 처리
-	@RequestMapping(value = "newPrs.do", method =RequestMethod.POST)
-	public String newPrs_POST(MultipartFile file)throws Exception{
-		adminService.newPrs();
-		return "admin/admin/newPrs";
+	@RequestMapping(value = "newPrsInsert.do", method =RequestMethod.POST)
+	public String newPrsInsert_POST(MultipartFile file)throws Exception{
+		adminService.newPrsInsert();
+		return "admin/admin/adminMain.do";
 	}
 	//////////////////////////////////////////////
 	
