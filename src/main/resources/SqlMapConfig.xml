@@ -5,6 +5,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.spmall.member.MemberVO" 				alias="MemberVO" />
-		
+		<typeAlias type="com.spmall.admin.AdminVO" 					alias="AdminVO" />
 	</typeAliases>
 </configuration>
