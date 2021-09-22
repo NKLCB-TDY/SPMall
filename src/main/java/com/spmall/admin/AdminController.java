@@ -1,13 +1,22 @@
 package com.spmall.admin;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spmall.common.MediaUtils;
 import com.spmall.common.UploadFileUtils;
 
 import net.sf.json.JSONArray;
@@ -38,8 +49,8 @@ public class AdminController {
 		return "admin/admin/adminMain";
 	}
 	
-	//»óÇ°µî·Ï ºÎºĞ ½ÃÀÛ
-	//»óÇ° Ä«Å×°í¸® Ã£±â
+	//ìƒí’ˆë“±ë¡ ë¶€ë¶„ ì‹œì‘
+	//ìƒí’ˆ ì¹´í…Œê³ ë¦¬ ì°¾ê¸°
 	@RequestMapping(value = "searchCate", method = RequestMethod.POST)
 	public AdminVO searchCate(Model model) throws Exception {
 		
@@ -47,7 +58,7 @@ public class AdminController {
 		return null;
 	}
 	
-	//»õ»óÇ°µî·Ï ÆäÀÌÁö new product register == prs
+	//ìƒˆìƒí’ˆë“±ë¡ í˜ì´ì§€ new product register == prs
 	@RequestMapping(value = "newPrsInsert.do", method =RequestMethod.GET)
 	public ModelAndView newPrs() throws Exception{
 		
@@ -58,29 +69,55 @@ public class AdminController {
 		return mv;
 	}
 	
-	//»óÇ°µî·Ï Ã³¸®
+	//ìƒí’ˆë“±ë¡ ì²˜ë¦¬
 	@RequestMapping(value = "newPrsInsert.do", method =RequestMethod.POST)
-	public String newPrsInsert_POST(MultipartFile file)throws Exception{
-		adminService.newPrsInsert();
-		return "admin/admin/adminMain.do";
+	public String newPrsInsert_POST(PduCategoryDetailVO vo, MultipartHttpServletRequest multipartRequest)throws Exception{
+		multipartRequest.setCharacterEncoding("utf-8");
+		//sub ì¹´í…Œê³ ë¦¬ê°€ ì—†ëŠ” ìƒí’ˆì¸ ê²½ìš° 
+		if(vo.getPdu_category_code_ref().isEmpty()) {
+			//main ì¹´í…Œê³ ë¦¬ ê°’ì„ code_refì— ì €ì¥
+			vo.setPdu_category_code_ref(vo.getPdu_category_main());
+		}
+		
+		//ìƒí’ˆë“±ë¡
+		adminService.newPrsInsert(vo);
+		
+
+		return "redirect:/admin/newPrsInsert.do";
 	}
 	//////////////////////////////////////////////
 	
-	//¾÷·Îµå Ã³¸®
-	@ResponseBody
-	@RequestMapping(value="uploadAjax", 
-					method = RequestMethod.POST,
-					produces = "text/plain;charset=UTF-8")
-	public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception {
-		logger.info("originalName " + file.getOriginalFilename());
+	public List<PduImageVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception{
 		
-		return 
-			new ResponseEntity<>(
-					UploadFileUtils.uploadFile(uploadPath, 
-							file.getOriginalFilename(), 
-							file.getBytes()),
-					HttpStatus.CREATED);
+		List<PduImageVO> fileList= new ArrayList<PduImageVO>();
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		
+		while(fileNames.hasNext()){
+			PduImageVO imageFileVO =new PduImageVO();
+			String fileName = fileNames.next();
+			
+			imageFileVO.setPdu_imageFileType(fileName);
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			
+			String originalFileName=mFile.getOriginalFilename();
+			
+			imageFileVO.setPdu_imageFileName(originalFileName);
+			fileList.add(imageFileVO);
+
+			File file = new File(uploadPath +"\\"+ fileName);
+			
+			
+			if(mFile.getSize()!=0){ 
+				if(! file.exists()){ 
+					
+					if(file.getParentFile().mkdirs()){
+						System.out.println("mkdir OK");
+							file.createNewFile(); 
+					}
+				}
+				mFile.transferTo(new File(uploadPath + "\\"+ "image" + "\\"+originalFileName));
+			}
+		}
+		return fileList;
 	}
-	
-	
 }
