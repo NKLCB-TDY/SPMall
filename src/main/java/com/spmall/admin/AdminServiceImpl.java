@@ -13,13 +13,16 @@ public class AdminServiceImpl implements AdminService  {
 	AdminDAO adminDAO;
 	
 	@Override
-	public void newPrsInsert() throws Exception {
-		// TODO Auto-generated method stub
+	public List<AdminVO> searchCate() throws Exception {
+		return adminDAO.searchCate();
 	}
 
 	@Override
-	public List<AdminVO> searchCate() throws Exception {
-		return adminDAO.searchCate();
+	public void newPrsInsert(PduCategoryDetailVO vo) throws Exception {
+		
+		//이미지를 제외한 정보 등록
+		adminDAO.newPrsInsert(vo);
+
 	}
 	
 }

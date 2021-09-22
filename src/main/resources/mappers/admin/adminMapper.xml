@@ -7,4 +7,28 @@
 		select category_code, category_code_ref, category_name, depth
 		from pdu_category
 	</select>
+	
+	<!-- 새상품 등록 -->
+	<insert id="newPrsInsert" parameterType="PduCategoryDetailVO">
+		insert into pdu_category_detail(pdu_category_code_ref,
+										pdu_name, 
+										pdu_price, 
+										pdu_sale_price, 
+										pdu_size, 
+										pdu_color, 
+										pdu_pieces, 
+										pdu_content, 
+										pdu_classificate)
+		values( #{pdu_category_code_ref}, 
+				#{pdu_name}, 
+				#{pdu_price}, 
+				#{pdu_sale_price}, 
+			  	#{pdu_size}, 
+			  	#{pdu_color}, 
+			  	#{pdu_pieces}, 
+			  	#{pdu_content}, 
+			  	#{pdu_classificate} )
+	</insert>
+
+
 </mapper>

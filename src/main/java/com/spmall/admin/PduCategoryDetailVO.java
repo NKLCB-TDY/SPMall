@@ -1,25 +1,24 @@
 package com.spmall.admin;
 
 public class PduCategoryDetailVO {
-	private String pdu_detail_code;
-	private String pdu_category_code_ref;
-	private String pdu_name;
+	private String pdu_category_main; 			//메인
+	private String pdu_category_code_ref; 	//상품 상위 코드
+	private String pdu_name;			  
 	private String pdu_price;
 	private String pdu_sale_price;
-	private String pdu_content;
 	private String pdu_size;
 	private String pdu_color;
-	private Integer pdu_pieces;
-	private String gooods_new_YN;
-	
-	
-	public String getPdu_detail_code() {
-		return pdu_detail_code;
+	private Integer pdu_pieces; 			//상품 수량
+	private String pdu_content;
+	private String pdu_classificate;		//상품 분류
+
+	public String getPdu_category_main() {
+		return pdu_category_main;
 	}
 
 
-	public void setPdu_detail_code(String pdu_detail_code) {
-		this.pdu_detail_code = pdu_detail_code;
+	public void setPdu_category_main(String pdu_category_main) {
+		this.pdu_category_main = pdu_category_main;
 	}
 
 
@@ -63,16 +62,6 @@ public class PduCategoryDetailVO {
 	}
 
 
-	public String getPdu_content() {
-		return pdu_content;
-	}
-
-
-	public void setPdu_content(String pdu_content) {
-		this.pdu_content = pdu_content;
-	}
-
-
 	public String getPdu_size() {
 		return pdu_size;
 	}
@@ -103,23 +92,32 @@ public class PduCategoryDetailVO {
 	}
 
 
-	public String getGooods_new_YN() {
-		return gooods_new_YN;
+	public String getPdu_content() {
+		return pdu_content;
 	}
 
 
-	public void setGooods_new_YN(String gooods_new_YN) {
-		this.gooods_new_YN = gooods_new_YN;
+	public void setPdu_content(String pdu_content) {
+		this.pdu_content = pdu_content;
 	}
 
 
-	@Override
-	public String toString() {
-		return "PduCategoryDetailVO [pdu_detail_code=" + pdu_detail_code + ", pdu_category_code_ref="
-				+ pdu_category_code_ref + ", pdu_name=" + pdu_name + ", pdu_price=" + pdu_price + ", pdu_sale_price="
-				+ pdu_sale_price + ", pdu_content=" + pdu_content + ", pdu_size=" + pdu_size + ", pdu_color="
-				+ pdu_color + ", pdu_pieces=" + pdu_pieces + ", gooods_new_YN=" + gooods_new_YN + "]";
-	} 
+	public String getPdu_classificate() {
+		return pdu_classificate;
+	}
+
+
+	public void setPdu_classificate(String pdu_classificate) {
+		this.pdu_classificate = pdu_classificate;
+	}
+
+
+
+	
+	
+	
+
+
 	
 	
 }

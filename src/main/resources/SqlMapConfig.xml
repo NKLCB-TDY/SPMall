@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.spmall.member.MemberVO" 				alias="MemberVO" />
-		<typeAlias type="com.spmall.admin.AdminVO" 					alias="AdminVO" />
+		<typeAlias type="com.spmall.member.MemberVO" 						alias="MemberVO" />
+		<typeAlias type="com.spmall.admin.AdminVO" 							alias="AdminVO" />
+		<typeAlias type="com.spmall.admin.PduCategoryDetailVO" 				alias="PduCategoryDetailVO" />
 	</typeAliases>
 </configuration>
