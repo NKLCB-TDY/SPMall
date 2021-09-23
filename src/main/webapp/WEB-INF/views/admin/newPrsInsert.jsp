@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-lg-3"></div>
 			<div class="col-lg-3">
-				<!-- Background Gradient Utilities -->
+				
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">상품 카테고리</h6>
@@ -30,7 +30,7 @@
 			</div>
 			<div class="col-lg-3">
 	
-				<!-- Background Gradient Utilities -->
+				
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">세부 카테고리</h6>
@@ -122,7 +122,7 @@
 			
 			<div class="card shadow mb-4">
 				<div class="card-header py-2">
-					<h6 class="m-0 font-weight-bold text-primary" >상품 분류</h6>
+					<h6 class="m-0 font-weight-bold text-primary">상품 분류</h6>
 				</div>
 				<select name="pdu_classificate">
 					<option value="신상품">신상품</option>
@@ -142,8 +142,8 @@
 				<div class="card-header py-2">
 					<h6 class="m-0 font-weight-bold text-primary">서브 이미지</h6>
 				</div>
-				<input type="button" value="서브 이미지 추가" onClick="fn_addFile()" />
-				<div id="detail_list"></div>
+				<input type="button" value="서브 이미지 추가" onClick="add_imgFile()" />
+				<div id="sub_list"></div>
 			</div>
 		</div>	
 		
@@ -155,9 +155,7 @@
 			
 			<div id="image_list">
 				<img id="preview" src="#" width=200 height=200 />	
-			</div>		
-			<!-- <ul class="mailbox-attachments clearfix uploadedList">
-			</ul> -->
+			</div>
 		</div>
 
 	</div>
@@ -169,18 +167,6 @@
 <!-- 파일업로드, 카테고리 처리를 위한 js -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-
-<script id="template" type="text/x-handlebars-template">
-<li>
-  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  <div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-	<a href="{{fullName}}" 
-     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
-	</span>
-  </div>
-</li>
-</script>    
 
 <script>
 function readURL(input,id) {
@@ -198,66 +184,12 @@ function readURL(input,id) {
 	 }
 }
 
-var cnt=1;
-function fn_addFile(){
-	
-	$("#detail_list").append("디테일이미지 "+cnt+" : <input type='file' name='detail_image"+cnt+"' id='"+cnt+"' onchange='readURL(this,this.id);' />"+"<br>");
-	if(cnt % 2 != 0){
-		$("#image_list").append("<img src='#' width=200 height=200 id='preview"+cnt+"'>");
-	}else{
-		$("#image_list").append("<img src='#' width=200 height=200 id='preview"+cnt+"'>");
-	}
-
+let cnt =1;
+function add_imgFile(){
+	$("#sub_list").append("서브이미지 "+cnt+" : <input type='file' name='sub_image"+cnt+"'id='"+cnt+"' onchange='readURL(this,this.id);' />"+"<br>");
+	$("#image_list").append("<img src='#' width=200 height=200 id='preview"+cnt+"'>");
 	cnt++;
 }
-
-
-<!--
-var template = Handlebars.compile($("#template").html());
-
-$(".fileDrop").on("dragenter dragover", function(event){
-	event.preventDefault();
-});
-
-
-$(".fileDrop").on("drop", function(event){
-	event.preventDefault();
-	
-	var files = event.originalEvent.dataTransfer.files;
-	var file = files[0];
-	
-	//파일 확장자
-	var extension = files[0].name.substring(files[0].name.lastIndexOf(".")+1);
-	//대문자변환
-	extension = extension.toUpperCase(); 
-	
-	if(!(extension == 'JPG' || extension == 'PNG' || extension == 'GIF' || extension =='JPEG')){
-		alert("올바르지 않은 확장자 입니다.");
-		return;
-	}
-	console.log(files[0].name.substring(files[0].name.lastIndexOf(".")+1));	
-	
-	var formData = new FormData();
-	formData.append("file", file);
-	
-	$.ajax({
-		  url: '/admin/uploadAjax',
-		  data: formData,
-		  dataType:'text',
-		  processData: false,
-		  contentType: false,
-		  type: 'POST',
-		  success: function(data){
-			  
-			  var fileInfo = getFileInfo(data);
-			  
-			  var html = template(fileInfo);
-			  
-			  $(".uploadedList").append(html);
-		  }
-		});	
-});
--->
 	
 	
 	/////// 상품 Category 처리 start

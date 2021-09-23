@@ -30,5 +30,12 @@
 			  	#{pdu_classificate} )
 	</insert>
 
-
+	<insert id="newPrsInsert_img" parameterType="PduImageVO">
+		insert into pdu_category_detail_image (pdu_detail_code_ref,
+											  pdu_image_file_name,
+											  pdu_image_file_type)
+		values( LAST_INSERT_ID() ,
+				#{pdu_image_file_name},
+				#{pdu_image_file_type} )
+	</insert>
 </mapper>

@@ -7,5 +7,6 @@
 		<typeAlias type="com.spmall.member.MemberVO" 						alias="MemberVO" />
 		<typeAlias type="com.spmall.admin.AdminVO" 							alias="AdminVO" />
 		<typeAlias type="com.spmall.admin.PduCategoryDetailVO" 				alias="PduCategoryDetailVO" />
+		<typeAlias type="com.spmall.admin.PduImageVO" 						alias="PduImageVO" />
 	</typeAliases>
 </configuration>
