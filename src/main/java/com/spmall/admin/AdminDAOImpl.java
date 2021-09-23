@@ -13,7 +13,6 @@ public class AdminDAOImpl implements AdminDAO {
 	SqlSession sqlSession;
 	
 
-
 	//카테고리 찾기
 	@Override
 	public List<AdminVO> searchCate() throws Exception {
@@ -21,12 +20,15 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public void newPrsInsert(PduCategoryDetailVO vo) throws Exception {
-		sqlSession.insert("admin.newPrsInsert", vo);
+	public int newPrsInsert(PduCategoryDetailVO vo) throws Exception {
+		return sqlSession.insert("admin.newPrsInsert", vo);
 	}
 	
 
-
-
-	
+	@Override
+	public void newPrsInsert_img(List<PduImageVO> imageFileList) throws Exception {
+		for(PduImageVO pduImageVO : imageFileList) {
+			sqlSession.insert("admin.newPrsInsert_img",pduImageVO);
+		}
+	}
 }

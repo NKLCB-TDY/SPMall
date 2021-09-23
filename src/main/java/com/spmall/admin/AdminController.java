@@ -1,34 +1,22 @@
 package com.spmall.admin;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.spmall.common.MediaUtils;
-import com.spmall.common.UploadFileUtils;
 
 import net.sf.json.JSONArray;
 
@@ -50,19 +38,12 @@ public class AdminController {
 	}
 	
 	//상품등록 부분 시작
-	//상품 카테고리 찾기
-	@RequestMapping(value = "searchCate", method = RequestMethod.POST)
-	public AdminVO searchCate(Model model) throws Exception {
-		
-		
-		return null;
-	}
-	
 	//새상품등록 페이지 new product register == prs
 	@RequestMapping(value = "newPrsInsert.do", method =RequestMethod.GET)
 	public ModelAndView newPrs() throws Exception{
 		
-		List<AdminVO> category = adminService.searchCate();
+		//상품 카테고리 찾기 
+		List<AdminVO> category = adminService.searchCate(); 
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("category",JSONArray.fromObject(category));
 		mv.setViewName("admin/admin/newPrsInsert");
@@ -80,13 +61,17 @@ public class AdminController {
 		}
 		
 		//상품등록
-		adminService.newPrsInsert(vo);
+		List<PduImageVO> imageFileList=upload(multipartRequest);
+		adminService.newPrsInsert(vo,imageFileList);
 		
-
+		
 		return "redirect:/admin/newPrsInsert.do";
 	}
-	//////////////////////////////////////////////
 	
+	
+	// 메서드 ///////////////////////////////////
+	
+	//이미지 파일 업로드
 	public List<PduImageVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception{
 		
 		List<PduImageVO> fileList= new ArrayList<PduImageVO>();
@@ -96,12 +81,12 @@ public class AdminController {
 			PduImageVO imageFileVO =new PduImageVO();
 			String fileName = fileNames.next();
 			
-			imageFileVO.setPdu_imageFileType(fileName);
+			imageFileVO.setPdu_image_file_type(fileName);
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			
 			String originalFileName=mFile.getOriginalFilename();
 			
-			imageFileVO.setPdu_imageFileName(originalFileName);
+			imageFileVO.setPdu_image_file_name(originalFileName);
 			fileList.add(imageFileVO);
 
 			File file = new File(uploadPath +"\\"+ fileName);
