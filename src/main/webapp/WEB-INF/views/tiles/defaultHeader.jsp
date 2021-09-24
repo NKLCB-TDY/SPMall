@@ -37,13 +37,6 @@
                              <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                          </ul>
                      </li>
-                     
-                     <li class="nav-item">
-                     	<input type="text" id="keyword" name="keyword" class="form-control" aria-label="Large" autocomplete="off" placeholder="검색어를 입력하세요."></input>
-                     </li>
-                     <li class="nav-item">
-                     	<button type="submit" class="btn btn-light">검색</button>
-                     </li>
                  </ul>
                  
                  <form class="d-flex">

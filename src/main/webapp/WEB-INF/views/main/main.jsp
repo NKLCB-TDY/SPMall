@@ -33,7 +33,29 @@
            <span class="visually-hidden">Next</span>
          </button>
        </div>
+       
      <!-- Section-->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light center">
+         <div class="container px-4 px-lg-5">
+             <!-- 사이즈작아질시 nav button -->
+             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 ">
+                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"></a></li>
+                     <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                     <li class="nav-item dropdown">
+                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" 
+                         		data-bs-toggle="dropdown" aria-expanded="false">아우터</a>
+                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <li><a class="dropdown-item" href="#!">가디건/조끼</a></li>
+                             <li><a class="dropdown-item" href="#!">자켓/코드</a></li>
+                             <li><a class="dropdown-item" href="#!">패딩</a></li>
+                         </ul>
+                     </li>
+                 </ul>
+
+             </div>
+         </div>
+     </nav>
      <section class="py-5">
          <div class="container px-4 px-lg-5 mt-5">
              <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">

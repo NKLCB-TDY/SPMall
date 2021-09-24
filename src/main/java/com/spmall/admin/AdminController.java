@@ -8,10 +8,11 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,6 +55,8 @@ public class AdminController {
 	@RequestMapping(value = "newPrsInsert.do", method =RequestMethod.POST)
 	public String newPrsInsert_POST(PduCategoryDetailVO vo, MultipartHttpServletRequest multipartRequest)throws Exception{
 		multipartRequest.setCharacterEncoding("utf-8");
+		String imageFileName=null;
+		
 		//sub 카테고리가 없는 상품인 경우 
 		if(vo.getPdu_category_code_ref().isEmpty()) {
 			//main 카테고리 값을 code_ref에 저장
@@ -62,8 +65,29 @@ public class AdminController {
 		
 		//상품등록
 		List<PduImageVO> imageFileList=upload(multipartRequest);
-		adminService.newPrsInsert(vo,imageFileList);
 		
+		try {
+			adminService.newPrsInsert(vo,imageFileList);
+			
+			if(imageFileList !=null && imageFileList.size() !=0) {
+				for(PduImageVO imageFileVO : imageFileList) {
+					imageFileName=imageFileVO.getPdu_image_file_name();
+					File srcFile=new File(uploadPath+"\\"+"image"+"\\"+imageFileName);
+					File destDir=new File(uploadPath+"\\"+vo.getPdu_detail_code()); 
+					FileUtils.moveFileToDirectory(srcFile, destDir, true); 
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			if(imageFileList !=null && imageFileList.size() !=0) {
+				for(PduImageVO imageFileVO : imageFileList) {
+					imageFileName=imageFileVO.getPdu_image_file_name();
+					File srcFile=new File(uploadPath+"\\"+"image"+"\\"+imageFileName);
+					srcFile.delete();
+				}
+			}
+		
+		}
 		
 		return "redirect:/admin/newPrsInsert.do";
 	}
@@ -94,9 +118,7 @@ public class AdminController {
 			
 			if(mFile.getSize()!=0){ 
 				if(! file.exists()){ 
-					
 					if(file.getParentFile().mkdirs()){
-						System.out.println("mkdir OK");
 							file.createNewFile(); 
 					}
 				}
