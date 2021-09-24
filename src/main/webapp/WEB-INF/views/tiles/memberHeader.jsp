@@ -27,27 +27,9 @@
              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
              <div class="collapse navbar-collapse" id="navbarSupportedContent">
                  <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                     <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                     <li class="nav-item dropdown">
-                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                             <li><a class="dropdown-item" href="#!">All Products</a></li>
-                             <li><hr class="dropdown-divider" /></li>
-                             <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                             <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                         </ul>
-                     </li>
-                     
-                     <li class="nav-item">
-                     	<input type="text" id="keyword" name="keyword" class="form-control" aria-label="Large" autocomplete="off" placeholder="검색어를 입력하세요."></input>
-                     </li>
-                     <li class="nav-item">
-                     	<button type="submit" class="btn btn-light">검색</button>
-                     </li>
                  </ul>
                   <sec:authorize access="hasRole('ROLE_USER')">
-                  	<sec:authentication property="principal.username" var="member_name" />${member_name}  님 환영합니다.
+                  	<sec:authentication property="principal.username" var="member_name" />
                   </sec:authorize>
                  	<button class="btn btn-outline-dark">
                          <i class="bi-cart-fill me-1"></i>

@@ -21,14 +21,16 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public int newPrsInsert(PduCategoryDetailVO vo) throws Exception {
-		return sqlSession.insert("admin.newPrsInsert", vo);
+		sqlSession.insert("admin.newPrsInsert", vo);
+		System.out.println("vo.getPdu_detail_code()" +vo.getPdu_detail_code());
+		return vo.getPdu_detail_code();
 	}
 	
 
 	@Override
 	public void newPrsInsert_img(List<PduImageVO> imageFileList) throws Exception {
 		for(PduImageVO pduImageVO : imageFileList) {
-			sqlSession.insert("admin.newPrsInsert_img",pduImageVO);
+			 sqlSession.insert("admin.newPrsInsert_img",pduImageVO);
 		}
 	}
 }

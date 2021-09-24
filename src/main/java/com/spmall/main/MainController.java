@@ -16,7 +16,6 @@ public class MainController {
 	public String Main(Authentication authentication) {
 		String page = "member/main/main";
 		if(authentication != null) {
-
 			CustomerUser user = (CustomerUser)authentication.getPrincipal();
 			for(GrantedAuthority item : user.getAuthorities()) {
 				

@@ -1,7 +1,8 @@
 package com.spmall.admin;
 
 public class PduCategoryDetailVO {
-	private String pdu_category_main; 			//메인
+	private int pdu_detail_code;			//기본키
+	private String pdu_category_main; 		//메인 코드
 	private String pdu_category_code_ref; 	//상품 상위 코드
 	private String pdu_name;			  
 	private String pdu_price;
@@ -11,6 +12,18 @@ public class PduCategoryDetailVO {
 	private Integer pdu_pieces; 			//상품 수량
 	private String pdu_content;
 	private String pdu_classificate;		//상품 분류
+
+	
+	
+	public int getPdu_detail_code() {
+		return pdu_detail_code;
+	}
+
+
+	public void setPdu_detail_code(int pdu_detail_code) {
+		this.pdu_detail_code = pdu_detail_code;
+	}
+
 
 	public String getPdu_category_main() {
 		return pdu_category_main;

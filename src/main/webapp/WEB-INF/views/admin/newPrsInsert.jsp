@@ -2,15 +2,14 @@
 	pageEncoding="UTF-8"%>
  <head>
 	<link rel="stylesheet" type="text/css" href="/resources/css/admin/newPrsInsert.css">
-	<script type="text/javascript" src="/resources/js/admin/upload/upload.js"></script>
-
+	
 </head>
 
 <form action="${pageContext.request.contextPath}/admin/newPrsInsert.do" 
 	method="POST" enctype="multipart/form-data">
-	
 	<div align="center">
 		<h1 class="h3 mb-1 text-gray-800">상품등록</h1>
+		<hr>
 		<div class="row">
 			<div class="col-lg-3"></div>
 			<div class="col-lg-3">
@@ -166,7 +165,7 @@
 
 <!-- 파일업로드, 카테고리 처리를 위한 js -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script type="text/javascript" src="/resources/js/admin/upload/upload.js"></script>
 
 <script>
 function readURL(input,id) {
@@ -186,7 +185,8 @@ function readURL(input,id) {
 
 let cnt =1;
 function add_imgFile(){
-	$("#sub_list").append("서브이미지 "+cnt+" : <input type='file' name='sub_image"+cnt+"'id='"+cnt+"' onchange='readURL(this,this.id);' />"+"<br>");
+	$("#sub_list").append("서브이미지 "+cnt+" : <input type='file' name='sub_image"+cnt+"'id='"+cnt+
+			"'onchange='readURL(this,this.id);' />"+"<br>");
 	$("#image_list").append("<img src='#' width=200 height=200 id='preview"+cnt+"'>");
 	cnt++;
 }

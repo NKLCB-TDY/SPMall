@@ -10,6 +10,10 @@
 	
 	<!-- 새상품 등록 -->
 	<insert id="newPrsInsert" parameterType="PduCategoryDetailVO">
+		<selectKey resultType="int" keyProperty="pdu_detail_code" order="AFTER">
+			select MAX(pdu_detail_code)
+			from pdu_category_detail
+		</selectKey>
 		insert into pdu_category_detail(pdu_category_code_ref,
 										pdu_name, 
 										pdu_price, 
@@ -31,10 +35,16 @@
 	</insert>
 
 	<insert id="newPrsInsert_img" parameterType="PduImageVO">
+	
+		<selectKey resultType="int" keyProperty="pdu_detail_code_ref" order="BEFORE">
+			select MAX(pdu_detail_code)
+			from pdu_category_detail
+		</selectKey>
+		
 		insert into pdu_category_detail_image (pdu_detail_code_ref,
 											  pdu_image_file_name,
 											  pdu_image_file_type)
-		values( LAST_INSERT_ID() ,
+		values( #{pdu_detail_code_ref},
 				#{pdu_image_file_name},
 				#{pdu_image_file_type} )
 	</insert>
