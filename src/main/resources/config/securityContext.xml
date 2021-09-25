@@ -21,6 +21,8 @@
 			pattern="/main/mainLogin.do" access="permitAll()" />
 	<security:intercept-url
 			pattern="/member/idoverlap.do" access="permitAll()" />
+	<security:intercept-url
+			pattern="/product/**" access="permitAll()" />
 			
 	<security:intercept-url pattern="/admin/*"
 			access="hasAuthority('ROLE_ADMIN')" />

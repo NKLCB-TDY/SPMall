@@ -14,8 +14,8 @@
     <link rel="icon" type="image/x-icon" href="" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/common.css" />
+    <!-- Bootstrap 5 cdn-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 	
 </head>
 <body>
@@ -37,6 +37,7 @@
                              <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                          </ul>
                      </li>
+                     
                  </ul>
                  
                  <form class="d-flex">

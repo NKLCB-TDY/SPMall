@@ -8,8 +8,6 @@
 			value="/WEB-INF/views/tiles/defaultBody.jsp" />	
 		<put-attribute name="footer"
 			value="/WEB-INF/views/tiles/defaultFooter.jsp" />
-			
-		
 	</definition>
 	
 	
@@ -24,4 +22,10 @@
 	<definition name="admin/*/*" template="/WEB-INF/views/tiles/adminLayout.jsp">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"> </put-attribute>
 	</definition> 
+	
+	<!-- 아무 권한이 없을때 -->
+	<definition name="*/*" extends="base-definition">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"> </put-attribute>
+	</definition> 
+	
 </tiles-definitions>

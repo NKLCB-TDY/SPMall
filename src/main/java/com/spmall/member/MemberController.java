@@ -34,7 +34,6 @@ public class MemberController {
 	//회원가입 로직 
 	@RequestMapping(value="/memberJoin.do", method = RequestMethod.POST)
 	public String memberJoin(MemberVO vo) {
-		logger.info(vo.getMember_addr1());
 		memberService.memberJoin(vo);
 		return "redirect:/main/main.do";
 	}
