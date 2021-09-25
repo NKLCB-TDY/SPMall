@@ -14,9 +14,8 @@
     <link rel="icon" type="image/x-icon" href="" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/common.css" />
-	
+   <!-- Bootstrap 5 cdn-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 </head>
 <body>
 	<!-- Navigation-->
@@ -58,13 +57,31 @@
                      </button>
                  </sec:authorize>
           
-    				
-					
-                 
              </div>
          </div>
      </nav>
-     
+     <!-- Section-->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+         <div class="container px-4 px-lg-5">
+             <!-- 사이즈작아질시 nav button -->
+             <div class="collapse navbar-collapse">
+                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 ">
+                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"></a></li>
+                     <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                     <li class="nav-item dropdown">
+                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" 
+                         		data-bs-toggle="dropdown" aria-expanded="false">아우터</a>
+                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <li><a class="dropdown-item" href="#!">가디건/조끼</a></li>
+                             <li><a class="dropdown-item" href="#!">자켓/코드</a></li>
+                             <li><a class="dropdown-item" href="#!">패딩</a></li>
+                         </ul>
+                     </li>
+                 </ul>
+
+             </div>
+         </div>
+     </nav>
     <!-- jsdelivr CDN 
     	- header 스크롤 동작-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
