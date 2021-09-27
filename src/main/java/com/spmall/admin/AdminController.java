@@ -42,7 +42,6 @@ public class AdminController {
 	//새상품등록 페이지 new product register == prs
 	@RequestMapping(value = "newPrsInsert.do", method =RequestMethod.GET)
 	public ModelAndView newPrs() throws Exception{
-		
 		//상품 카테고리 찾기 
 		List<AdminVO> category = adminService.searchCate(); 
 		ModelAndView mv = new ModelAndView();

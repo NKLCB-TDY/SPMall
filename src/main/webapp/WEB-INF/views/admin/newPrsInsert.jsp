@@ -5,6 +5,7 @@
 	
 </head>
 
+
 <form action="${pageContext.request.contextPath}/admin/newPrsInsert.do" 
 	method="POST" enctype="multipart/form-data">
 	<div align="center">
@@ -57,7 +58,7 @@
 				<div class="card-header py-2">
 					<h6 class="m-0 font-weight-bold text-primary">상품 가격</h6>
 				</div>
-				<input type="text" class="form-control" name="pdu_price"
+				<input type="text" class="form-control" name="pdu_price" id="pdu_price"
 					  placeholder="상품 가격"> <small
 					id="emailHelp" class="form-text text-muted">숫자만 입력</small>
 			</div>
@@ -66,9 +67,10 @@
 				<div class="card-header py-2">
 					<h6 class="m-0 font-weight-bold text-primary">상품 할인율</h6>
 				</div>
-				<input type="text" class="form-control" name="pdu_sale_price"
+				<input type="text" class="form-control" name="pdu_discount_rate" id="pdu_discount_rate"
 					  placeholder="퍼센테이지"> <small
-					id="emailHelp" class="form-text text-muted">10% 할인시 숫자 10</small>
+					id="show_discounted_price" class="form-text text-muted">10% 할인시 숫자 10</small>
+				<input type="hidden" name="pdu_discounted_price" id="pdu_discounted_price">	
 			</div>
 					
 			<div class="card shadow mb-4">
@@ -168,6 +170,24 @@
 <script type="text/javascript" src="/resources/js/admin/upload/upload.js"></script>
 
 <script>
+$(function () {
+	$("#pdu_discount_rate").blur(function(){
+		// primePrice == 원가
+		let primePrice = $("#pdu_price").val();
+		let discountRate =  $("#pdu_discount_rate").val();
+		
+		console.log(primePrice);
+		// discounted_price == 할인된가격
+		let discounted_price = primePrice - (primePrice/100 * discountRate);
+		console.log(discounted_price);
+		$("#pdu_discounted_price").val(discounted_price);
+		
+		//할인가 보여주기
+		let show_discounted_price = document.getElementById("show_discounted_price");
+		
+		show_discounted_price.innerText = "할인된 가격 : "+discounted_price+" 원";
+	});
+});
 function readURL(input,id) {
 	 if (input.files && input.files[0]) {
 	  var reader = new FileReader();
