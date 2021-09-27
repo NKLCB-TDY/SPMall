@@ -1,5 +1,10 @@
 package com.spmall.product;
 
-public interface ProductDAO {
+import java.util.List;
 
+import com.spmall.common.Criteria;
+
+public interface ProductDAO {
+	public List<ProductVO> listAll()throws Exception;
+	public List<ProductVO> productList(Criteria cri)throws Exception;
 }

@@ -8,5 +8,7 @@
 		<typeAlias type="com.spmall.admin.AdminVO" 							alias="AdminVO" />
 		<typeAlias type="com.spmall.admin.PduCategoryDetailVO" 				alias="PduCategoryDetailVO" />
 		<typeAlias type="com.spmall.admin.PduImageVO" 						alias="PduImageVO" />
+		<typeAlias type="com.spmall.product.ProductVO" 						alias="ProductVO" />
+		
 	</typeAliases>
 </configuration>

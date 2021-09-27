@@ -22,7 +22,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public int newPrsInsert(PduCategoryDetailVO vo) throws Exception {
 		sqlSession.insert("admin.newPrsInsert", vo);
-		System.out.println("vo.getPdu_detail_code()" +vo.getPdu_detail_code());
 		return vo.getPdu_detail_code();
 	}
 	
