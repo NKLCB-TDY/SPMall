@@ -27,7 +27,7 @@ public class ProductDAOTest {
 		cri.setPage(0);
 		cri.setPerPageNum(20);
 		
-		List<ProductVO> list = dao.productList(cri);
+		
 		
 	}
 	
