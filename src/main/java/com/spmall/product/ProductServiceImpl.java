@@ -16,14 +16,18 @@ public class ProductServiceImpl implements ProductService {
 	ProductDAO productDAO;
 	
 	@Override
-	public List<ProductVO> productList(Criteria cri)throws Exception {
+	public Map<String, Object> productList(Criteria cri)throws Exception {
 		return productDAO.productList(cri);
 	}
 
 	@Override
 	public Map<String, Object> productDetail(int pdu_detail_code) {
-		// TODO Auto-generated method stub
-		return null;
+		return productDAO.productDetail(pdu_detail_code);
+	}
+	
+	@Override
+	public int countingPaging(Criteria cri) throws Exception {
+		return productDAO.countingPaging(cri);
 	}
 	
 }

@@ -123,21 +123,32 @@
 
 
 <body>
+<!-- img count할 index 변수 선언 -->
+<c:set var="idxCount" value="0"/>
 <div class="container">
 	<div class="row">
-		<c:forEach items="${list}" var="productVO"> 
+		<c:forEach items="${productList}" var="productVO" varStatus="status">
 	    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 ">
 	        <div class="product-grid">
 	            <div class="product-image">
-	                <a href="#" class="image">
-	                    <img class="pic-1" src="/zzz/upload/1/test1.jpg">
-	                    <img class="pic-2" src="/zzz/upload/1/spring 책.JPG">
+	                <a href="/product/productDetailList.do${pagingSetting.makeQuery(pagingSetting.cri.page)
+		                		}&pdu_detail_code=${productVO.pdu_detail_code}" class="image">
+		                	
+						<!-- img는 main 이미지 한개, sub1 이미지 한개, 총2개 출력해야되기에 index 변수 선언 후 증감으로 처리 -->
+		                   <img class="pic-1" src="/zzz/upload/${imageList[idxCount].pdu_detail_code_ref}/${imageList[idxCount].pdu_image_file_name}">
+		                   <c:set var="idxCount" value="${idxCount+1}"/>
+		                   <img class="pic-2" src="/zzz/upload/${imageList[idxCount].pdu_detail_code_ref}/${imageList[idxCount].pdu_image_file_name}">
+		                   <c:set var="idxCount" value="${idxCount+1}"/>
 	                </a>
 	                <ul class="product-links">
 	                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
 	                    <li><a href="#"><i class="far fa-heart"></i></a></li>
 	                    <li><a href="#"><i class="fa fa-random"></i></a></li>
-	                    <li><a href="#"><i class="fa fa-search"></i></a></li>
+	                    <li>
+	                    	<a href="/product/productDetailList.do${pagingSetting.makeQuery(pagingSetting.cri.page)
+		                		}&pdu_detail_code=${productVO.pdu_detail_code}"><i class="fa fa-search"></i>
+		                	</a>
+		                </li>
 	                </ul>
 	            </div>
 	            <div class="product-content">
@@ -148,7 +159,13 @@
 	                    <li class="fa fa-star"></li>
 	                    <li class="far fa-star"></li>
 	                </ul>
-	                <h3 class="title"><a href="#">${productVO.pdu_name }</a></h3>
+	                <h3 class="title">
+		                <a href="/product/productDetailList.do${pagingSetting.makeQuery(pagingSetting.cri.page)
+		                		}&pdu_detail_code=${productVO.pdu_detail_code}">
+
+		              			${productVO.pdu_name}
+		              	</a>
+	              	</h3>
 	                <div class="price">
 	                	<span>
 	                		<fmt:formatNumber value="${productVO.pdu_price }" pattern="#,###" />원
@@ -168,7 +185,7 @@
 
 				<c:if test="${pagingSetting.prev}">
 					<li><a class="page-link"
-						href="productList?page=${pagingSetting.makeSearch(pagingSetting.startPage - 1) }">&laquo;</a></li>
+						href="productList.do${pagingSetting.makeQuery(pagingSetting.startPage - 1) }">&laquo;</a></li>
 				</c:if>
 
 				<c:forEach begin="${pagingSetting.startPage }"
@@ -180,13 +197,13 @@
 						</c:if>>
 						
 						
-						<a class="page-link" href="productList.do?page=${idx}">${idx}</a>
+						<a class="page-link" href="productList.do${pagingSetting.makeQuery(idx)}">${idx}</a>
 					</li>
 				</c:forEach>
 
 				<c:if test="${pagingSetting.next && pagingSetting.endPage > 0}">
 					<li ><a class="page-link"
-						href="productList${pagingSetting.makeSearch(pagingSetting.endPage +1) }">&raquo;</a></li>
+						href="productList.do${pagingSetting.makeQuery(pagingSetting.endPage +1) }">&raquo;</a></li>
 				</c:if>
 
 			</ul>

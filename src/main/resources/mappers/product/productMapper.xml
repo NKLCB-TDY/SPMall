@@ -6,13 +6,60 @@
 
 	
 	<select id = "productList" resultType ="ProductVO">
-	<![CDATA[
-		select *
-		from pdu_category_detail
-		order by pdu_detail_code desc
-		limit #{pageStart}, #{perPageNum}
-	]]>
+		<![CDATA[
+			select 
+					*
+			from 
+				pdu_category_detail
+			order by 
+				pdu_detail_code desc
+			limit #{pageStart}, #{perPageNum}
+		]]>
 	</select>
 	
-
+	<select id ="countPaging" resultType = "int">
+		<![CDATA[
+			select 
+				count(pdu_detail_code)
+			from 
+				pdu_category_detail
+		]]>
+	</select>
+	
+	<select id ="productDetailInfo" resultType = "ProductVO">
+		<![CDATA[
+			select 
+				*
+			from 
+				pdu_category_detail
+			where 
+				pdu_detail_code = #{pdu_detail_code}  
+		]]>
+	</select>
+	
+	<select id ="pduimageList" resultType = "PduImageVO">
+		<![CDATA[
+			select 
+				*
+			from 
+				pdu_category_detail_image
+			where
+			    pdu_image_file_type = 'main_image' OR pdu_image_file_type = 'sub_image1'
+			order 
+				by pdu_detail_code_ref desc
+		]]>
+	</select>
+		<select id ="detailImageList" resultType = "PduImageVO">
+		<![CDATA[
+			select 
+				*
+			from 
+				pdu_category_detail_image
+			where
+			    pdu_detail_code_ref = ${pdu_detail_code}
+			
+			
+		]]>
+	</select>
+	
 </mapper>
