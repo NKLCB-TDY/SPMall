@@ -26,7 +26,7 @@
 		]]>
 	</select>
 	
-	<select id ="productDetailInfo" resultType = "ProductVO">
+	<select id ="productDetailInfo" parameterType="int" resultType = "ProductVO">
 		<![CDATA[
 			select 
 				*

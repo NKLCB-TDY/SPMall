@@ -14,6 +14,8 @@ public class ProductVO {
 	private String pdu_content;
 	private String pdu_classificate;		//상품 분류
 	
+
+	
 	public int getPdu_detail_code() {
 		return pdu_detail_code;
 	}
@@ -85,6 +87,14 @@ public class ProductVO {
 	}
 	public void setPdu_classificate(String pdu_classificate) {
 		this.pdu_classificate = pdu_classificate;
+	}
+	@Override
+	public String toString() {
+		return "ProductVO [pdu_detail_code=" + pdu_detail_code + ", pdu_category_main=" + pdu_category_main
+				+ ", pdu_category_code_ref=" + pdu_category_code_ref + ", pdu_name=" + pdu_name + ", pdu_price="
+				+ pdu_price + ", pdu_discount_rate=" + pdu_discount_rate + ", pdu_discounted_price="
+				+ pdu_discounted_price + ", pdu_size=" + pdu_size + ", pdu_color=" + pdu_color + ", pdu_pieces="
+				+ pdu_pieces + ", pdu_content=" + pdu_content + ", pdu_classificate=" + pdu_classificate + "]";
 	}
 
 	

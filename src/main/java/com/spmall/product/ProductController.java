@@ -5,6 +5,7 @@ package com.spmall.product;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -17,12 +18,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spmall.common.Criteria;
 import com.spmall.common.PagingSetting;
 
+
+
 @Controller
 @RequestMapping("/product/*")
+
 public class ProductController {
 	
 	@Inject
 	ProductService pduService;
+
+	
 	
 	//상품 리스트 출력
 	@RequestMapping(value="productList.do", method = RequestMethod.GET)
@@ -57,4 +63,6 @@ public class ProductController {
 		mv.setViewName("product/productDetail");
 		return mv;
 	}
+	
+	
 }
