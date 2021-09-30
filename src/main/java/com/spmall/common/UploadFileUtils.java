@@ -2,100 +2,81 @@ package com.spmall.common;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.text.DecimalFormat;
-import java.util.Calendar;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.spmall.admin.PduImageVO;
 
 public class UploadFileUtils {
-	private static final Logger logger = LoggerFactory.getLogger(UploadFileUtils.class);
+	
+	
+	
+	//이미지 파일 업로드
+	public List<PduImageVO> upload(MultipartHttpServletRequest multipartRequest, int pdu_detail_code,
+			String uploadPath) throws Exception{
+		
+		List<PduImageVO> fileList= new ArrayList<PduImageVO>();
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		
+		while(fileNames.hasNext()){
+			PduImageVO imageFileVO =new PduImageVO();
+			String fileName = fileNames.next();
+			
+			imageFileVO.setPdu_image_file_type(fileName);
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			
+			String originalFileName=mFile.getOriginalFilename();
+			
+			imageFileVO.setPdu_image_file_name(originalFileName);
+			fileList.add(imageFileVO);
 
-	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception {
-
-		UUID uid = UUID.randomUUID();
-
-		String savedName = uid.toString() + "_" + originalName;
-
-		String savedPath = calcPath(uploadPath);
-
-		File target = new File(uploadPath + savedPath, savedName);
-
-		FileCopyUtils.copy(fileData, target);
-
-		String formatName = originalName.substring(originalName.lastIndexOf(".") + 1);
-		System.out.println("formatName= " + formatName );
-		String uploadedFileName = null;
-
-		if (MediaUtils.getMediaType(formatName) != null) {
-			uploadedFileName = makeThumbnail(uploadPath, savedPath, savedName);
-		} else {
-			uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
-		}
-
-		return uploadedFileName;
-
-	}
-
-	private static String makeIcon(String uploadPath, String path, String fileName) throws Exception {
-
-		String iconName = uploadPath + path + File.separator + fileName;
-
-		return iconName.substring(uploadPath.length()).replace(File.separatorChar, '/');
-	}
-
-	private static String makeThumbnail(String uploadPath, String path, String fileName) throws Exception {
-
-		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
-
-		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);
-
-		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
-
-		File newFile = new File(thumbnailName);
-		String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
-
-		ImageIO.write(destImg, formatName.toUpperCase(), newFile);
-		return thumbnailName.substring(uploadPath.length()).replace(File.separatorChar, '/');
-	}
-
-	private static String calcPath(String uploadPath) {
-
-		Calendar cal = Calendar.getInstance();
-
-		String yearPath = File.separator + cal.get(Calendar.YEAR);
-
-		String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
-
-		String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
-
-		makeDir(uploadPath, yearPath, monthPath, datePath);
-
-		logger.info(datePath);
-
-		return datePath;
-	}
-
-	private static void makeDir(String uploadPath, String... paths) {
-
-		if (new File(paths[paths.length - 1]).exists()) {
-			return;
-		}
-
-		for (String path : paths) {
-
-			File dirPath = new File(uploadPath + path);
-
-			if (!dirPath.exists()) {
-				dirPath.mkdir();
+			File file = new File(uploadPath +"\\"+ fileName);
+			
+			
+			if(mFile.getSize()!=0){ 
+				if(! file.exists()){ 
+					if(file.getParentFile().mkdirs()){
+							file.createNewFile(); 
+					}
+				}
+				System.out.println(uploadPath);
+				mFile.transferTo(new File(uploadPath + "\\"+"image"+ "\\"+originalFileName));
 			}
 		}
+		return fileList;
 	}
 
+	public String makeThumbnail(
+              String path, 
+              String fileName)throws Exception{
+   
+    BufferedImage sourceImg = 
+        ImageIO.read(new File(path, fileName));
+    
+    BufferedImage destImg = 
+        Scalr.resize(sourceImg, 
+            Scalr.Method.AUTOMATIC, 
+            Scalr.Mode.FIT_TO_HEIGHT,100);
+    
+    String thumbnailName = 
+        path + File.separator +"s_"+ fileName;
+
+    File newFile = new File(thumbnailName);
+    String formatName = 
+    		fileName.substring(fileName.lastIndexOf(".")+1);
+
+
+    ImageIO.write(destImg, formatName.toUpperCase(), newFile);
+    
+    return thumbnailName.substring(
+		path.length()).replace(File.separatorChar, '/');
+  } 
 }

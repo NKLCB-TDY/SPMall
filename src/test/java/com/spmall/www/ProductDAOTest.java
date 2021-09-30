@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.spmall.common.Criteria;
 import com.spmall.product.ProductDAO;
+import com.spmall.product.ProductDAOImpl;
 import com.spmall.product.ProductVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,5 +31,6 @@ public class ProductDAOTest {
 		
 		
 	}
+
 	
-}
+}	

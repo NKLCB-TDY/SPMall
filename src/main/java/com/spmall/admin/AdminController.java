@@ -11,13 +11,14 @@ import javax.inject.Inject;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.spmall.common.UploadFileUtils;
 
 import net.sf.json.JSONArray;
 
@@ -42,6 +43,7 @@ public class AdminController {
 	//새상품등록 페이지 new product register == prs
 	@RequestMapping(value = "newPrsInsert.do", method =RequestMethod.GET)
 	public ModelAndView newPrs() throws Exception{
+	
 		//상품 카테고리 찾기 
 		List<AdminVO> category = adminService.searchCate(); 
 		ModelAndView mv = new ModelAndView();
@@ -54,6 +56,7 @@ public class AdminController {
 	@RequestMapping(value = "newPrsInsert.do", method =RequestMethod.POST)
 	public String newPrsInsert_POST(PduCategoryDetailVO vo, MultipartHttpServletRequest multipartRequest)throws Exception{
 		multipartRequest.setCharacterEncoding("utf-8");
+		UploadFileUtils uploadFileUtils = new UploadFileUtils();
 		String imageFileName=null;
 		
 		//sub 카테고리가 없는 상품인 경우 
@@ -63,7 +66,7 @@ public class AdminController {
 		}
 		
 		//상품등록
-		List<PduImageVO> imageFileList=upload(multipartRequest);
+		List<PduImageVO> imageFileList=uploadFileUtils.upload(multipartRequest, vo.getPdu_detail_code(), uploadPath);
 		
 		try {
 			adminService.newPrsInsert(vo,imageFileList);
@@ -71,13 +74,21 @@ public class AdminController {
 			if(imageFileList !=null && imageFileList.size() !=0) {
 				for(PduImageVO imageFileVO : imageFileList) {
 					imageFileName=imageFileVO.getPdu_image_file_name();
+					
+					//임시저장파일에 
 					File srcFile=new File(uploadPath+"\\"+"image"+"\\"+imageFileName);
 					File destDir=new File(uploadPath+"\\"+vo.getPdu_detail_code()); 
 					FileUtils.moveFileToDirectory(srcFile, destDir, true); 
+				
+					
+					String name = uploadFileUtils.makeThumbnail(uploadPath+"\\"+imageFileVO.
+					getPdu_detail_code_ref()+ "\\", imageFileName); System.out.println(name);
+					 
 				}
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
+			//Exception 발생시 이미지 삭제
 			if(imageFileList !=null && imageFileList.size() !=0) {
 				for(PduImageVO imageFileVO : imageFileList) {
 					imageFileName=imageFileVO.getPdu_image_file_name();
@@ -92,38 +103,6 @@ public class AdminController {
 	}
 	
 	
-	// 메서드 ///////////////////////////////////
 	
-	//이미지 파일 업로드
-	public List<PduImageVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception{
-		
-		List<PduImageVO> fileList= new ArrayList<PduImageVO>();
-		Iterator<String> fileNames = multipartRequest.getFileNames();
-		
-		while(fileNames.hasNext()){
-			PduImageVO imageFileVO =new PduImageVO();
-			String fileName = fileNames.next();
-			
-			imageFileVO.setPdu_image_file_type(fileName);
-			MultipartFile mFile = multipartRequest.getFile(fileName);
-			
-			String originalFileName=mFile.getOriginalFilename();
-			
-			imageFileVO.setPdu_image_file_name(originalFileName);
-			fileList.add(imageFileVO);
-
-			File file = new File(uploadPath +"\\"+ fileName);
-			
-			
-			if(mFile.getSize()!=0){ 
-				if(! file.exists()){ 
-					if(file.getParentFile().mkdirs()){
-							file.createNewFile(); 
-					}
-				}
-				mFile.transferTo(new File(uploadPath + "\\"+ "image" + "\\"+originalFileName));
-			}
-		}
-		return fileList;
-	}
+	
 }

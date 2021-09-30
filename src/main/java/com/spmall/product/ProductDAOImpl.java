@@ -53,13 +53,14 @@ public class ProductDAOImpl implements ProductDAO {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		//제품정보 
-		ProductVO vo = new ProductVO(); 
-		vo = sqlSession.selectOne(namespace + ".productDetailInfo", pdu_detail_code);
+		ProductVO vo = new ProductVO();
+		vo.setPdu_detail_code(pdu_detail_code);
+		vo = sqlSession.selectOne(namespace + ".productDetailInfo", vo);
 		map.put("productDetail", vo);
 		
 		//제품 이미지 정보
 		List<PduImageVO> imageList = new ArrayList<PduImageVO>();
-		imageList = sqlSession.selectList(namespace + ".detailImageList", pdu_detail_code);
+		imageList = sqlSession.selectList(namespace + ".detailImageList", vo);
 		map.put("imageList", imageList);
 		return map;
 	}
