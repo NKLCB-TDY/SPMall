@@ -138,27 +138,31 @@
                         <h2>${productVO.pdu_name}</h2> <span class="heart"><i class='bx bx-heart'></i></span>
                     </div>
                     <hr>
+                    
                    	<div class="price">
 	                	<span>
 	                		<fmt:formatNumber value="${productVO.pdu_price }" pattern="#,###" />원
 	                	</span>     
 	                	<fmt:formatNumber value="${productVO.pdu_discounted_price }" pattern="#,###" />원
 	                </div>
-					<div class="mt-2 pr-3 content">
-                        상품정보 : <p>${productVO.pdu_content }</p>
+					<div class="mt-4"> <span class="fw-bold">상품정보</span>
+                        <p>${productVO.pdu_content }</p>
                     </div>
-                    <div class="ratings d-flex flex-row align-items-center">
-                        <span></span>
+                    <div class="mt-5"> <span class="fw-bold">Size</span>
+                  		<div class="size">
+                   			<select class="" id ="size" name="size">
+								<option value="">사이즈를 선택해주세요.</option>
+								<c:forEach items="${SizeColor}" var="size">
+										<option value="${size.pdu_size_name}">Size ${size.pdu_size_name}</option>
+								</c:forEach>
+							</select>
+						</div>
                     </div>
                     <div class="mt-5"> <span class="fw-bold">Color</span>
                         <div class="colors">
-                            <ul id="marker">
-                                <li id="marker-1"></li>
-                                <li id="marker-2"></li>
-                                <li id="marker-3"></li>
-                                <li id="marker-4"></li>
-                                <li id="marker-5"></li>
-                            </ul>
+							<select class="" id ="color" name="color">
+								<option value="">사이즈를 먼저선택하세요</option>
+							</select>
                         </div>
                     </div>
                     <div class="buttons d-flex flex-row mt-5 gap-3"> <button class="btn btn-outline-dark">Buy Now</button> <button class="btn btn-dark">Add to Basket</button> </div>
@@ -171,13 +175,52 @@
 
 
 
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 	//썸네일 클릭시 이미지 출력
 	function changeImage(element) {
-		var main_prodcut_image = document.getElementById('main_product_image');
+		let main_prodcut_image = document.getElementById('main_product_image');
 		main_prodcut_image.src = element.src;
-}
-</script>
+	}
+	//수량 체크
 
+	$(function(){
+		//select
+		$('#size').on('change',function(){
+			var option;
+			$("#color option").remove();
+			let size = $('select[name=size]').val();
+			console.log(size);
+			//사이즈선택안될시
+			if(!size){
+				option = $("<option value="+">"+"사이즈를 먼저선택하세요"+"</option>");
+				$('#color').append(option);
+				return;
+			}
+			let pduDetailCode = ${productVO.pdu_detail_code};
+			$.ajax({
+				 type: 'POST',
+				 dataType:'json',
+				 url: '/product/selectColor', 
+				 data: {
+					  pdu_detail_code : pduDetailCode,
+					  pdu_size_name : size
+				  },
+				  success: function(data){
+					  
+					  for(let i=0; i<data.length;i++){
+						  option = $("<option value="+data[i].pdu_color_name+">"+data[i].pdu_color_name+"</option>");
+						  $('#color').append(option);
+					  }
+				  },
+					error : function(error) {
+						console.log(error);
+					}
+				});	
+		}); 
+	});
+
+</script>
 
 </body>

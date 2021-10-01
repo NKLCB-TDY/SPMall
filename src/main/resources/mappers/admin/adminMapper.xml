@@ -10,18 +10,12 @@
 	
 	<!-- 새상품 등록 -->
 	<insert id="newPrsInsert" parameterType="PduCategoryDetailVO">
-		<selectKey resultType="int" keyProperty="pdu_detail_code" order="AFTER">
-			select MAX(pdu_detail_code)
-			from pdu_category_detail
-		</selectKey>
+
 		insert into pdu_category_detail(pdu_category_code_ref,
 										pdu_name, 
 										pdu_price, 
 										pdu_discount_rate, 
 										pdu_discounted_price,
-										pdu_size, 
-										pdu_color, 
-										pdu_pieces, 
 										pdu_content, 
 										pdu_classificate)
 		values( #{pdu_category_code_ref}, 
@@ -29,13 +23,26 @@
 				#{pdu_price}, 
 				#{pdu_discount_rate}, 
 				#{pdu_discounted_price},
-			  	#{pdu_size}, 
-			  	#{pdu_color}, 
-			  	#{pdu_pieces}, 
 			  	#{pdu_content}, 
 			  	#{pdu_classificate} )
 	</insert>
-
+	
+	<insert id="newPrsInsertColorSizePieces" parameterType="PduCategoryDetailVO">
+		<selectKey resultType="int" keyProperty="pdu_detail_code" order="BEFORE">
+			select MAX(pdu_detail_code)
+			from pdu_category_detail
+		</selectKey>
+		insert into pdu_color_size_pieces(  pdu_detail_code_ref,
+											pdu_color_name,
+											pdu_size_name,
+											pdu_pieces)
+		values( #{pdu_detail_code},
+				#{pdu_color_name},
+				#{pdu_size_name},
+				#{pdu_pieces}  )
+	</insert>
+	
+	
 	<insert id="newPrsInsert_img" parameterType="PduImageVO">
 	
 		<selectKey resultType="int" keyProperty="pdu_detail_code_ref" order="BEFORE">

@@ -2,17 +2,20 @@ package com.spmall.product;
 
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spmall.common.Criteria;
@@ -54,15 +57,23 @@ public class ProductController {
 	@RequestMapping(value="productDetail.do", method = RequestMethod.GET)
 	public ModelAndView detailProductList(@RequestParam("pdu_detail_code") int pdu_detail_code,
 									@ModelAttribute("cri") Criteria cri,
-									ModelAndView mv)throws Exception {
+									ModelAndView mv)throws Exception {	
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = pduService.productDetail(pdu_detail_code);
+		
 		mv.addObject("productVO", map.get("productDetail"));
 		mv.addObject("imageList", map.get("imageList"));
+		mv.addObject("SizeColor", map.get("pduSizeColor"));
 		mv.setViewName("product/productDetail");
 		return mv;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value ="/selectColor", method=RequestMethod.POST)	
+	public Object selectColor(ProductVO vo)throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = pduService.selectColor(vo);
+		return map.get("colorList");
+  }
 }
