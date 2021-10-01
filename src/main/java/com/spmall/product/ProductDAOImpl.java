@@ -62,6 +62,23 @@ public class ProductDAOImpl implements ProductDAO {
 		List<PduImageVO> imageList = new ArrayList<PduImageVO>();
 		imageList = sqlSession.selectList(namespace + ".detailImageList", vo);
 		map.put("imageList", imageList);
+		
+		//컬러 및 사이즈
+		List<String> colorList = new ArrayList<String>();
+		colorList = sqlSession.selectList(namespace + ".pduColorSelect", vo);
+		map.put("pduSizeColor", colorList);
+		
+		return map;
+		
+	}
+
+	@Override
+	public Map<String, Object> selectColor(ProductVO vo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<ProductVO> colorList = new ArrayList<ProductVO>();
+		colorList = sqlSession.selectList(namespace + ".selectColor", vo);
+		map.put("colorList", colorList);
 		return map;
 	}
 

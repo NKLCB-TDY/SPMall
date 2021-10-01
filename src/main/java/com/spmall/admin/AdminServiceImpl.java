@@ -19,7 +19,7 @@ public class AdminServiceImpl implements AdminService  {
 
 	@Override
 	public void newPrsInsert(PduCategoryDetailVO vo, List<PduImageVO> imageFileList) throws Exception {
-		//이미지를 제외한 정보 등록
+		//상품정보 및 이미지 등록
 		adminDAO.newPrsInsert(vo);
 		adminDAO.newPrsInsert_img(imageFileList);
 	}

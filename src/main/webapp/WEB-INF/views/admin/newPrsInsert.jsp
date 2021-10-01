@@ -77,13 +77,14 @@
 				<div class="card-header py-2">
 					<h6 class="m-0 font-weight-bold text-primary">상품 사이즈</h6>
 				</div>
-				<select name="pdu_size">
+				<select name="pdu_size_name">
 					<option>사이즈 선택</option>
 					<option value="S">S</option>
 					<option value="M">M</option>
 					<option value="L">L</option>
 					<option value="XL">XL</option>
 					<option value="XXL">XXL</option>
+					<option value="Free">Free</option>
 				</select>
 			</div>
 					
@@ -91,7 +92,7 @@
 				<div class="card-header py-2">
 					<h6 class="m-0 font-weight-bold text-primary">상품 색</h6>
 				</div>
-				<select name="pdu_color">
+				<select name="pdu_color_name">
 					<option value="" selected>색 선택</option>
 					<option value="black">블랙</option>
 					<option value="white">화이트</option>

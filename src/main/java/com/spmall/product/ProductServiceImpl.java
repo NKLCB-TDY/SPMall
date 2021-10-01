@@ -29,5 +29,10 @@ public class ProductServiceImpl implements ProductService {
 	public int countingPaging(Criteria cri) throws Exception {
 		return productDAO.countingPaging(cri);
 	}
+
+	@Override
+	public Map<String, Object> selectColor(ProductVO vo) {
+		return productDAO.selectColor(vo);
+	}
 	
 }

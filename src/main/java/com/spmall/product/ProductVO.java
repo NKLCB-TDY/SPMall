@@ -8,8 +8,8 @@ public class ProductVO {
 	private String pdu_price;
 	private String pdu_discount_rate;		//할인율
 	private String pdu_discounted_price;	//할인가
-	private String pdu_size;
-	private String pdu_color;
+	private String pdu_size_name;
+	private String pdu_color_name;
 	private Integer pdu_pieces; 			//상품 수량
 	private String pdu_content;
 	private String pdu_classificate;		//상품 분류
@@ -58,17 +58,18 @@ public class ProductVO {
 	public void setPdu_discounted_price(String pdu_discounted_price) {
 		this.pdu_discounted_price = pdu_discounted_price;
 	}
-	public String getPdu_size() {
-		return pdu_size;
+	
+	public String getPdu_size_name() {
+		return pdu_size_name;
 	}
-	public void setPdu_size(String pdu_size) {
-		this.pdu_size = pdu_size;
+	public void setPdu_size_name(String pdu_size_name) {
+		this.pdu_size_name = pdu_size_name;
 	}
-	public String getPdu_color() {
-		return pdu_color;
+	public String getPdu_color_name() {
+		return pdu_color_name;
 	}
-	public void setPdu_color(String pdu_color) {
-		this.pdu_color = pdu_color;
+	public void setPdu_color_name(String pdu_color_name) {
+		this.pdu_color_name = pdu_color_name;
 	}
 	public Integer getPdu_pieces() {
 		return pdu_pieces;
@@ -87,14 +88,6 @@ public class ProductVO {
 	}
 	public void setPdu_classificate(String pdu_classificate) {
 		this.pdu_classificate = pdu_classificate;
-	}
-	@Override
-	public String toString() {
-		return "ProductVO [pdu_detail_code=" + pdu_detail_code + ", pdu_category_main=" + pdu_category_main
-				+ ", pdu_category_code_ref=" + pdu_category_code_ref + ", pdu_name=" + pdu_name + ", pdu_price="
-				+ pdu_price + ", pdu_discount_rate=" + pdu_discount_rate + ", pdu_discounted_price="
-				+ pdu_discounted_price + ", pdu_size=" + pdu_size + ", pdu_color=" + pdu_color + ", pdu_pieces="
-				+ pdu_pieces + ", pdu_content=" + pdu_content + ", pdu_classificate=" + pdu_classificate + "]";
 	}
 
 	
