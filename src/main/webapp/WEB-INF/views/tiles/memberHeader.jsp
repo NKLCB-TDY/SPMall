@@ -30,11 +30,7 @@
                   <sec:authorize access="hasRole('ROLE_USER')">
                   	<sec:authentication property="principal.username" var="member_name" />
                   </sec:authorize>
-                 	<button class="btn btn-outline-dark">
-                         <i class="bi-cart-fill me-1"></i>
-                         Cart
-                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                     </button>
+
                  <sec:authorize access="isAnonymous()">
                      <button type="button" class="btn btn-outline-dark" 
                      	onclick="location.href='/main/mainLogin.do'">
@@ -44,6 +40,11 @@
                  </sec:authorize>
                  <!-- 회원권한 가질시 -->
                  <sec:authorize access="hasRole('ROLE_USER')">
+                 	 <button class="btn btn-outline-dark" onclick="location.href='/cart/cartList.do'">
+                         <i class="bi-cart-fill me-1"></i>
+                         Cart
+                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                     </button>
                  	
                  	<button type="button" class="btn btn-outline-dark" 
                      	onclick="location.href='/mypage/membermypage.do'">

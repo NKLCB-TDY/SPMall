@@ -5,8 +5,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
 <link rel="stylesheet" type="text/css" href="/resources/css/product/product.css">
-	<style>
-		body {
+
+<!-- 수량 버튼 css, js -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+<!-- 수량 버튼 css, js end-->
+
+<style>
+body {
     background-color: #ecedee
 }
 
@@ -113,6 +120,7 @@
     border-radius: 0px !important
 }
 	</style>
+
 </head>
 <body>
 
@@ -138,7 +146,7 @@
                         <h2>${productVO.pdu_name}</h2> <span class="heart"><i class='bx bx-heart'></i></span>
                     </div>
                     <hr>
-                    
+                    <span class="fw-bold ">가격</span>
                    	<div class="price">
 	                	<span>
 	                		<fmt:formatNumber value="${productVO.pdu_price }" pattern="#,###" />원
@@ -151,7 +159,7 @@
                     <div class="mt-5"> <span class="fw-bold">Size</span>
                   		<div class="size">
                    			<select class="" id ="size" name="size">
-								<option value="">사이즈를 선택해주세요.</option>
+								<option value="No_Value">사이즈를 선택해주세요.</option>
 								<c:forEach items="${SizeColor}" var="size">
 										<option value="${size.pdu_size_name}">Size ${size.pdu_size_name}</option>
 								</c:forEach>
@@ -161,16 +169,40 @@
                     <div class="mt-5"> <span class="fw-bold">Color</span>
                         <div class="colors">
 							<select class="" id ="color" name="color">
-								<option value="">사이즈를 먼저선택하세요</option>
+								<option value="No_Value">사이즈를 먼저 선택 해주세요.</option>
 							</select>
                         </div>
                     </div>
-                    <div class="buttons d-flex flex-row mt-5 gap-3"> <button class="btn btn-outline-dark">Buy Now</button> <button class="btn btn-dark">Add to Basket</button> </div>
+                    
+                   <div class="mt-5">
+                     <div class="mb-2"><span class="fw-bold ">상품 수량</span></div>
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-dark btn-md" id="minus-btn"><i class="fa fa-minus"></i></button>
+                                </div>
+                                <input type="number" name="quantity" id="qty_input" class="form-control form-control-md" value="1" min="1">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-dark btn-md" id="plus-btn"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4"></div>
+                	</div>
+                    <div class="buttons d-flex flex-row mt-5 gap-3"> 
+                    	<button class="btn btn-outline-dark" onclick="Submit('장바구니')">장바 구니 담기</button> 
+                    	<button class="btn btn-dark" onclick="Submit('바로구매')">바로 구매</button> </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+	<c:forEach items="${imageList}" var = "imageList">
+		<div class="d-flex justify-content-center mt-5 mb-5">
+			<img src="/test/upload/${imageList.pdu_detail_code_ref}/${imageList.pdu_image_file_name}">
+		</div>
+	</c:forEach>
 
 
 
@@ -183,7 +215,7 @@
 		let main_prodcut_image = document.getElementById('main_product_image');
 		main_prodcut_image.src = element.src;
 	}
-	//수량 체크
+	
 
 	$(function(){
 		//select
@@ -199,6 +231,7 @@
 				return;
 			}
 			let pduDetailCode = ${productVO.pdu_detail_code};
+			
 			$.ajax({
 				 type: 'POST',
 				 dataType:'json',
@@ -208,7 +241,7 @@
 					  pdu_size_name : size
 				  },
 				  success: function(data){
-					  
+					  console.log(data);
 					  for(let i=0; i<data.length;i++){
 						  option = $("<option value="+data[i].pdu_color_name+">"+data[i].pdu_color_name+"</option>");
 						  $('#color').append(option);
@@ -221,6 +254,55 @@
 		}); 
 	});
 
+	//수량 +- 이펙트 처리
+	$(function(){
+	    $('#qty_input').prop('disabled', true);
+	    $('#plus-btn').click(function(){
+	    	$('#qty_input').val(parseInt($('#qty_input').val()) + 1 );
+   	    });
+	    
+	    $('#minus-btn').click(function(){
+	    	$('#qty_input').val(parseInt($('#qty_input').val()) - 1 );
+	    	if ($('#qty_input').val() == 0) {
+				$('#qty_input').val(1);
+			}
+			console.log($('#qty_input').val());
+	    });
+	       
+	 });
+	
+	//Submit
+	function Submit(select){
+		const pdu_detail_code_ref = ${productVO.pdu_detail_code}; 
+		const size = $('#size').val();
+		const color = $('#color').val();
+		const quantity = $('#qty_input').val();
+		if(size == "No_Value"){
+			alert('사이즈를 선택해주세요');
+		}
+		
+		$.ajax({
+			type : 'POST',
+			dataType : 'text',
+			url  : '/cart/addToCart.do',
+			data : {
+				cart_pdu_detail_code_ref : pdu_detail_code_ref,
+				cart_pdu_size : size,
+				cart_pdu_color : color,
+				cart_pdu_quantity : quantity
+			},
+			success: function(){
+				
+			},
+			
+			error : function(error) {
+				console.log(error);
+			}
+				
+		});
+		
+	}
+		
 </script>
 
 </body>

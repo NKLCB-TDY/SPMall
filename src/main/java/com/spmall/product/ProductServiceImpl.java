@@ -31,8 +31,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Map<String, Object> selectColor(ProductVO vo) {
-		return productDAO.selectColor(vo);
+	public Map<String, Object> selectColor(ProductVO productVO) {
+		return productDAO.selectColor(productVO);
 	}
 	
 }
