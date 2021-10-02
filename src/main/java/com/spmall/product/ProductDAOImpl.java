@@ -73,11 +73,11 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public Map<String, Object> selectColor(ProductVO vo) {
+	public Map<String, Object> selectColor(ProductVO productVO) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		List<ProductVO> colorList = new ArrayList<ProductVO>();
-		colorList = sqlSession.selectList(namespace + ".selectColor", vo);
+		colorList = sqlSession.selectList(namespace + ".selectColor", productVO);
 		map.put("colorList", colorList);
 		return map;
 	}

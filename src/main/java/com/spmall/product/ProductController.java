@@ -69,11 +69,12 @@ public class ProductController {
 		return mv;
 	}
 	
+	//Size 값에 따른 색찾기
 	@ResponseBody
 	@RequestMapping(value ="/selectColor", method=RequestMethod.POST)	
-	public Object selectColor(ProductVO vo)throws Exception{
+	public Object selectColor(ProductVO productVO)throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
-		map = pduService.selectColor(vo);
+		map = pduService.selectColor(productVO);
 		return map.get("colorList");
   }
 }
