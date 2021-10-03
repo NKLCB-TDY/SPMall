@@ -8,9 +8,17 @@
 	<select id = "productList" resultType ="ProductVO">
 		<![CDATA[
 			select 
-					*
+				*
 			from 
 				pdu_category_detail
+			
+			]]>
+			<if test="keyword != null">
+				where
+				pdu_name like CONCAT('%', #{keyword}, '%')
+			</if>
+			<![CDATA[
+				 
 			order by 
 				pdu_detail_code desc
 			limit #{pageStart}, #{perPageNum}
@@ -23,6 +31,13 @@
 				count(pdu_detail_code)
 			from 
 				pdu_category_detail
+			 
+		]]>
+			<if test="keyword != null">
+				where
+				pdu_name like CONCAT('%', #{keyword}, '%')
+			</if>
+		<![CDATA[
 		]]>
 	</select>
 	

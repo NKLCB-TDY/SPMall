@@ -102,19 +102,16 @@
 	<input type="hidden" name="perPageNum" value="${pagingSetting.cri.perPageNum}">
 </form>
 
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
-	$(".pagination li a").on("click", function(){
-		event.preventDefault();
-		
-		var targetPage = $(this).attr("href");
-		var jobForm = $("#jobForm");
-		
-		jobForm.find("[name='page']").val(targetPage);
-		jobForm.attr("action","/product/productList.do").attr("method","get");
-		jobForm.submit();
+	
+	$(function(){
+		$("#searchBtn").on("click", function(event){
+			self.location = "productList.do"
+				+ '${pagingSetting.makeQuery(1)}'
+				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
+		});
 	});
-	
-	
 </script>
 </body>
 
