@@ -37,12 +37,15 @@ public class ProductController {
 									ModelAndView mv, 
 									ProductVO productVO) throws Exception {
 		
+		
 		//페이징처리
 		PagingSetting pagingSetting = new PagingSetting();
 		pagingSetting.setCri(cri);
-		//출력할 총 데이터 개수
-		pagingSetting.setTotalCount(pduService.countingPaging(cri));
 		
+		//출력할 총 데이터 개수
+
+		pagingSetting.setTotalCount(pduService.countingPaging(cri));
+		System.out.println(cri.getKeyword());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = pduService.productList(cri);
 		
