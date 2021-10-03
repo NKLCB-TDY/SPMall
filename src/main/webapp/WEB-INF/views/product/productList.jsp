@@ -13,13 +13,15 @@
 <body>
 <!-- img count할 index 변수 선언 -->
 <c:set var="idxCount" value="0"/>
-<div class="container">
+<input type="text" name="keyword" id="keywordInput" value="${cri.keyword}">
+<button id="searchBtn">Search</button>
+<div class="container mt-5 mb-5">
 	<div class="row">
 		<c:forEach items="${productList}" var="productVO" varStatus="status">
 	    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 ">
 	        <div class="product-grid">
 	            <div class="product-image">
-	                <a href="/product/productDetail.do${pagingSetting.makeQuery(pagingSetting.cri.page)
+	                <a href="/product/productDetail.do${pagingSetting.makeSearch(pagingSetting.cri.page)
 		                		}&pdu_detail_code=${productVO.pdu_detail_code}" class="image">
 		                	
 						<!-- img는 main 이미지 한개, sub1 이미지 한개, 총2개 출력해야되기에 index 변수 선언 후 증감으로 처리 -->
@@ -33,7 +35,7 @@
 	                    <li><a href="#"><i class="far fa-heart"></i></a></li>
 	                    <li><a href="#"><i class="fa fa-random"></i></a></li>
 	                    <li>
-	                    	<a href="/product/productDetail.do${pagingSetting.makeQuery(pagingSetting.cri.page)
+	                    	<a href="/product/productDetail.do${pagingSetting.makeSearch(pagingSetting.cri.page)
 		                		}&pdu_detail_code=${productVO.pdu_detail_code}"><i class="fa fa-search"></i>
 		                	</a>
 		                </li>
@@ -48,7 +50,7 @@
 	                    <li class="far fa-star"></li>
 	                </ul>
 	                <h3 class="title">
-		                <a href="/product/productDetail.do${pagingSetting.makeQuery(pagingSetting.cri.page)
+		                <a href="/product/productDetail.do${pagingSetting.makeSearch(pagingSetting.cri.page)
 		                		}&pdu_detail_code=${productVO.pdu_detail_code}">
 
 		              			${productVO.pdu_name}
@@ -69,35 +71,50 @@
 	
 
 	<div class="text-center">
-			<ul class="pagination">
+		<ul class="pagination">
+			<c:if test="${pagingSetting.prev}">
+				<li><a class="page-link"
+					href="productList.do${pagingSetting.makeSearch(pagingSetting.startPage - 1) }">&laquo;</a></li>
+			</c:if>
 
-				<c:if test="${pagingSetting.prev}">
-					<li><a class="page-link"
-						href="productList.do${pagingSetting.makeQuery(pagingSetting.startPage - 1) }">&laquo;</a></li>
-				</c:if>
+			<c:forEach begin="${pagingSetting.startPage }"
+				end="${pagingSetting.endPage }" var="idx">
 
-				<c:forEach begin="${pagingSetting.startPage }"
-					end="${pagingSetting.endPage }" var="idx">
+				<li 
+					<c:if test="${pagingSetting.cri.page == idx}">
+						 class="page-item active"
+					</c:if>>
+					
+					
+					<a class="page-link" href="productList.do${pagingSetting.makeSearch(idx)}">${idx}</a>
+				</li>
+			</c:forEach>
 
-					<li 
-						<c:if test="${pagingSetting.cri.page == idx}">
-							 class="page-item active"
-						</c:if>>
-						
-						
-						<a class="page-link" href="productList.do${pagingSetting.makeQuery(idx)}">${idx}</a>
-					</li>
-				</c:forEach>
-
-				<c:if test="${pagingSetting.next && pagingSetting.endPage > 0}">
-					<li ><a class="page-link"
-						href="productList.do${pagingSetting.makeQuery(pagingSetting.endPage +1) }">&raquo;</a></li>
-				</c:if>
-
-			</ul>
-			
-			
-		</div>
+			<c:if test="${pagingSetting.next && pagingSetting.endPage > 0}">
+				<li ><a class="page-link"
+					href="productList.do${pagingSetting.makeSearch(pagingSetting.endPage +1) }">&raquo;</a></li>
+			</c:if>
+		</ul>
+	</div>
 </div>
+<form id="jobForm">
+	<input type="hidden" name="page" value="${pagingSetting.cri.page}">
+	<input type="hidden" name="perPageNum" value="${pagingSetting.cri.perPageNum}">
+</form>
 
+<script>
+	$(".pagination li a").on("click", function(){
+		event.preventDefault();
+		
+		var targetPage = $(this).attr("href");
+		var jobForm = $("#jobForm");
+		
+		jobForm.find("[name='page']").val(targetPage);
+		jobForm.attr("action","/product/productList.do").attr("method","get");
+		jobForm.submit();
+	});
+	
+	
+</script>
 </body>
+

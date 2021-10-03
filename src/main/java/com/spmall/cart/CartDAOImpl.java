@@ -15,6 +15,6 @@ public class CartDAOImpl implements CartDAO{
 	
 	@Override
 	public void addToCart(CartVO cartVO)throws Exception{
-		sqlSession.insert(namespace+".addToCart");
+		sqlSession.insert(namespace+".addToCart", cartVO);
 	}
 }

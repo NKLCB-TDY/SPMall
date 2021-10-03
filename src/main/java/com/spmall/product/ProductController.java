@@ -2,15 +2,12 @@ package com.spmall.product;
 
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spmall.common.Criteria;
 import com.spmall.common.PagingSetting;
+import com.spmall.common.SearchCriteria;
 
 
 
@@ -35,12 +33,14 @@ public class ProductController {
 	
 	//상품 리스트 출력
 	@RequestMapping(value="productList.do", method = RequestMethod.GET)
-	public ModelAndView ProductList(Criteria cri, ModelAndView mv, ProductVO productVO) throws Exception {
+	public ModelAndView ProductList(@ModelAttribute("cri")SearchCriteria cri, 
+									ModelAndView mv, 
+									ProductVO productVO) throws Exception {
 		
+		//페이징처리
 		PagingSetting pagingSetting = new PagingSetting();
-		
 		pagingSetting.setCri(cri);
-		//출력할 데이터 개수
+		//출력할 총 데이터 개수
 		pagingSetting.setTotalCount(pduService.countingPaging(cri));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -68,6 +68,7 @@ public class ProductController {
 		mv.setViewName("product/productDetail");
 		return mv;
 	}
+	
 	
 	//Size 값에 따른 색찾기
 	@ResponseBody

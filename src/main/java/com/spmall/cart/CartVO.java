@@ -2,7 +2,7 @@ package com.spmall.cart;
 
 public class CartVO {
 	private int cart_pdu_detail_code_ref;
-	private String member_id;
+	private String cart_member_id;
 	private String cart_pdu_size;
 	private String cart_pdu_color;
 	private int cart_pdu_quantity;
@@ -15,11 +15,12 @@ public class CartVO {
 		this.cart_pdu_detail_code_ref = cart_pdu_detail_code_ref;
 	}
 	
-	public String getMember_id() {
-		return member_id;
+	
+	public String getCart_member_id() {
+		return cart_member_id;
 	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+	public void setCart_member_id(String cart_member_id) {
+		this.cart_member_id = cart_member_id;
 	}
 	public String getCart_pdu_size() {
 		return cart_pdu_size;
