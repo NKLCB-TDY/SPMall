@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.spmall.common.Criteria;
+import com.spmall.common.SearchCriteria;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -16,7 +17,7 @@ public class ProductServiceImpl implements ProductService {
 	ProductDAO productDAO;
 	
 	@Override
-	public Map<String, Object> productList(Criteria cri)throws Exception {
+	public Map<String, Object> productList(SearchCriteria cri)throws Exception {
 		return productDAO.productList(cri);
 	}
 
@@ -26,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public int countingPaging(Criteria cri) throws Exception {
+	public int countingPaging(SearchCriteria cri) throws Exception {
 		return productDAO.countingPaging(cri);
 	}
 

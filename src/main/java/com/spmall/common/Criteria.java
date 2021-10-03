@@ -6,7 +6,7 @@ public class Criteria {
 	
 	public Criteria() {
 		this.page = 1;  //1페이지 default
-		this.perPageNum = 10; //10개 출력
+		this.perPageNum = 8; //8개 출력
 	}
 
 	public int getPage() {
@@ -28,8 +28,8 @@ public class Criteria {
 	}
 
 	public void setPerPageNum(int perPageNum) {
-		if(perPageNum <= 0 || perPageNum > 100) { //perPageNum 범위 0 < x < 100 아닐시 10으로 초기화
-			this.perPageNum = 10;
+		if(perPageNum <= 0 || perPageNum > 100) { //perPageNum 범위 0 < x < 100 아닐시 8으로 초기화
+			this.perPageNum = 8;
 			return;
 		}
 		this.perPageNum = perPageNum;

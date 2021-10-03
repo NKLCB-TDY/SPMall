@@ -19,7 +19,8 @@ body {
 
 .card {
     border: none;
-    overflow: hidden
+    overflow: hidden;
+    
 }
 
 .thumbnail_images ul {
@@ -47,7 +48,7 @@ body {
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid #eee;
-    height: 400px;
+    height: 600px;
     width: 100%;
     overflow: hidden;
     margin-top : 5%;
@@ -157,7 +158,7 @@ body {
                         <p>${productVO.pdu_content }</p>
                     </div>
                     <div class="mt-5"> <span class="fw-bold">Size</span>
-                  		<div class="size">
+                  		<div class="size mt-1">
                    			<select class="" id ="size" name="size">
 								<option value="No_Value">사이즈를 선택해주세요.</option>
 								<c:forEach items="${SizeColor}" var="size">
@@ -167,31 +168,32 @@ body {
 						</div>
                     </div>
                     <div class="mt-5"> <span class="fw-bold">Color</span>
-                        <div class="colors">
+                        <div class="colors mt-1">
 							<select class="" id ="color" name="color">
 								<option value="No_Value">사이즈를 먼저 선택 해주세요.</option>
 							</select>
                         </div>
                     </div>
                     
-                   <div class="mt-5">
-                     <div class="mb-2"><span class="fw-bold ">상품 수량</span></div>
-                        <div class="col-sm-4 col-sm-offset-4">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-dark btn-md" id="minus-btn"><i class="fa fa-minus"></i></button>
-                                </div>
-                                <input type="number" name="quantity" id="qty_input" class="form-control form-control-md" value="1" min="1">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-dark btn-md" id="plus-btn"><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4"></div>
-                	</div>
-                    <div class="buttons d-flex flex-row mt-5 gap-3"> 
-                    	<button class="btn btn-outline-dark" onclick="Submit('장바구니')">장바 구니 담기</button> 
-                    	<button class="btn btn-dark" onclick="Submit('바로구매')">바로 구매</button> </div>
+					<div class="mt-5"> <span class="fw-bold">상품 수량</span>
+	                     <div class="col-sm-4 col-sm-offset-4">
+	                         <div class="input-group mb-3 mt-3">
+	                             <div class="input-group-prepend">
+	                                 <button class="btn btn-dark btn-md" id="minus-btn"><i class="fa fa-minus"></i></button>
+	                             </div>
+	                             <input type="number" name="quantity" id="qty_input" class="form-control form-control-md" value="1" min="1">
+	                             <div class="input-group-prepend">
+	                                 <button class="btn btn-dark btn-md" id="plus-btn"><i class="fa fa-plus"></i></button>
+	                             </div>
+	                         </div>
+	                     </div>
+                    	 <div class="col-sm-4"></div>
+					</div>
+                    <div class="buttons d-flex flex-row mt-5 gap-3 "> 
+                    	<button class="btn btn-outline-dark" id="cartButton" onclick="Submit('장바구니')">장바 구니 담기</button> 
+                    	<button class="btn btn-dark" onclick="Submit('바로구매')">바로 구매</button> 
+                    	
+                    </div>
                 </div>
             </div>
         </div>
@@ -218,6 +220,33 @@ body {
 	
 
 	$(function(){
+		//carButton 클릭시 
+	    //popover 
+			$('#cartButton').popover({
+				placement: 'top',
+		        html: true,
+		        title : '<span class="text-info"><strong>장바구니 등록완료</strong></span>'+
+		        		'<a href="#" class="close" data-dismiss="alert">&times;</a>',
+		        content : '<a type="button" href="##">장바구니로 이동하시겠습니까?</a>'
+			});
+			
+			//popover에서 취소버튼 누를시
+			$(document).on("click", ".popover .close" , function(){
+				$(this).parents(".popover").popover('hide');
+			});
+			
+			//5초뒤에 popover 숨김처리
+			$('#cartButton').click(function () {
+				
+					setTimeout(function () {
+			            $('.popover').popover('hide');
+			        }, 5000);
+		    });
+
+		
+		
+		
+		
 		//select
 		$('#size').on('change',function(){
 			var option;
@@ -225,7 +254,7 @@ body {
 			let size = $('select[name=size]').val();
 			console.log(size);
 			//사이즈선택안될시
-			if(!size){
+			if(size == "No_Value"){
 				option = $("<option value="+">"+"사이즈를 먼저선택하세요"+"</option>");
 				$('#color').append(option);
 				return;
@@ -269,40 +298,48 @@ body {
 			console.log($('#qty_input').val());
 	    });
 	       
+
 	 });
 	
 	//Submit
 	function Submit(select){
+		
+
 		const pdu_detail_code_ref = ${productVO.pdu_detail_code}; 
 		const size = $('#size').val();
 		const color = $('#color').val();
 		const quantity = $('#qty_input').val();
+		
 		if(size == "No_Value"){
 			alert('사이즈를 선택해주세요');
+		}else{
+			$.ajax({
+				type : 'POST',
+				dataType : 'text',
+				url  : '/cart/addToCart.do',
+				data : {
+					cart_pdu_detail_code_ref : pdu_detail_code_ref,
+					cart_pdu_size : size,
+					cart_pdu_color : color,
+					cart_pdu_quantity : quantity
+				},
+				success: function(data){
+					console.log("등록완료");
+				},
+				
+				error : function(error) {
+					console.log(error);
+				}
+					
+			});
+			
 		}
 		
-		$.ajax({
-			type : 'POST',
-			dataType : 'text',
-			url  : '/cart/addToCart.do',
-			data : {
-				cart_pdu_detail_code_ref : pdu_detail_code_ref,
-				cart_pdu_size : size,
-				cart_pdu_color : color,
-				cart_pdu_quantity : quantity
-			},
-			success: function(){
-				
-			},
-			
-			error : function(error) {
-				console.log(error);
-			}
-				
-		});
+		
 		
 	}
-		
+
+	
 </script>
 
 </body>

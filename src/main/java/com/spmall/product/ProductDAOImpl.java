@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.spmall.admin.PduImageVO;
-import com.spmall.common.Criteria;
+import com.spmall.common.SearchCriteria;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -24,7 +24,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	//페이지 데이터 sql값에 맞게 출력
 	@Override
-	public Map<String, Object> productList(Criteria cri) throws Exception {
+	public Map<String, Object> productList(SearchCriteria cri) throws Exception {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -41,8 +41,8 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public int countingPaging(Criteria cri) throws Exception {
-		// TODO Auto-generated method stub
+	public int countingPaging(SearchCriteria cri) throws Exception {
+
 		return sqlSession.selectOne(namespace + ".countPaging", cri);
 	}
 
