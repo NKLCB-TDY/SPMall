@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -40,8 +42,15 @@
     color: #007bff;
     font-size: 18px;
     font-weight: bold;
-    margin-right: 5px;
     display: block;
+    text-align:center;
+}
+.shopping-cart-wrap .perPrice {
+    color: 	#4169E1;
+    font-size: 12px;
+    font-weight: bold;
+    display: block;
+    text-align:center;
 }
 var {
     font-style: normal;
@@ -59,91 +68,178 @@ var {
 </head>
 <body>
 
+
 <div class="container pt-5">
-<br>  <h2 class="text-center">장바구니 리스트 </h2>
-<hr>
-
-
-
-<div class="card">
-<table class="table table-hover shopping-cart-wrap">
-<thead class="text-muted">
-<tr>
-  <th scope="col" width="20">Check</th>
-  <th scope="col">Product</th>
-  <th scope="col" width="120">Quantity</th>
-  <th scope="col" width="120">Price</th>
-  <th scope="col" width="200" class="text-right">Action</th>
-</tr>
-</thead>
-<tbody>
-
-<tr>
-	<td><input type="checkbox">	</td>
-	<td>
-		<figure class="media">
+	<br>
+	<h2 class="text-center">장바구니 리스트 </h2>
+	<hr>
 	
-			<div class="img-wrap"><img src="/test/upload/1/s_test1.JPG" class="img-thumbnail img-sm"></div>
-			<figcaption class="media-body">
-				<h6 class="title text-truncate">Product name goes here </h6>
-				<dl class="param param-inline small">
-		  			<dt>Size: </dt>
-		  			<dd>XXL</dd>
-				</dl>
-				<dl class="param param-inline small">
-		  			<dt>Color: </dt>
-		  			<dd>Orange color</dd>
-				</dl>
-			</figcaption>
-		</figure> 
-	</td>
-	<td> 	
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
-        </div>
-        <input type="number" name="pdu_pieces" id="qty_input" class="form-control form-control-sm" value="1" min="1">
-        <div class="input-group-prepend">
-            <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
-        </div>
-    </div>
+	<div class="card">
+	<table class="table table-hover shopping-cart-wrap">
+		<thead class="text-muted">
+			<tr>
+			  <th scope="col" width="5%"><input type="checkbox"></th>
+			  <th scope="col" width="40%">제품정보</th>
+			  <th scope="col" width="10%" class="text-center">수량</th>
+			  <th scope="col" width="10%" class="text-center">상품가격</th>
+			  <th scope="col" width="20%" class="text-right pr-4">삭제하기</th>
+			</tr>
+		</thead>
+	
+		<tbody>
 		
-	</td>
-	<td> 
-		<div class="price-wrap"> 
-			<var class="price">14,000 원</var> 
-
-		</div> <!-- price-wrap .// -->
-	</td>
-	<td class="text-right"> 
-		 
-		<a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-	</td>
-</tr>
-</tbody>
-</table>
-</div> <!-- card.// -->
+	<!-- 선언이유
+		foreach와 같이 i 증감
+		id, name 뒤에 붙어줌으로 독립적으로 사용하게함  -->
+		<c:set var="i" value="0"/>
+		<c:forEach items="${cartList}" var="cartVO">
+	
+			<tr>
+				<td><input type="checkbox">	</td>
+				<td>
+					<figure class="media">	
+						<div class="img-wrap">
+							<img class="img-thumbnail"
+									src="/test/upload/${cartVO.cart_pdu_detail_code_ref }/s_${cartVO.pdu_image_file_name}">
+						</div>
+						<figcaption class="media-body">
+							<h6 class="title text-truncate">${cartVO.pdu_name }</h6>
+							<dl class="param param-inline small">
+					  			<dt>Size: </dt>
+					  			<dd>${cartVO.cart_pdu_size }</dd>
+							</dl>
+							<dl class="param param-inline small">
+					  			<dt>Color: </dt>
+					  			<dd>${cartVO.cart_pdu_color }</dd>
+							</dl>
+						</figcaption>
+					</figure> 
+				</td>
+				
+				<td> 	
+			    <div class="input-group mb-3">
+			        <div class="input-group-prepend">
+			            <button class="btn btn-dark btn-sm" id="minus-btn" onclick="subtractQuantity(${i})">
+			            	<i class="fa fa-minus"></i>
+			            </button>
+			        </div>
+			        
+			        <!-- 수량 표시 disabled로 직접입력 막음 -->
+			        <input style="width:50px" 
+			        		type="number" 
+			        		name="pdu_pieces${i}" 
+			        		id="qty_input${i}" 
+			        		class="form-control form-control-sm" 
+			        		value="${cartVO.cart_pdu_quantity}"
+			        		disabled="disabled">
+			       	
+			        <div class="input-group-prepend">
+			            <button class="btn btn-dark btn-sm" id="plus-btn" onclick="addQuantity(${i})">
+			            	<i class="fa fa-plus" ></i>
+			            </button>
+			        </div>
+			    </div>
+					
+				</td>
+				<td> 
+					<div class="price-wrap"> 
+						<var class="price" id="price${i}">${cartVO.pdu_discounted_price * cartVO.cart_pdu_quantity}</var>
+						<var class="perPrice" id="perPrice${i}">per : ${cartVO.pdu_discounted_price}</var>
+						<input type="hidden" name="pdu_discounted_price${i}" value="${cartVO.pdu_discounted_price }"> 
+					</div> <!-- price-wrap .// -->
+				</td>
+				<td class="text-right"> 
+					 
+					<a href="javascript:Remove(${i});" class="btn btn-outline-danger btn-round"> × Remove</a>
+				</td>
+			</tr>
+		
+		
+		<c:set var="i" value="${i+1}"/>
+		</c:forEach>
+	
+		</tbody>
+	</table>
+	</div> <!-- card.// -->
 
 </div> 
 <!--container end.//-->
 
 <br><br>
-
+<c:out value="${i}"></c:out>
 </body>
 
 <script>
-	//수량 +- 처리
-	$(function(){
-	    $('#qty_input').prop('disabled', true);
-	    $('#plus-btn').click(function(){
-	    	$('#qty_input').val(parseInt($('#qty_input').val()) + 1 );
-	    	    });
-	        $('#minus-btn').click(function(){
-	    	$('#qty_input').val(parseInt($('#qty_input').val()) - 1 );
-	    	if ($('#qty_input').val() == 0) {
-				$('#qty_input').val(1);
-			}
 	
-	    	    });
-	 });
+	
+	// 수량 증가(+) 버튼클릭시 이벤트
+	// parmeter 값으로 inputId : 수량표시되는 id값, i : 증감값 가져옴
+	function addQuantity(i){
+		$('#qty_input'+i).val(parseInt($('#qty_input'+i).val()) + 1 );
+		
+		//수량 변경시 가격 변경
+		let totalPrice = $('[name="pdu_discounted_price'+i+'"]').val() * $('[name="pdu_pieces'+i+'"]').val();
+
+		document.getElementById("price"+i).innerHTML = totalPrice;
+		 
+		console.log(totalPrice);
+		console.log($('#qty_input'+i).val());
+	}
+	// 수량 빼기(-) 버튼클릭시 이벤트
+	function subtractQuantity(i){
+    	$('#qty_input'+i).val(parseInt($('#qty_input'+i).val()) - 1 );
+    	
+    	if ($('#qty_input'+i).val() == 0) {
+			$('#qty_input'+i).val(1);
+			alert('수량은 최소 한개이상 입니다.');
+		}else{
+			//-시 가격처리
+			let totalPrice = $('[name="pdu_discounted_price'+i+'"]').val() * $('[name="pdu_pieces'+i+'"]').val();
+			
+			document.getElementById("price"+i).innerHTML = totalPrice;
+			
+			console.log("한개 가격은" + $('[name="pdu_discounted_price'+i+'"]').val());
+			console.log(totalPrice);
+		}
+		
+		 
+	}
+	
+	//장바구니 품목 삭제 Remove
+	function Remove(select){
+		
+
+		const pdu_detail_code_ref = ${productVO.pdu_detail_code}; 
+		const size = $('#size').val();
+		const color = $('#color').val();
+		const quantity = $('#qty_input').val();
+		
+		if(size == "No_Value"){
+			alert('사이즈를 선택해주세요');
+		}else{
+			$.ajax({
+				type : 'POST',
+				dataType : 'text',
+				url  : '/cart/addToCart.do',
+				data : {
+					cart_pdu_detail_code_ref : pdu_detail_code_ref,
+					cart_pdu_size : size,
+					cart_pdu_color : color,
+					cart_pdu_quantity : quantity
+				},
+				success: function(data){
+					console.log("등록완료");
+				},
+				
+				error : function(error) {
+					console.log(error);
+				}
+					
+			});
+			
+		}
+		
+		
+		
+	}
 </script>
