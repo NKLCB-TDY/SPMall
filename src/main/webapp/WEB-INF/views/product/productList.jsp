@@ -97,10 +97,6 @@
 		</ul>
 	</div>
 </div>
-<form id="jobForm">
-	<input type="hidden" name="page" value="${pagingSetting.cri.page}">
-	<input type="hidden" name="perPageNum" value="${pagingSetting.cri.perPageNum}">
-</form>
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>

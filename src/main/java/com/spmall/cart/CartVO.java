@@ -7,6 +7,9 @@ public class CartVO {
 	private String cart_pdu_color;
 	private int cart_pdu_quantity;
 	
+	private String pdu_image_file_name;
+	private String pdu_name;
+	private String pdu_discounted_price;
 	
 	public int getCart_pdu_detail_code_ref() {
 		return cart_pdu_detail_code_ref;
@@ -39,6 +42,24 @@ public class CartVO {
 	}
 	public void setCart_pdu_quantity(int cart_pdu_quantity) {
 		this.cart_pdu_quantity = cart_pdu_quantity;
+	}
+	public String getPdu_image_file_name() {
+		return pdu_image_file_name;
+	}
+	public void setPdu_image_file_name(String pdu_image_file_name) {
+		this.pdu_image_file_name = pdu_image_file_name;
+	}
+	public String getPdu_name() {
+		return pdu_name;
+	}
+	public void setPdu_name(String pdu_name) {
+		this.pdu_name = pdu_name;
+	}
+	public String getPdu_discounted_price() {
+		return pdu_discounted_price;
+	}
+	public void setPdu_discounted_price(String pdu_discounted_price) {
+		this.pdu_discounted_price = pdu_discounted_price;
 	}
 	
 	

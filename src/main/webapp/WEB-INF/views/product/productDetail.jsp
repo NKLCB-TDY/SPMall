@@ -303,8 +303,6 @@ body {
 	
 	//Submit
 	function Submit(select){
-		
-
 		const pdu_detail_code_ref = ${productVO.pdu_detail_code}; 
 		const size = $('#size').val();
 		const color = $('#color').val();
@@ -334,9 +332,7 @@ body {
 			});
 			
 		}
-		
-		
-		
+
 	}
 
 	
