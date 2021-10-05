@@ -4,16 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인 페이지</title>
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main/mainLogin.css">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/main/mainLogin.js"></script>
 	
 <!-- front 단 link, -->
 <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
-<body>
+<body >
 	<div class="container">
     	<div class="row">
 			<div class="col-md-5 mx-auto">

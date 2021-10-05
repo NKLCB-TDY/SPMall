@@ -16,6 +16,5 @@ public class CommonController {
 			return "redirect:/admin/adminMain.do";
 		else
 			return "redirect:/main/main.do";
-					
 	}
 }

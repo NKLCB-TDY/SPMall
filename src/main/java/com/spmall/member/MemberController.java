@@ -7,12 +7,15 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.spmall.common.CustomerUser;
 
 
 
@@ -27,8 +30,14 @@ public class MemberController {
 	
 	//회원가입 페이지로 이동
 	@RequestMapping(value ="/memberJoin.do", method = RequestMethod.GET)
-	public String memberJoin() {
-		return "member/member/memberJoin";
+	public String memberJoin(Authentication authentication) {
+		
+		//로그인 상태시 접근막음
+		if(authentication != null) {
+			return "redirect:/main/main.do";
+		}
+
+		return "member/memberJoin";
 	}
 	
 	//회원가입 로직 
@@ -60,10 +69,10 @@ public class MemberController {
 	
 
 	
-	//회원 정보 & 수정 페이지
+	//회원 정보 & 수정 페이지 처리해야함!!!!!
 	@RequestMapping(value = "/memberinfoform.do", method = RequestMethod.GET)
 	public ModelAndView memberInfoForm() {
-		//로그인처리를 먼저해야 개발가능 로그인한 아이디 값을 가져와야하기에..
+		
 		String member_id = "sdfsdfsdf"; //임시id
 		ModelAndView mv = new ModelAndView();
 		mv.addObject(memberService.memberInfo(member_id));

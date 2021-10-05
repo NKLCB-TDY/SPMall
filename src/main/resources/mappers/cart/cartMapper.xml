@@ -3,6 +3,9 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cart">
+
+	
+	
 	<insert id="addToCart" parameterType="CartVO">
 		<![CDATA[
 			insert into cart
@@ -22,7 +25,7 @@
 			select 
 				cart.*, img.pdu_image_file_name, p.pdu_name, p.pdu_discounted_price
 			from 
-				(select c.* from cart c where c.cart_member_id= 'test') cart ,
+				(select c.* from cart c where c.cart_member_id= #{member_id}) cart ,
 				 pdu_category_detail_image img, 
 				 pdu_category_detail p 
 			where 
@@ -34,4 +37,24 @@
 			 order by cart.cart_code desc
 		 ]]>
 	</select>
+	
+	<select id="countingCart" resultType="int">
+		select count(*)
+		from cart
+		where cart_member_id= #{member_id}
+	</select>
+	
+	<!-- MySQL 은 Oracle 과는 달리 UPDATE 나 DELETE 시 자기 테이블의 데이타를 바로 사용 못하므로 아래와 같은 SQL 을 실행시 1093 에러가 발생함.
+		Sub Query 를 하나 더 넣고 sub query 결과를 임시 테이블로 만든후에 실행하면 해결됨. -->
+	<delete id="removeCart" parameterType="hashMap">
+		delete 
+		from 
+			cart
+		where 
+			cart_code IN ( 
+						select c.cart_code from (select c.cart_code
+						from cart c
+    					where cart_member_id = #{memberId}
+    					order by c.cart_code desc limit #{offsetNum},1) c)
+	</delete>
 </mapper>

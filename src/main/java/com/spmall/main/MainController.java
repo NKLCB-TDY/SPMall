@@ -14,7 +14,7 @@ public class MainController {
 	
 	@RequestMapping("/main.do")
 	public String Main(Authentication authentication) {
-		String page = "member/main/main";
+		String page = null;
 		if(authentication != null) {
 			CustomerUser user = (CustomerUser)authentication.getPrincipal();
 			for(GrantedAuthority item : user.getAuthorities()) {
@@ -29,6 +29,7 @@ public class MainController {
 					break;
 				
 				default:
+					page = "main/main";
 					break;
 				}
 			}
@@ -39,7 +40,11 @@ public class MainController {
 	
 	//로그인 페이지 
 	@RequestMapping(value = "/mainLogin.do", method = RequestMethod.GET)
-	public String mainLogin() {
-		return "member/main/mainLogin";
+	public String mainLogin(Authentication authentication) {
+		
+		if(authentication != null) {
+			return "redirect:/main/main.do";
+		}
+		return "main/mainLogin";
 	}
 }

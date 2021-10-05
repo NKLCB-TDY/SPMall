@@ -10,6 +10,7 @@
 	<security:http pattern="/resources/css/**" security="none"/>
 	<security:http pattern="/resources/js/**" security="none"/>
 	<security:http pattern="/resources/image/**" security="none"/>
+	
 <security:http>
 	<security:intercept-url 
 			pattern="/" access="permitAll()" />

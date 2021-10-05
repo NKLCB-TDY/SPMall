@@ -166,7 +166,7 @@ var {
 <!--container end.//-->
 
 <br><br>
-<c:out value="${i}"></c:out>
+
 </body>
 
 <script>
@@ -184,7 +184,7 @@ var {
 		 
 		console.log(totalPrice);
 		console.log($('#qty_input'+i).val());
-	}
+	};
 	// 수량 빼기(-) 버튼클릭시 이벤트
 	function subtractQuantity(i){
     	$('#qty_input'+i).val(parseInt($('#qty_input'+i).val()) - 1 );
@@ -203,32 +203,21 @@ var {
 		}
 		
 		 
-	}
+	};
 	
 	//장바구니 품목 삭제 Remove
-	function Remove(select){
+	function Remove(offsetN){
 		
-
-		const pdu_detail_code_ref = ${productVO.pdu_detail_code}; 
-		const size = $('#size').val();
-		const color = $('#color').val();
-		const quantity = $('#qty_input').val();
-		
-		if(size == "No_Value"){
-			alert('사이즈를 선택해주세요');
-		}else{
 			$.ajax({
 				type : 'POST',
 				dataType : 'text',
-				url  : '/cart/addToCart.do',
+				url  : '/cart/removeCart.do',
 				data : {
-					cart_pdu_detail_code_ref : pdu_detail_code_ref,
-					cart_pdu_size : size,
-					cart_pdu_color : color,
-					cart_pdu_quantity : quantity
+					offsetNum : offsetN
 				},
-				success: function(data){
-					console.log("등록완료");
+				success: function(){
+					alert("삭제완료");
+					location.href='/cart/cartView.do';
 				},
 				
 				error : function(error) {
@@ -236,10 +225,9 @@ var {
 				}
 					
 			});
-			
-		}
+	}	
+	
 		
 		
 		
-	}
 </script>
