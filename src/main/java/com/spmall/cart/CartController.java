@@ -1,7 +1,9 @@
 package com.spmall.cart;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -13,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,11 +39,13 @@ public class CartController {
 		CustomerUser user = (CustomerUser)authentication.getPrincipal();
 		String member_id = user.getUsername();
 		
+		
 		List<CartVO> list = new ArrayList<CartVO>();
 		list = cartService.selectCartList(member_id);
 		
+		
 		mv.addObject("cartList", list);
-		mv.setViewName("member/cart/cartView");
+		mv.setViewName(user.getRoleStatus()+"/cart/cartView");
 		return mv;
 	}
 	
@@ -58,4 +63,25 @@ public class CartController {
 		return "OK";
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="countingCart.do", method = RequestMethod.POST) 
+	public int countingCart(Authentication authentication)throws Exception{
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		
+		return cartService.countingCart(user.getUsername());
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="removeCart.do", method = RequestMethod.POST)
+	public void removeCart(@RequestParam("offsetNum") int offsetNum, Authentication authentication)throws Exception {
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("memberId", user.getUsername());
+		map.put("offsetNum", offsetNum);
+		cartService.removeCart(map);
+		
+		
+	}
 }

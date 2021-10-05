@@ -8,20 +8,8 @@ import org.springframework.security.core.userdetails.User;
 public class CustomerUser extends User {
 
     private String roleName;
-    private String fullName;
-    private String deptName;
-
-    public String getFullName() {
-		return fullName;
-	}
-
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	
-
+    private String roleStatus; //null, member, admin 셋중하나 담김
+    
     public CustomerUser(String username, String password,
             Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
@@ -37,15 +25,19 @@ public class CustomerUser extends User {
 		this.roleName = roleName;
 	}
 
+	
 
-	public String getDeptName() {
-        return deptName;
-    }
+    public String getRoleStatus() {
+		return roleStatus;
+	}
 
 
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
+	public void setRoleStatus(String roleStatus) {
+		this.roleStatus = roleStatus;
+	}
 
-    private static final long serialVersionUID = 5869301720811314860L;
+
+
+
+	private static final long serialVersionUID = 5869301720811314860L;
 }

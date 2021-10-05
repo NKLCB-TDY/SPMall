@@ -37,6 +37,16 @@ public class CustomerUserService implements UserDetailsService{
 		auth.add(new SimpleGrantedAuthority(vo.getRole_Name()));
 		CustomerUser user = new CustomerUser(username, vo.getMember_pwd(), auth);
 		user.setRoleName(vo.getRole_Name());
+		
+		//ROLE_User == memeber, ROLE_ADMIN == admin, 가독성을 위해 setRoleStatus추가
+		if(vo.getRole_Name().equals("ROLE_USER")) {
+			user.setRoleStatus("member");
+		}else if(vo.getRole_Name().equals("ROLE_ADMIN")){
+			user.setRoleStatus("admin");
+		}else {
+			user.setRoleStatus("");
+		}
+		
 		return user;
 	}
 }

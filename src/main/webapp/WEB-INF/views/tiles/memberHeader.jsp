@@ -40,10 +40,10 @@
                  </sec:authorize>
                  <!-- 회원권한 가질시 -->
                  <sec:authorize access="hasRole('ROLE_USER')">
-                 	 <button class="btn btn-outline-dark" onclick="location.href='/cart/cartList.do'">
+                 	 <button class="btn btn-outline-dark" onclick="location.href='/cart/cartView.do'">
                          <i class="bi-cart-fill me-1"></i>
                          Cart
-                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                         <span class="badge bg-dark text-white ms-1 rounded-pill" id="cartIcon"></span>
                      </button>
                  	
                  	<button type="button" class="btn btn-outline-dark" 
@@ -86,5 +86,24 @@
     <!-- jsdelivr CDN 
     	- header 스크롤 동작-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     
+    <!-- member 로그인시 cartCounting하는데 코드중복없이 사용하기에 header가 적합하다고생각해 여기적음 (더좋은 방법이생각나면 수정)-->
+    <script>
+	    $(function(){
+	    		$.ajax({
+	    			 type: 'POST',
+	    			 dataType:'text',
+	    			 url: '/cart/countingCart.do', 
+	    			  success: function(data){
+	    				  let cartNum = data;
+	    				  $('#cartIcon').html(cartNum);
+	    				  
+	    			  },
+	    				error : function(error) {
+	    					console.log(error);
+	    				}
+	    			});
+	    	});
+    </script>
 </body>

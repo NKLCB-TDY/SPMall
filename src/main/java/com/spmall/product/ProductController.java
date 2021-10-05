@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +36,15 @@ public class ProductController {
 	@RequestMapping(value="productList.do", method = RequestMethod.GET)
 	public ModelAndView ProductList(@ModelAttribute("cri")SearchCriteria cri, 
 									ModelAndView mv, 
-									ProductVO productVO) throws Exception {
+									ProductVO productVO,
+									Authentication authentication) throws Exception {
 		
+		
+		if(authentication == null) {
+			mv.setViewName("product/productList");
+		}else {
+			mv.setViewName("member/product/productList");
+		}
 		
 		//∆‰¿Ã¬°√≥∏Æ
 		PagingSetting pagingSetting = new PagingSetting();
@@ -52,7 +60,7 @@ public class ProductController {
 		mv.addObject("productList", map.get("productList"));
 		mv.addObject("imageList", map.get("imageList"));
 		mv.addObject("pagingSetting", pagingSetting);
-		mv.setViewName("product/productList");
+		
 		return mv;
 	}
 	
@@ -60,7 +68,14 @@ public class ProductController {
 	@RequestMapping(value="productDetail.do", method = RequestMethod.GET)
 	public ModelAndView detailProductList(@RequestParam("pdu_detail_code") int pdu_detail_code,
 									@ModelAttribute("cri") Criteria cri,
-									ModelAndView mv)throws Exception {	
+									ModelAndView mv,
+									Authentication authentication)throws Exception {	
+		
+		if(authentication == null) {
+			mv.setViewName("product/productList");
+		}else {
+			mv.setViewName("member/product/productList");
+		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = pduService.productDetail(pdu_detail_code);
