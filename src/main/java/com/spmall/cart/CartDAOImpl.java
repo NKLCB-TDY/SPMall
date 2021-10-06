@@ -19,9 +19,15 @@ public class CartDAOImpl implements CartDAO{
 	
 	@Override
 	public void addToCart(CartVO cartVO)throws Exception{
+		
 		sqlSession.insert(namespace+".addToCart", cartVO);
 	}
 
+	@Override
+	public int checkOverlap(CartVO cartVO) throws Exception {
+		return sqlSession.selectOne(namespace+".checkOverlap", cartVO);
+	}
+	
 	@Override
 	public List<CartVO> selectCartList(String member_id) throws Exception {
 		return sqlSession.selectList(namespace+".selectCartList", member_id);
@@ -37,4 +43,11 @@ public class CartDAOImpl implements CartDAO{
 		sqlSession.delete(namespace+".removeCart" ,map);
 		
 	}
+
+	@Override
+	public void updateToCart(CartVO cartVO) throws Exception {
+		sqlSession.update(namespace+".updateToCart", cartVO);
+	}
+
+	
 }

@@ -72,9 +72,9 @@ public class ProductController {
 									Authentication authentication)throws Exception {	
 		
 		if(authentication == null) {
-			mv.setViewName("product/productList");
+			mv.setViewName("product/productDetail");
 		}else {
-			mv.setViewName("member/product/productList");
+			mv.setViewName("member/product/productDetail");
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -83,14 +83,14 @@ public class ProductController {
 		mv.addObject("productVO", map.get("productDetail"));
 		mv.addObject("imageList", map.get("imageList"));
 		mv.addObject("SizeColor", map.get("pduSizeColor"));
-		mv.setViewName("product/productDetail");
+
 		return mv;
 	}
 	
 	
 	//Size 값에 따른 색찾기
 	@ResponseBody
-	@RequestMapping(value ="/selectColor", method=RequestMethod.POST)	
+	@RequestMapping(value ="/selectColor.do", method=RequestMethod.POST)	
 	public Object selectColor(ProductVO productVO)throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = pduService.selectColor(productVO);

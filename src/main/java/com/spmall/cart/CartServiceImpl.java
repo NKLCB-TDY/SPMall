@@ -38,4 +38,18 @@ public class CartServiceImpl implements CartService {
 		cartDAO.removeCart(map);
 	}
 
+
+	@Override
+	public int checkOverlap(CartVO cartVO) throws Exception {
+		return cartDAO.checkOverlap(cartVO);
+	}
+
+
+	@Override
+	public void updateToCart(CartVO cartVO) throws Exception {
+		cartDAO.updateToCart(cartVO);
+	}
+	
+	
+
 }

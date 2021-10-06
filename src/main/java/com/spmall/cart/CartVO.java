@@ -1,6 +1,7 @@
 package com.spmall.cart;
 
 public class CartVO {
+	private int cart_code;
 	private int cart_pdu_detail_code_ref;
 	private String cart_member_id;
 	private String cart_pdu_size;
@@ -11,6 +12,14 @@ public class CartVO {
 	private String pdu_name;
 	private String pdu_discounted_price;
 	
+	
+	
+	public int getCart_code() {
+		return cart_code;
+	}
+	public void setCart_code(int cart_code) {
+		this.cart_code = cart_code;
+	}
 	public int getCart_pdu_detail_code_ref() {
 		return cart_pdu_detail_code_ref;
 	}
