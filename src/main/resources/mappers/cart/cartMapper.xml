@@ -52,9 +52,48 @@
 			cart
 		where 
 			cart_code IN ( 
-						select c.cart_code from (select c.cart_code
-						from cart c
-    					where cart_member_id = #{memberId}
-    					order by c.cart_code desc limit #{offsetNum},1) c)
+						select 
+							c.cart_code 
+						from 
+							(select 
+								c.cart_code
+							from 
+								cart c
+    						where 
+    							cart_member_id = #{memberId}
+    						order by 
+    							c.cart_code desc 
+    						limit #{offsetNum},1) c)
 	</delete>
+	
+	<!-- mysql ifnull이 내가 생각하는대로 작동하지않아. update구문까지 코드가길어짐.. -->
+	<select id="checkOverlap" parameterType="CartVO" resultType="int">
+		select 
+			count(*)
+		from 
+			cart
+		where 
+			cart_member_id= #{cart_member_id}
+			AND 
+			cart_pdu_detail_code_ref = #{cart_pdu_detail_code_ref}
+			AND 
+			cart_pdu_size = #{cart_pdu_size}
+			AND 
+			cart_pdu_color = #{cart_pdu_color}
+	</select>
+	
+	<update id="updateToCart" parameterType="CartVO">
+		update 
+			cart
+		set
+			cart_pdu_quantity = cart_pdu_quantity + #{cart_pdu_quantity}
+		where
+			cart_member_id= #{cart_member_id}
+			AND 
+			cart_pdu_detail_code_ref = #{cart_pdu_detail_code_ref}
+			AND 
+			cart_pdu_size = #{cart_pdu_size}
+			AND 
+			cart_pdu_color = #{cart_pdu_color}
+	</update>
 </mapper>

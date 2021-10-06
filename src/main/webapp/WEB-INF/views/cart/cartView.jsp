@@ -95,7 +95,7 @@ var {
 		<c:forEach items="${cartList}" var="cartVO">
 	
 			<tr>
-				<td><input type="checkbox">	</td>
+				<td><input type="checkbox" name="check-pdu" value="${i}"></td>
 				<td>
 					<figure class="media">	
 						<div class="img-wrap">
@@ -161,16 +161,39 @@ var {
 		</tbody>
 	</table>
 	</div> <!-- card.// -->
-
+	
+	<div class="mt-5">
+		<table class="table">
+		  <thead>
+		    <tr >
+		      <th scope="col"></th>
+		      <th scope="col">총상품가격</th>
+		      <th scope="col">+</th>
+		      <th scope="col">총 배송비</th>
+		      <th scope="col">총 주문금액</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr class= "table-success">
+		      <th scope="row"></th>
+		      <td>1</td>
+		      <td>+</td>
+		      <td>4</td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
 </div> 
 <!--container end.//-->
 
 <br><br>
 
 </body>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script>
 	
+	console.log($('[name="check-pdu"]').val());
 	
 	// 수량 증가(+) 버튼클릭시 이벤트
 	// parmeter 값으로 inputId : 수량표시되는 id값, i : 증감값 가져옴

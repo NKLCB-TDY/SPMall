@@ -52,15 +52,29 @@ public class CartController {
 	//장바구니에 상품 추가
 	@ResponseBody
 	@RequestMapping(value= "addToCart.do", method = RequestMethod.POST)
-	public String addToCart(Authentication authentication, CartVO cartVO) throws Exception {
+	public void addToCart(Authentication authentication, CartVO cartVO) throws Exception {
 
-		//memberId insert
 		CustomerUser user = (CustomerUser)authentication.getPrincipal();
 		cartVO.setCart_member_id(user.getUsername());
-		
 		cartService.addToCart(cartVO);
 		
-		return "OK";
+	}
+	
+	
+	//장바구니에 상품 추가전 중복된 장바구니에 중복된 상품이 있는지 확인
+	@ResponseBody
+	@RequestMapping(value= "checkOverlap.do", method = RequestMethod.POST)
+	public int checkOverlap(Authentication authentication, CartVO cartVO) throws Exception {
+
+		//로그인 정보 없을시 
+		if(authentication != null) {
+
+			CustomerUser user = (CustomerUser)authentication.getPrincipal();
+			cartVO.setCart_member_id(user.getUsername());
+			//중복데이터 있을시 1반환, 없으면 0반환
+			return cartService.checkOverlap(cartVO);
+		}
+		return 401;
 	}
 	
 	
@@ -70,6 +84,18 @@ public class CartController {
 		CustomerUser user = (CustomerUser)authentication.getPrincipal();
 		
 		return cartService.countingCart(user.getUsername());
+	}
+	
+	//장바구니에 품복 추가시 중복된 물품이 있으므로 수량만 update
+	@ResponseBody
+	@RequestMapping(value= "updateToCart.do", method = RequestMethod.POST)
+	public void updateToCart(Authentication authentication, CartVO cartVO) throws Exception {
+
+		
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		cartVO.setCart_member_id(user.getUsername());
+
+		cartService.updateToCart(cartVO);
 	}
 	
 	@ResponseBody

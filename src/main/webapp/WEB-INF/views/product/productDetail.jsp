@@ -6,7 +6,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/resources/css/product/product.css">
 
-<!-- 수량 버튼 css, js -->
+<!-- 수량 버튼에 문제 있을시 여기임 -->
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
@@ -212,6 +212,7 @@ body {
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
+	let popover1 = 0;
 	//썸네일 클릭시 이미지 출력
 	function changeImage(element) {
 		let main_prodcut_image = document.getElementById('main_product_image');
@@ -221,29 +222,9 @@ body {
 
 	$(function(){
 		//carButton 클릭시 
-	    //popover 
-			$('#cartButton').popover({
-				placement: 'top',
-		        html: true,
-		        title : '<span class="text-info"><strong>장바구니 등록완료</strong></span>'+
-		        		'<a href="#" class="close" data-dismiss="alert">&times;</a>',
-		        content : '<a type="button" href="##">장바구니로 이동하시겠습니까?</a>'
-			});
-			
-			//popover에서 취소버튼 누를시
-			$(document).on("click", ".popover .close" , function(){
-				$(this).parents(".popover").popover('hide');
-			});
-			
-			//5초뒤에 popover 숨김처리
-			$('#cartButton').click(function () {
-				
-					setTimeout(function () {
-			            $('.popover').popover('hide');
-			        }, 5000);
-		    });
 
-		
+
+
 		
 		
 		
@@ -264,7 +245,7 @@ body {
 			$.ajax({
 				 type: 'POST',
 				 dataType:'json',
-				 url: '/product/selectColor', 
+				 url: '/product/selectColor.do', 
 				 data: {
 					  pdu_detail_code : pduDetailCode,
 					  pdu_size_name : size
@@ -277,7 +258,7 @@ body {
 					  }
 				  },
 					error : function(error) {
-						console.log(error);
+						console.log('error');
 					}
 				});	
 		}); 
@@ -293,6 +274,7 @@ body {
 	    $('#minus-btn').click(function(){
 	    	$('#qty_input').val(parseInt($('#qty_input').val()) - 1 );
 	    	if ($('#qty_input').val() == 0) {
+	    		alert("최소수량은 한개 입니다.");
 				$('#qty_input').val(1);
 			}
 			console.log($('#qty_input').val());
@@ -300,6 +282,8 @@ body {
 	       
 
 	 });
+	
+	
 	
 	//Submit
 	function Submit(select){
@@ -310,31 +294,125 @@ body {
 		
 		if(size == "No_Value"){
 			alert('사이즈를 선택해주세요');
-		}else{
-			$.ajax({
-				type : 'POST',
-				dataType : 'text',
-				url  : '/cart/addToCart.do',
-				data : {
-					cart_pdu_detail_code_ref : pdu_detail_code_ref,
-					cart_pdu_size : size,
-					cart_pdu_color : color,
-					cart_pdu_quantity : quantity
-				},
-				success: function(data){
-					console.log("등록완료");
-				},
+		}else if('장바구니'){
+			let checkOverlap_result = checkOverlap(pdu_detail_code_ref, size, color);
+			if(checkOverlap_result == 401){
+				alert('로그인 후 이용가능합니다.');
+				location.href='/main/mainLogin.do';	
+				return;
+			}
+			
+			//0 : 장바구니에 중복된 품복이 없음 상품추가(add)
+			if(checkOverlap_result == 0){
 				
-				error : function(error) {
-					console.log(error);
-				}
+				$.ajax({
+					type : 'POST',
+					dataType : 'text',
+					url  : '/cart/addToCart.do',
+					data : {
+						cart_pdu_detail_code_ref : pdu_detail_code_ref,
+						cart_pdu_size : size,
+						cart_pdu_color : color,
+						cart_pdu_quantity : quantity
+					},
+					success: function(data){
+						popover1 = 1;
+						console.log("등록완료");
+						
+					},
 					
-			});
+					error : function(error) {
+						console.log('error');
+					}
+						
+				});
+				
+			}else{ //중복된 상품이 있으므로 update
+				let result = confirm("중복되는 상품이 장바구니에 있습니다. 그래도 추가하시겠습니까?");
+
+				if(result == true){
+					$.ajax({
+						type : 'POST',
+						dataType : 'text',
+						url  : '/cart/updateToCart.do',
+						data : {
+							cart_pdu_detail_code_ref : pdu_detail_code_ref,
+							cart_pdu_size : size,
+							cart_pdu_color : color,
+							cart_pdu_quantity : quantity
+						},
+						success: function(data){
+							popover1 = 1;
+							alert('정상적으로 추가되었습니다.');
+							
+						},
+						
+						error : function(error) {
+							console.log('error');
+						}
+							
+					});
+					
+					
+				}
+			}
+
 			
 		}
 
 	}
-
+	
+	function popover(){
+		
+	    //popover 
+		$('#cartButton').popover({
+			placement: 'top',
+	        html: true,
+	        title : '<span class="text-info"><strong>장바구니 등록완료</strong></span>'+
+	        		'<a href="#" class="close" data-dismiss="alert">&times;</a>',
+	        content : '<a type="button" href="##">장바구니로 이동하시겠습니까?</a>'
+		});
+		
+		//popover에서 취소버튼 누를시
+		$(document).on("click", ".popover .close" , function(){
+			$(this).parents(".popover").popover('hide');
+		});
+		
+		//5초뒤에 popover 숨김처리
+		$('#cartButton').click(function () {
+			
+				setTimeout(function () {
+		            $('.popover').popover('hide');
+		        }, 5000);
+	    });
+	}
+	//장바구니에 중복된 상품이 있는지 체크
+	function checkOverlap(pdu_detail_code_ref, size, color){
+		let result;
+		
+		$.ajax({
+			type : 'POST',
+			url  : '/cart/checkOverlap.do',
+			async: false, 
+			dataType:'text',
+			data : {
+				cart_pdu_detail_code_ref : pdu_detail_code_ref,
+				cart_pdu_size : size,
+				cart_pdu_color : color
+			},
+			//Controller단에서는 리턴값이 잘넘어왔는데 data에 값이 안들어와서 async: false니 해결됨
+			success: function(data){ 
+				console.log(data +"data");
+				result = data;
+				
+			},
+			error : function(error) {
+				console.log('error');
+			}
+		});
+		
+		return result;
+	}
 	
 </script>
 
