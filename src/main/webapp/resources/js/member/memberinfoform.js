@@ -52,18 +52,18 @@ function find_addr() {
 
 //Email 처리
 $(function(){
-			$('#email_select').change(function() { //이메일선택부분이 바뀌면
-				var email = $('#email_select').val();	//선택된값 저장
-				if (email == 'direct') { //이메일을 직접입력시
-					$('#_email2').attr('disabled', false); //
-					$('#_email2').val(''); 
-					$('#_email2').focus();
-				} else {
-					$('#_email2').attr('disabled',true);
-					$('#_email2').val($('#email_select').val());
-					$('#member_email2').val($('#email_select').val());
-				}
-			});
+	$('#email_select').change(function() { //이메일선택부분이 바뀌면
+		var email = $('#email_select').val();	//선택된값 저장
+		if (email == 'direct') { //이메일을 직접입력시
+			$('#_email2').attr('disabled', false); //
+			$('#_email2').val(''); 
+			$('#_email2').focus();
+		} else {
+			$('#_email2').attr('disabled',true);
+			$('#_email2').val($('#email_select').val());
+			$('#member_email2').val($('#email_select').val());
+		}
+	});
 });
 
 function Sub(){

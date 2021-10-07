@@ -221,13 +221,8 @@ body {
 	
 
 	$(function(){
-		//carButton 클릭시 
-
-
-
 		
-		
-		
+
 		//select
 		$('#size').on('change',function(){
 			var option;

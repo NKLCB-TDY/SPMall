@@ -10,5 +10,5 @@ public interface CartDAO {
 	public List<CartVO> selectCartList(String member_id)throws Exception;
 	public int countingCart(String member_id) throws Exception;
 	public void removeCart(Map<String, Object> map)throws Exception;
-	
+	public void updateQuantity(CartVO cartvo)throws Exception;
 }

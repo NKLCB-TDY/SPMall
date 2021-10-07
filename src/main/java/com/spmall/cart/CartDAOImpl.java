@@ -49,5 +49,10 @@ public class CartDAOImpl implements CartDAO{
 		sqlSession.update(namespace+".updateToCart", cartVO);
 	}
 
+	@Override
+	public void updateQuantity(CartVO cartvo) throws Exception {
+		sqlSession.update(namespace+".updateQuantity", cartvo);
+	}
+
 	
 }

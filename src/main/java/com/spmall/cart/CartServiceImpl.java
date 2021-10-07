@@ -49,6 +49,12 @@ public class CartServiceImpl implements CartService {
 	public void updateToCart(CartVO cartVO) throws Exception {
 		cartDAO.updateToCart(cartVO);
 	}
+
+
+	@Override
+	public void updateQuantity(CartVO cartvo) throws Exception {
+		cartDAO.updateQuantity(cartvo);
+	}
 	
 	
 
