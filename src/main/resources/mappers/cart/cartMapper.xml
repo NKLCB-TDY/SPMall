@@ -30,11 +30,12 @@
 				 pdu_category_detail p 
 			where 
 				cart.cart_pdu_detail_code_ref = img.pdu_detail_code_ref 
-					and 
+				and 
 			  	img.pdu_image_file_type like 'main%' 
-			  		and 
+			  	and 
 			  	cart.cart_pdu_detail_code_ref = p.pdu_detail_code
-			 order by cart.cart_code desc
+			 order by 
+			 	cart.cart_code desc
 		 ]]>
 	</select>
 	
@@ -95,5 +96,14 @@
 			cart_pdu_size = #{cart_pdu_size}
 			AND 
 			cart_pdu_color = #{cart_pdu_color}
+	</update>
+	
+	<update id="updateQuantity" parameterType="CartVO">
+		update
+			cart
+		set
+			cart_pdu_quantity = #{cart_pdu_quantity}
+		where
+			cart_code = #{cart_code}
 	</update>
 </mapper>

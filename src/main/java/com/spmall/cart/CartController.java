@@ -49,6 +49,8 @@ public class CartController {
 		return mv;
 	}
 	
+
+	
 	//장바구니에 상품 추가
 	@ResponseBody
 	@RequestMapping(value= "addToCart.do", method = RequestMethod.POST)
@@ -108,6 +110,12 @@ public class CartController {
 		map.put("offsetNum", offsetNum);
 		cartService.removeCart(map);
 		
-		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="updateQuantity.do", method = RequestMethod.POST)
+	public void updateQuantity(CartVO cartvo)throws Exception {
+
+		cartService.updateQuantity(cartvo);
 	}
 }
