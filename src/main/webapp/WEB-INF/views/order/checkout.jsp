@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="list" value="${cartCodeList}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,11 +41,11 @@
 			  <tbody>
 			    <tr>
 			      <td class="td1">이름</td>
-			      <td class="td2">ㅇㅇ</td>
+			      <td class="td2">${list[0].pdu_name}</td>
 			    </tr>
 			    <tr>
 			      <td class="td1">이메일</td>
-			      <td class="td2">누구누구</td>
+			      <td class="td2"></td>
 			    </tr>
 			    <tr>
 			      <td class="td1">휴대폰 번호</td>

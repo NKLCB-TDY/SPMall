@@ -51,9 +51,8 @@ public class ProductController {
 		pagingSetting.setCri(cri);
 		
 		//출력할 총 데이터 개수
-
 		pagingSetting.setTotalCount(pduService.countingPaging(cri));
-		System.out.println(cri.getKeyword());
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = pduService.productList(cri);
 		

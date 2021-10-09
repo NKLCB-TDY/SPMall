@@ -21,11 +21,17 @@
 	</insert>
 	
 	<select id="selectCartList" resultType="CartVO">
-		<![CDATA[
+		
 			select 
 				cart.*, img.pdu_image_file_name, p.pdu_name, p.pdu_discounted_price
 			from 
-				(select c.* from cart c where c.cart_member_id= #{member_id}) cart ,
+				(select 
+					c.* 
+				from 
+					cart c 
+				where 
+					c.cart_member_id= #{cart_member_id}
+				) cart ,
 				 pdu_category_detail_image img, 
 				 pdu_category_detail p 
 			where 
@@ -36,8 +42,10 @@
 			  	cart.cart_pdu_detail_code_ref = p.pdu_detail_code
 			 order by 
 			 	cart.cart_code desc
-		 ]]>
+		 
 	</select>
+					
+	
 	
 	<select id="countingCart" resultType="int">
 		select count(*)

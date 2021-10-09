@@ -29,10 +29,19 @@ public class CartDAOImpl implements CartDAO{
 	}
 	
 	@Override
-	public List<CartVO> selectCartList(String member_id) throws Exception {
-		return sqlSession.selectList(namespace+".selectCartList", member_id);
+	public List<CartVO> selectCartList(String cart_member_id) throws Exception {
+		
+		
+		return sqlSession.selectList(namespace+".selectCartList", cart_member_id);
 	}
 
+	@Override
+	public List<CartVO> selectCartList(List<Integer> cartCodeList) throws Exception {
+	
+
+		return sqlSession.selectList(namespace+".selectCartList", cartCodeList);
+	}
+	
 	@Override
 	public int countingCart(String member_id)throws Exception {
 		return sqlSession.selectOne(namespace+".countingCart", member_id);
@@ -53,6 +62,8 @@ public class CartDAOImpl implements CartDAO{
 	public void updateQuantity(CartVO cartvo) throws Exception {
 		sqlSession.update(namespace+".updateQuantity", cartvo);
 	}
+
+
 
 	
 }
