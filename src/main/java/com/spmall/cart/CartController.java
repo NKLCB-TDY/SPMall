@@ -37,11 +37,11 @@ public class CartController {
 	public ModelAndView cartView(Authentication authentication, ModelAndView mv) throws Exception {
 		
 		CustomerUser user = (CustomerUser)authentication.getPrincipal();
-		String member_id = user.getUsername();
+		String cart_member_id = user.getUsername();
 		
 		
 		List<CartVO> list = new ArrayList<CartVO>();
-		list = cartService.selectCartList(member_id);
+		list = cartService.selectCartList(cart_member_id);
 		
 		
 		mv.addObject("cartList", list);
@@ -100,6 +100,7 @@ public class CartController {
 		cartService.updateToCart(cartVO);
 	}
 	
+	//장바구니 목록제거
 	@ResponseBody
 	@RequestMapping(value="removeCart.do", method = RequestMethod.POST)
 	public void removeCart(@RequestParam("offsetNum") int offsetNum, Authentication authentication)throws Exception {
@@ -112,6 +113,7 @@ public class CartController {
 		
 	}
 	
+	//수량업데이트
 	@ResponseBody
 	@RequestMapping(value="updateQuantity.do", method = RequestMethod.POST)
 	public void updateQuantity(CartVO cartvo)throws Exception {

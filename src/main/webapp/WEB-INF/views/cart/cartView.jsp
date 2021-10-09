@@ -293,16 +293,9 @@
 			}
 			
 		}
-		/////////////////////여기까지했음
-		/* $.ajax({
-			type : "POST",
-			url : "/order/checkout.do",
-			data : checkList,
-			
-			success : function(){
-				
-			},
-		}); */
+		
+		location.href = '/order/checkout.do?cart_code='+checkList;
+		
 		
 	}
 </script>

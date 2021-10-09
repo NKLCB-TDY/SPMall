@@ -21,12 +21,16 @@ public class CartServiceImpl implements CartService {
 
 
 	@Override
-	public List<CartVO> selectCartList(String member_id) throws Exception {
+	public List<CartVO> selectCartList(String cart_member_id) throws Exception {
 		
-		return cartDAO.selectCartList(member_id);
+		return cartDAO.selectCartList(cart_member_id);
 	}
 
-
+	@Override
+	public List<CartVO> selectCartList(List<Integer> cart_code) throws Exception {
+		return cartDAO.selectCartList(cart_code);
+	}
+	
 	@Override
 	public int countingCart(String member_id)throws Exception {
 		return cartDAO.countingCart(member_id);
@@ -55,6 +59,9 @@ public class CartServiceImpl implements CartService {
 	public void updateQuantity(CartVO cartvo) throws Exception {
 		cartDAO.updateQuantity(cartvo);
 	}
+
+
+
 	
 	
 
