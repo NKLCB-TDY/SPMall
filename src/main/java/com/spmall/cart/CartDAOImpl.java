@@ -39,7 +39,7 @@ public class CartDAOImpl implements CartDAO{
 	public List<CartVO> selectCartList(List<Integer> cartCodeList) throws Exception {
 	
 
-		return sqlSession.selectList(namespace+".selectCartList", cartCodeList);
+		return sqlSession.selectList(namespace+".selectCartList1", cartCodeList);
 	}
 	
 	@Override
@@ -59,8 +59,13 @@ public class CartDAOImpl implements CartDAO{
 	}
 
 	@Override
-	public void updateQuantity(CartVO cartvo) throws Exception {
-		sqlSession.update(namespace+".updateQuantity", cartvo);
+	public void updateQuantity(CartVO cartVO) throws Exception {
+		sqlSession.update(namespace+".updateQuantity", cartVO);
+	}
+
+	@Override
+	public void updateCheck(CartVO cartVO) throws Exception {
+		sqlSession.update(namespace+".updateCheck", cartVO);
 	}
 
 

@@ -36,6 +36,10 @@ public class CartController {
 	@RequestMapping(value = "cartView.do", method = RequestMethod.GET)
 	public ModelAndView cartView(Authentication authentication, ModelAndView mv) throws Exception {
 		
+		if(authentication == null) {
+			mv.setViewName("redirect:/main/mainLogin.do");
+			return mv;
+		}
 		CustomerUser user = (CustomerUser)authentication.getPrincipal();
 		String cart_member_id = user.getUsername();
 		
@@ -100,6 +104,8 @@ public class CartController {
 		cartService.updateToCart(cartVO);
 	}
 	
+
+	
 	//장바구니 목록제거
 	@ResponseBody
 	@RequestMapping(value="removeCart.do", method = RequestMethod.POST)
@@ -119,5 +125,13 @@ public class CartController {
 	public void updateQuantity(CartVO cartvo)throws Exception {
 
 		cartService.updateQuantity(cartvo);
+	}
+	
+	//상품 checkUpdate
+	@ResponseBody
+	@RequestMapping(value= "updateCheck.do", method = RequestMethod.POST)
+	public void updateCheck(CartVO cartvo) throws Exception {
+		cartService.updateCheck(cartvo);
+		
 	}
 }

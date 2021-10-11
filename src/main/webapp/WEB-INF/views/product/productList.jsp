@@ -3,19 +3,50 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-  
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <head>
 <link rel="stylesheet" type="text/css" href="/resources/css/product/product.css">
+
+<style>
+	.contents{
+		padding: 0 0 55px 0;
+	    min-height: 60px;
+	    font-family: 'Noto Sans KR', sans-serif;
+	    font-size: 40px;
+	    color: #ff7d9e;
+	    text-align: center;
+	   
+	}
+</style>
 </head>
 
 
 <body>
+
 <!-- img count할 index 변수 선언 -->
+
+<div class="contents mb-5">
+	<h1><!-- cri.searchType이 AA면 아우터>가디건 인것처럼 첫글자가 대분류를 의미 (A:아우터, B:상의 ..) -->
+		<c:choose>
+			<c:when test="${fn:substring(cri.searchType,0,1) eq 'A'}">아우터</c:when>
+			<c:when test="${fn:substring(cri.searchType,0,1) eq 'B'}">상의</c:when>
+			<c:when test="${fn:substring(cri.searchType,0,1) eq 'C'}">셔츠 / 블라우스</c:when>
+			<c:when test="${fn:substring(cri.searchType,0,1) eq 'D'}">트레이닝</c:when>
+			<c:when test="${fn:substring(cri.searchType,0,1) eq 'E'}">원피스</c:when>
+			<c:when test="${fn:substring(cri.searchType,0,1) eq 'F'}">팬츠</c:when>
+			<c:when test="${fn:substring(cri.searchType,0,1) eq 'G'}">가방</c:when>
+			<c:when test="${fn:substring(cri.searchType,0,1) eq 'H'}">신발</c:when>
+		</c:choose>
+	</h1>
+	
+</div>
+
 <c:set var="idxCount" value="0"/>
-<input type="text" name="keyword" id="keywordInput" value="${cri.keyword}">
-<button id="searchBtn">Search</button>
+<!-- 원래 검색창<input type="text" name="keyword" id="keywordInput" value="${cri.keyword}"> <button id="searchBtn">Search</button>-->
+
 <div class="container mt-5 mb-5">
+
 	<div class="row">
 		<c:forEach items="${productList}" var="productVO" varStatus="status">
 	    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 ">
@@ -33,7 +64,6 @@
 	                <ul class="product-links">
 	                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
 	                    <li><a href="#"><i class="far fa-heart"></i></a></li>
-	                    <li><a href="#"><i class="fa fa-random"></i></a></li>
 	                    <li>
 	                    	<a href="/product/productDetail.do${pagingSetting.makeSearch(pagingSetting.cri.page)
 		                		}&pdu_detail_code=${productVO.pdu_detail_code}"><i class="fa fa-search"></i>
@@ -98,16 +128,15 @@
 	</div>
 </div>
 
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-	
+
+<!-- 개별 검색으로 사용시 이거 추가
 	$(function(){
 		$("#searchBtn").on("click", function(event){
 			self.location = "productList.do"
 				+ '${pagingSetting.makeQuery(1)}'
+				+ "&searchType=" + '${cri.searchType}'
 				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
 		});
-	});
-</script>
+	});-->
 </body>
 
