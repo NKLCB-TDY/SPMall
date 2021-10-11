@@ -65,8 +65,8 @@ public class ProductController {
 	
 	//상품 상세조회
 	@RequestMapping(value="productDetail.do", method = RequestMethod.GET)
-	public ModelAndView detailProductList(@RequestParam("pdu_detail_code") int pdu_detail_code,
-									@ModelAttribute("cri") Criteria cri,
+	public ModelAndView detailProductList(@ModelAttribute("cri") SearchCriteria cri,
+									@RequestParam("pdu_detail_code") int pdu_detail_code,
 									ModelAndView mv,
 									Authentication authentication)throws Exception {	
 		
