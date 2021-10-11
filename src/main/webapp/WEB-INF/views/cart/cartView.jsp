@@ -31,7 +31,7 @@
 	<table class="table table-hover shopping-cart-wrap">
 		<thead class="text-muted">
 			<tr>
-			  <th scope="col" width="5%"><input type="checkbox" id="allselect" onclick="AllSelect()"></th>
+			  <th scope="col" width="5%"><input type="checkbox" id="allSelect" onclick="AllSelect()"></th>
 			  <th scope="col" width="40%">제품정보</th>
 			  <th scope="col" width="10%" class="text-center">수량</th>
 			  <th scope="col" width="10%" class="text-center">상품가격</th>
@@ -46,9 +46,18 @@
 		id, name 뒤에 붙어줌으로 독립적으로 사용하게함  -->
 		<c:set var="i" value="0"/>
 		<c:forEach items="${cartList}" var="cartVO">
-	
+			
 			<tr>
-				<td><input type="checkbox" name="check_pdu" id="checkPdu${i}" value="${cartVO.cart_code}" onclick="totalPriceChange()" ></td>
+				<td>
+					<c:if test="${cartVO.check_YN eq 'Y'}">
+						<input type="checkbox" name="check_pdu" id="checkPdu${i}" 
+							value="${cartVO.cart_code}" onclick="totalPriceChange(${cartVO.cart_code},'Y')" checked="checked">
+					</c:if>
+					<c:if test="${cartVO.check_YN eq 'N'}">
+						<input type="checkbox" name="check_pdu" id="checkPdu${i}" value="${cartVO.cart_code}" onclick="totalPriceChange(${cartVO.cart_code},'N')" >
+					</c:if>
+				</td>
+					
 				<td>
 					<figure class="media">	
 						<div class="img-wrap">
@@ -153,6 +162,30 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 	
+	//초기화	
+	let total_price = 0;
+	let allSelect =0;
+	for(let i=0; i<${cartList.size()}; i++){
+		if( $('#checkPdu'+i).is(':checked') ){
+			total_price += parseInt($('#price'+i).text());
+			allSelect++;
+		}else{
+			allSelect--;
+		}
+	}
+	
+	if(allSelect == ${cartList.size()}){
+		$('#allSelect').prop('checked',true); 
+	}else{
+		$('#allSelect').prop('checked',false);
+	}
+	$('#total_Pdu_Price').html((total_price));
+	$('#total_Price').html((total_price));
+
+		 
+	
+	
+	
 	// 수량 증가(+) 버튼클릭시 이벤트
 	// parmeter 값으로 inputId : 수량표시되는 id값, i : 증감값 가져옴
 	function addQuantity(i){
@@ -235,13 +268,44 @@
 		
 	}); */
 	
-	//checkbox 클릭, 수량수정, delete시 선택된 전체 가격대입
+	//수량 버튼 클릭시 동작
 	function totalPriceChange(){
-		let total_price= 0;
+		
+		total_price= 0;
+		
 		for(let i=0; i<${cartList.size()}; i++){
 			if( $('#checkPdu'+i).is(':checked') ){
 				total_price += parseInt($('#price'+i).text());
+
 			}
+		}
+		
+		$('#total_Pdu_Price').html((total_price));
+		$('#total_Price').html((total_price));
+		console.log($('#total_Price').text());
+	}
+	//checkbox 클릭, 수량수정, delete시 선택된 전체 가격대입
+	function totalPriceChange(cart_code, check_YN){
+		
+		total_price= 0;
+		allSelect =0;
+		if(check_YN != null){
+			updateCheck(cart_code, check_YN);	
+		}
+
+		for(let i=0; i<${cartList.size()}; i++){
+			if( $('#checkPdu'+i).is(':checked') ){
+				total_price += parseInt($('#price'+i).text());
+				allSelect++;
+			}else{
+				allSelect--;
+			}
+		}
+		
+		if(allSelect == ${cartList.size()}){
+			$('#allSelect').prop('checked',true); 
+		}else{
+			$('#allSelect').prop('checked',false);
 		}
 		
 		$('#total_Pdu_Price').html((total_price));
@@ -268,8 +332,43 @@
 		});
 	}
 	
-	function AllSelect(){
+	function updateCheck(cart_code, check_YN){
 		
+		$.ajax({
+			type: 'POST',
+			dataType: 'text',
+			url : '/cart/updateCheck.do',
+			data : {
+				cart_code : cart_code,
+				check_YN : check_YN
+			},
+			success : function(){
+				
+			},
+			
+			error : function(error) {
+				console.log(error);
+			}
+		});
+	}
+	function AllSelect(){
+		const allSelect = $('#allSelect').is(":checked");
+		if(allSelect == true){
+			$('input[name=check_pdu]').prop('checked',true); 
+		}else{
+			total_price = 0; //체크모두 해제시 초기화
+			$('input[name=check_pdu]').prop('checked',false);
+		}
+		
+		for(let i=0; i<${cartList.size()}; i++){
+			if( $('#checkPdu'+i).is(':checked') ){
+				total_price += parseInt($('#price'+i).text());
+
+			}
+		}
+		
+		$('#total_Pdu_Price').html((total_price));
+		$('#total_Price').html((total_price));
 	}
 	
 
@@ -295,7 +394,6 @@
 		}
 		
 		location.href = '/order/checkout.do?cart_code='+checkList;
-		
 		
 	}
 </script>

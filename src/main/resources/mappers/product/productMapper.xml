@@ -13,10 +13,9 @@
 				pdu_category_detail
 			
 			]]>
-			<if test="keyword != null">
-				where
-				pdu_name like CONCAT('%', #{keyword}, '%')
-			</if>
+			
+			<include refid="search"> </include>
+			
 			<![CDATA[
 				 
 			order by 
@@ -33,12 +32,8 @@
 				pdu_category_detail
 			 
 		]]>
-			<if test="keyword != null">
-				where
-				pdu_name like CONCAT('%', #{keyword}, '%')
-			</if>
-		<![CDATA[
-		]]>
+		
+		<include refid="search"> </include>	
 	</select>
 	
 	<select id ="productDetailInfo" parameterType="int" resultType = "ProductVO">
@@ -52,7 +47,7 @@
 		]]>
 	</select>
 	
-	<select id ="pduimageList" resultType = "PduImageVO">
+	<select id ="pduImageList" resultType = "PduImageVO">
 		<![CDATA[
 			select 
 				*
@@ -100,4 +95,184 @@
 		]]>
 	</select>
 	
+	
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<choose>
+				<when test="searchType == 'AA'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'AB'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'AC'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'BA'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'BB'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'BC'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'BD'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'C'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'D'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'E'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'FA'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'FB'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'FC'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'FD'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'FE'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'G'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'GA'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'GB'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'HA'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'HB'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<when test="searchType == 'HC'.toString()">
+					where
+					pdu_category_code_ref = #{searchType}
+					<if test="keyword != null">
+						AND
+						pdu_name like CONCAT('%', #{keyword}, '%')
+					</if>						
+				</when>
+				<otherwise>
+					where
+					pdu_name like CONCAT('%', #{keyword}, '%')
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
 </mapper>

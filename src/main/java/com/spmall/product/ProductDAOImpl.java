@@ -21,7 +21,7 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	String namespace = "product";
 	
-
+	
 	//페이지 데이터 sql값에 맞게 출력
 	@Override
 	public Map<String, Object> productList(SearchCriteria cri) throws Exception {
@@ -33,7 +33,7 @@ public class ProductDAOImpl implements ProductDAO {
 		map.put("productList", list);
 		
 		List<PduImageVO> imageList = new ArrayList<PduImageVO>();
-		imageList = sqlSession.selectList(namespace + ".pduimageList");
+		imageList = sqlSession.selectList(namespace + ".pduImageList");
 		map.put("imageList", imageList);
 		
 		
