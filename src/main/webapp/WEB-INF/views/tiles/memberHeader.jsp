@@ -4,7 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>	
 
 <!DOCTYPE html>
-<html>
+<html>  
 <head>
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -27,7 +27,7 @@
 	<!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
          <div class="container px-4 px-lg-5">
-             <a class="navbar-brand" href="/main/main.do">당근셔핑</a>
+             <a class="navbar-brand" href="/main/main.do">당근셔핑1</a>
              
              <!-- 검색버튼 -->
              <fieldset>

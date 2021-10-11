@@ -45,6 +45,7 @@
 <c:set var="idxCount" value="0"/>
 <!-- 원래 검색창<input type="text" name="keyword" id="keywordInput" value="${cri.keyword}"> <button id="searchBtn">Search</button>-->
 
+
 <div class="container mt-5 mb-5">
 
 	<div class="row">
