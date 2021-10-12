@@ -29,6 +29,7 @@
 <div class="contents mb-5">
 	<h1><!-- cri.searchType이 AA면 아우터>가디건 인것처럼 첫글자가 대분류를 의미 (A:아우터, B:상의 ..) -->
 		<c:choose>
+			<c:when test="${not empty cri.keyword}"><span style="">통합 검색 :</span> "${cri.keyword}"</c:when>
 			<c:when test="${fn:substring(cri.searchType,0,1) eq 'A'}">아우터</c:when>
 			<c:when test="${fn:substring(cri.searchType,0,1) eq 'B'}">상의</c:when>
 			<c:when test="${fn:substring(cri.searchType,0,1) eq 'C'}">셔츠 / 블라우스</c:when>
@@ -37,6 +38,7 @@
 			<c:when test="${fn:substring(cri.searchType,0,1) eq 'F'}">팬츠</c:when>
 			<c:when test="${fn:substring(cri.searchType,0,1) eq 'G'}">가방</c:when>
 			<c:when test="${fn:substring(cri.searchType,0,1) eq 'H'}">신발</c:when>
+			<c:otherwise>ALL</c:otherwise>
 		</c:choose>
 	</h1>
 	

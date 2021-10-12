@@ -142,12 +142,7 @@
 		update
 			cart
 		set
-			check_YN =
-			
-			<choose>
-				<when test="check_YN == 'Y'.toString()">'N'</when>
-				<when test="check_YN == 'N'.toString()">'Y'</when>
-			</choose>
+			check_YN = #{check_YN}
 		where
 			cart_code = #{cart_code}
 	</update>
