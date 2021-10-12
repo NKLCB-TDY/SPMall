@@ -27,7 +27,7 @@
 	<!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
          <div class="container px-4 px-lg-5">
-             <a class="navbar-brand" href="/main/main.do">봄 쇼핑몰</a>
+             <a class="navbar-brand" href="/main/main.do">옷 쇼핑</a>
              
              <!-- 검색버튼 -->
              <fieldset>
@@ -131,6 +131,7 @@
     <!-- jsdelivr CDN 
     	- header 스크롤 동작-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 없으면 비회원일때 AJAX 실행안됨 -->
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
     	

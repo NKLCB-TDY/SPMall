@@ -210,7 +210,7 @@ body {
 
 
 
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <script>
 	let popover1 = 0;
 	//썸네일 클릭시 이미지 출력

@@ -27,7 +27,7 @@
 	<!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
          <div class="container px-4 px-lg-5">
-             <a class="navbar-brand" href="/main/main.do">당근셔핑1</a>
+             <a class="navbar-brand" href="/main/main.do">옷 쇼핑</a>
              
              <!-- 검색버튼 -->
              <fieldset>
@@ -151,6 +151,7 @@
     <!-- jsdelivr CDN 
     	- header 스크롤 동작-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 없으면 회원일때 모든 AJAX 실행안됨 -->
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     
     <!-- member 로그인시 cartCounting하는데 코드중복없이 사용하기에 header가 적합하다고생각해 여기적음 (더좋은 방법이생각나면 수정)-->

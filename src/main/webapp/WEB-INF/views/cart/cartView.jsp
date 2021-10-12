@@ -5,10 +5,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<title>장바구니</title>
+
 <!-- 수량 버튼 css, js -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <!-- 수량 버튼 css, js end-->
@@ -16,26 +16,26 @@
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 <link rel="stylesheet" href="/resources/css/cart/cart.css">
-</head>
+</head> 
 
 
 <body>
 
 
-<div class="container pt-5">
+<div class="container pt-5 ">
 	<br>
 	<h2 class="text-center">장바구니 리스트 </h2>
 	<hr>
-	
-	<div class="card">
+	<div style="text-align: center;">
+	<div class="card" style="display: inline-block;">
 	<table class="table table-hover shopping-cart-wrap">
 		<thead class="text-muted">
 			<tr>
 			  <th scope="col" width="5%"><input type="checkbox" id="allSelect" onclick="AllSelect()"></th>
-			  <th scope="col" width="40%">제품정보</th>
-			  <th scope="col" width="10%" class="text-center">수량</th>
-			  <th scope="col" width="10%" class="text-center">상품가격</th>
-			  <th scope="col" width="20%" class="text-right pr-4">삭제하기</th>
+			  <th scope="col" width="30%">제품정보</th>
+			  <th scope="col" width="10%">수량</th>
+			  <th scope="col" width="15%">상품가격</th>
+			  <th scope="col" width="10%">삭제하기</th>
 			</tr>
 		</thead>
 	
@@ -49,13 +49,14 @@
 			
 			<tr>
 				<td>
-					<c:if test="${cartVO.check_YN eq 'Y'}">
+					
 						<input type="checkbox" name="check_pdu" id="checkPdu${i}" 
-							value="${cartVO.cart_code}" onclick="totalPriceChange(${cartVO.cart_code},'Y')" checked="checked">
-					</c:if>
-					<c:if test="${cartVO.check_YN eq 'N'}">
-						<input type="checkbox" name="check_pdu" id="checkPdu${i}" value="${cartVO.cart_code}" onclick="totalPriceChange(${cartVO.cart_code},'N')" >
-					</c:if>
+							value="${cartVO.cart_code}" onclick="totalPriceChange(${cartVO.cart_code},this.checked)" 
+							
+							<c:if test="${cartVO.check_YN eq 'Y'}">
+								checked="checked"
+							</c:if>
+						>
 				</td>
 					
 				<td>
@@ -87,7 +88,7 @@
 			        </div>
 			        
 			        <!-- 수량 표시 disabled로 직접입력 막음 -->
-			        <input style="width:50px" 
+			        <input style="width:20px;text-align:center" 
 			        		type="number" 
 			        		name="pdu_pieces${i}" 
 			        		id="qty_input${i}" 
@@ -123,7 +124,7 @@
 		</tbody>
 	</table>
 	</div> <!-- card.// -->
-	
+	</div>
 	<div class="mt-5 ">
 		<table class="table text-center">
 		  <thead>
@@ -159,7 +160,7 @@
 <br><br>
 
 </body>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <script>
 	
 	//초기화	
@@ -287,9 +288,14 @@
 	//checkbox 클릭, 수량수정, delete시 선택된 전체 가격대입
 	function totalPriceChange(cart_code, check_YN){
 		
+		
 		total_price= 0;
 		allSelect =0;
 		if(check_YN != null){
+			if(check_YN == true){
+				check_YN ='Y'
+			}else check_YN ='N'
+			console.log(cart_code + " " + check_YN);
 			updateCheck(cart_code, check_YN);	
 		}
 
