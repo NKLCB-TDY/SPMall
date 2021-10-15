@@ -1,56 +1,3 @@
-// 회원가입 유효성 검사
-
-// id 중복 검사
-$(function(){
-	$('#member_id').blur(function(){
-		let id = $('#member_id').val();
-		if(id == ''){
-			$('#id_check').text('아이디를 입력해 주세요.');
-		}else{
-			$.ajax({
-				type : 'POST',
-				url : 'idoverlap.do',
-				dataType : "json", //text 타입으로 하니 map key(data.result)가 undefiend뜸 그래서 json으로 하니됨	 
-				data : {
-					member_id : id
-				},
-				
-				success : function(data){//spring version을 낮추니 data 값이안들어옴
-					console.log(data);
-					if(data.result == true){
-						document.getElementById('id_check').style.color='#555';
-						
-						$('#id_check').text('사용이 가능한 아이디 입니다.');
-					}else{
-						
-						document.getElementById('id_check').style.color='red';
-						$('#id_check').text('이미 중복되는 Id가 있습니다.');
-					}
-				},
-				error :function(error){
-					$('#id_check').text('오류');
-					console.log(error);
-				}
-			});
-		}
-	});
-});
-
-//비밀번호 확인
-$(function(){
-	$('#member_pwd2').blur(function(){
-		if($('#member_pwd2').val() == ''){
-			$('#password_check').text('비밀번호를 입력해주세요.');
-		}else{
-			if($('#member_pwd1').val() != $('#member_pwd2').val()){
-				$('#password_check').text('비밀번호가 틀립니다. 확인해주세요');
-			}else{
-				$('#password_check').text('비밀번호 일치!');
-			}
-		}
-		
-	});	
-});
 
 //주소검색 처리
 function find_addr() {
@@ -93,7 +40,7 @@ function find_addr() {
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("postCode").value = data.zonecode;
+                document.getElementById('postCode').value = data.zonecode;
                 document.getElementById("basicAddr").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("detailAddr").focus();
@@ -101,28 +48,8 @@ function find_addr() {
         }).open();
  }
 
-//Email 처리
-$(function(){
-			$('#email_select').change(function() { //이메일선택부분이 바뀌면
-				var email = $('#email_select').val();	//선택된값 저장
-				if (email == 'direct') { //이메일을 직접입력시
-					$('#_email2').attr('disabled', false); //
-					$('#_email2').val(''); 
-					$('#_email2').focus();
-				} else {
-					$('#_email2').attr('disabled',true);
-					$('#_email2').val($('#email_select').val());
-					$('#member_email2').val($('#email_select').val());
-				}
-			});
-});
 
 function Sub(){
-	if($('#member_id').val() == ''){
-		alert("id를 입력해 주세요");
-		$('#member_id').focus();
-		return;
-	}
 	var num = 0;
 	var list = new Array();
 	var phone = $('#member_cp1').val() + $('#member_cp2').val() + $('#member_cp3').val()

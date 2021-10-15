@@ -15,13 +15,13 @@
          </div>
          <div class="carousel-inner">
            <div class="carousel-item active">
+             <img src="${pageContext.request.contextPath}/resources/image/main/1.jpg" class="d-block w-100" alt="...">
+           </div>
+           <div class="carousel-item">	
              <img src="${pageContext.request.contextPath}/resources/image/main/2.jpg" class="d-block w-100" alt="...">
            </div>
            <div class="carousel-item">
              <img src="${pageContext.request.contextPath}/resources/image/main/3.jpg" class="d-block w-100" alt="...">
-           </div>
-           <div class="carousel-item">
-             <img src="${pageContext.request.contextPath}/resources/image/main/4.jpg" class="d-block w-100" alt="...">
            </div>
          </div>
          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -42,7 +42,7 @@
                      <div class="card h-100">
                          <a href="/member/memberJoin.do">
                          <!-- Product image-->
-                         <img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/main/1.jpg" alt="..." />
+                         <!-- <img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/main/.jpg" alt="..." /> -->
                          <!-- Product details-->
                          <div class="card-body p-4">
                              
