@@ -8,7 +8,7 @@ public interface CartDAO {
 	public void updateToCart(CartVO cartVO)throws Exception;
 	public int checkOverlap(CartVO cartVO)throws Exception;
 	public List<CartVO> selectCartList(String cart_member_id)throws Exception;
-	public List<CartVO> selectCartList(List<Integer> cart_code)throws Exception;
+	
 	
 	public int countingCart(String member_id) throws Exception;
 	public void removeCart(Map<String, Object> map)throws Exception;

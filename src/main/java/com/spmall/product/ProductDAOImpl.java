@@ -27,8 +27,8 @@ public class ProductDAOImpl implements ProductDAO {
 	public Map<String, Object> productList(SearchCriteria cri) throws Exception {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		List<ProductVO> list = new ArrayList<ProductVO>();
+		
 		list = sqlSession.selectList(namespace + ".productList", cri);
 		map.put("productList", list);
 		

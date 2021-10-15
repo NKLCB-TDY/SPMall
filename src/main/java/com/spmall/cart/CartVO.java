@@ -7,6 +7,7 @@ public class CartVO {
 	private String cart_pdu_size;
 	private String cart_pdu_color;
 	private int cart_pdu_quantity;
+	
 	private String check_YN;
 	private String pdu_image_file_name;
 	private String pdu_name;

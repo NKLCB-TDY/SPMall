@@ -44,31 +44,7 @@
 		 
 	</select>
 	
-	<select id="selectCartList1" parameterType="java.util.List" resultType="CartVO">
-			select 
-				cart.*, img.pdu_image_file_name, p.pdu_name, p.pdu_discounted_price
-			from 
-				(select 
-					c.* 
-				from 
-					cart c 
-				where 
-					c.cart_code IN
-					( <foreach collection="list" item="item" separator=",">
-						#{item}
-					</foreach> ) ) cart ,
-				 pdu_category_detail_image img, 
-				 pdu_category_detail p 
-			where 
-				cart.cart_pdu_detail_code_ref = img.pdu_detail_code_ref 
-				and 
-			  	img.pdu_image_file_type like 'main%' 
-			  	and 
-			  	cart.cart_pdu_detail_code_ref = p.pdu_detail_code
-			 order by 
-			 	cart.cart_code desc
-		 
-	</select>
+
 	
 	<select id="countingCart" resultType="int">
 		select count(*)

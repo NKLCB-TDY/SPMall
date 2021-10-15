@@ -1,7 +1,9 @@
 package com.spmall.order;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -34,12 +36,18 @@ public class OrderController {
 	
 	@RequestMapping(value = "checkout.do", method = RequestMethod.GET)
 	public ModelAndView checkout_GET(@RequestParam("cart_code") List<Integer> cart_code, 
-			ModelAndView mv) throws Exception {
+			ModelAndView mv,
+			Authentication authentication) throws Exception {
 		
-		List<CartVO> list = new ArrayList<CartVO>();
-		list = cartService.selectCartList(cart_code);
 		
-		mv.addObject("cartCodeList", list);
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		String member_id = user.getUsername();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = orderService.checkOut(member_id, cart_code);
+		
+		
+		mv.addObject("memberVO",map.get("memberVO"));
+		mv.addObject("cartList",map.get("cartList"));
 		mv.setViewName("member/order/checkout");
 		
 		return mv;

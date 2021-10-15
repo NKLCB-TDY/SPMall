@@ -106,8 +106,12 @@
 				</td>
 				<td> 
 					<div class="price-wrap"> 
-						<var class="price" id="price${i}">${cartVO.pdu_discounted_price * cartVO.cart_pdu_quantity}</var>
-						<var class="perPrice" id="perPrice${i}">per : ${cartVO.pdu_discounted_price}</var>
+						<var class="price" id="price${i}">
+							<fmt:formatNumber type="number" pattern="###,###,###,###,###,###"
+									 value="${cartVO.pdu_discounted_price * cartVO.cart_pdu_quantity}"/>원</var>
+						<var class="perPrice" id="perPrice${i}">per : 
+							<fmt:formatNumber type="number" pattern="###,###,###,###,###,###"
+									 value="${cartVO.pdu_discounted_price}"/>원</var>
 						<input type="hidden" name="pdu_discounted_price${i}" value="${cartVO.pdu_discounted_price }"> 
 					</div> <!-- price-wrap .// -->
 				</td>
@@ -139,13 +143,13 @@
 		  <tbody>
 		    <tr class= "table-success">
 		      <td scope="row">
-		      	<span class="mr-2" id="total_Pdu_Price">0</span>원	
+		      	<span class="mr-2" id="total_Pdu_Price">0원</span>
 		      </td>
 		      <td scope="row">+</td>
 		      <td scope="row">0</td>
 		      <td scope="row">=</td>
 		      <td scope="row">
-		      	<span class="mr-2" id="total_Price" style="color: red;">0</span>원
+		      	<span class="mr-2" id="total_Price" style="color: red;">0원</span>
 		      </td>
 		    </tr>
 		  </tbody>
@@ -161,14 +165,22 @@
 
 </body>
 
-<script>
+<script type="text/javascript">
+
+	
+	var ret = 0;
+	var val = $('#price1').text();
+		console.log(val);
+		console.log(parseInt($('#price1').text().replace(/,|원/gi,'')));
+		ret = Number(val.replace(/','|'원',/gi,""));
+		console.log(ret);
 	
 	//초기화	
 	let total_price = 0;
 	let allSelect =0;
 	for(let i=0; i<${cartList.size()}; i++){
 		if( $('#checkPdu'+i).is(':checked') ){
-			total_price += parseInt($('#price'+i).text());
+			total_price += removeCommasWon($('#price'+i).text());
 			allSelect++;
 		}else{
 			allSelect--;
@@ -180,10 +192,19 @@
 	}else{
 		$('#allSelect').prop('checked',false);
 	}
-	$('#total_Pdu_Price').html((total_price));
-	$('#total_Price').html((total_price));
+	$('#total_Pdu_Price').html(numberWithCommas(total_price));
+	$('#total_Price').html(numberWithCommas(total_price));
 
 		 
+	//콤마 찍기
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
+	}
+
+	//콤마, 원 제거
+	function removeCommasWon(x){
+		return parseInt(x.replace(/,|원/gi,''));
+	}
 	
 	
 	
@@ -201,11 +222,10 @@
 		//수량 변경시 가격 변경
 		let totalPrice = $('[name="pdu_discounted_price'+i+'"]').val() * $('[name="pdu_pieces'+i+'"]').val();
 		
-		$('#price'+i).html(totalPrice);
-		//document.getElementById("price"+i).innerHTML = ;
-		totalPriceChange();
-		console.log(totalPrice);
-		console.log($('#qty_input'+i).val());
+		$('#price'+i).html(numberWithCommas(totalPrice));
+		
+		totalPriceChange_quantity();
+		
 	};
 	// 수량 빼기(-) 버튼클릭시 이벤트
 	function subtractQuantity(i){
@@ -223,11 +243,9 @@
 			
 			//-시 가격처리
 			let totalPrice = $('[name="pdu_discounted_price'+i+'"]').val() * $('[name="pdu_pieces'+i+'"]').val();
-			$('#price'+i).html(totalPrice);
-			//document.getElementById("price"+i).innerHTML = totalPrice;
-			totalPriceChange();
-			console.log("한개 가격은" + $('[name="pdu_discounted_price'+i+'"]').val());
-			console.log(totalPrice);
+			$('#price'+i).html(numberWithCommas(totalPrice));
+			totalPriceChange_quantity();
+			
 		}
 		
 		 
@@ -270,20 +288,20 @@
 	}); */
 	
 	//수량 버튼 클릭시 동작
-	function totalPriceChange(){
-		
+	function totalPriceChange_quantity(){
+		console.log("OKg");
 		total_price= 0;
 		
 		for(let i=0; i<${cartList.size()}; i++){
 			if( $('#checkPdu'+i).is(':checked') ){
-				total_price += parseInt($('#price'+i).text());
-
+				total_price += removeCommasWon($('#price'+i).text());
+				console.log(total_price + "total_price");
 			}
 		}
 		
-		$('#total_Pdu_Price').html((total_price));
-		$('#total_Price').html((total_price));
-		console.log($('#total_Price').text());
+		$('#total_Pdu_Price').html(numberWithCommas(total_price));
+		$('#total_Price').html(numberWithCommas(total_price));
+		console.log($('#total_Price').text() +"toto");
 	}
 	//checkbox 클릭, 수량수정, delete시 선택된 전체 가격대입
 	function totalPriceChange(cart_code, check_YN){
@@ -301,7 +319,7 @@
 
 		for(let i=0; i<${cartList.size()}; i++){
 			if( $('#checkPdu'+i).is(':checked') ){
-				total_price += parseInt($('#price'+i).text());
+				total_price += removeCommasWon($('#price'+i).text());
 				allSelect++;
 			}else{
 				allSelect--;
@@ -314,9 +332,9 @@
 			$('#allSelect').prop('checked',false);
 		}
 		
-		$('#total_Pdu_Price').html((total_price));
-		$('#total_Price').html((total_price));
-		console.log($('#total_Price').text());
+		$('#total_Pdu_Price').html(numberWithCommas(total_price));
+		$('#total_Price').html(numberWithCommas(total_price));
+		
 	}
 
 	function updateQuantity(quantity, cart_code){
@@ -368,20 +386,20 @@
 		
 		for(let i=0; i<${cartList.size()}; i++){
 			if( $('#checkPdu'+i).is(':checked') ){
-				total_price += parseInt($('#price'+i).text());
+				total_price += removeCommasWon($('#price'+i).text());
 
 			}
 		}
 		
-		$('#total_Pdu_Price').html((total_price));
-		$('#total_Price').html((total_price));
+		$('#total_Pdu_Price').html(numberWithCommas(total_price));
+		$('#total_Price').html(numberWithCommas(total_price));
 	}
 	
 
 	// submit
 	function Submit(){
 		
-		if($('#total_Price').text() == 0){
+		if(removeCommasWon($('#total_Price').text()) == 0){
 			alert("선택된 상품이 없습니다.");
 			return;
 		}

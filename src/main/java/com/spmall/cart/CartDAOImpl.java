@@ -1,6 +1,5 @@
 package com.spmall.cart;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,17 +29,10 @@ public class CartDAOImpl implements CartDAO{
 	
 	@Override
 	public List<CartVO> selectCartList(String cart_member_id) throws Exception {
-		
-		
 		return sqlSession.selectList(namespace+".selectCartList", cart_member_id);
 	}
 
-	@Override
-	public List<CartVO> selectCartList(List<Integer> cartCodeList) throws Exception {
-	
 
-		return sqlSession.selectList(namespace+".selectCartList1", cartCodeList);
-	}
 	
 	@Override
 	public int countingCart(String member_id)throws Exception {
