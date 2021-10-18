@@ -27,20 +27,32 @@
 <!-- img count할 index 변수 선언 -->
 
 <div class="contents mb-5">
-	<h1><!-- cri.searchType이 AA면 아우터>가디건 인것처럼 첫글자가 대분류를 의미 (A:아우터, B:상의 ..) -->
+	<!-- cri.searchType이 AA면 아우터>가디건 인것처럼 첫글자가 대분류를 의미 (A:아우터, B:상의 ..) -->
 		<c:choose>
 			<c:when test="${not empty cri.keyword}"><span style="">통합 검색 :</span> "${cri.keyword}"</c:when>
-			<c:when test="${fn:substring(cri.searchType,0,1) eq 'A'}">아우터</c:when>
-			<c:when test="${fn:substring(cri.searchType,0,1) eq 'B'}">상의</c:when>
-			<c:when test="${fn:substring(cri.searchType,0,1) eq 'C'}">셔츠 / 블라우스</c:when>
-			<c:when test="${fn:substring(cri.searchType,0,1) eq 'D'}">트레이닝</c:when>
-			<c:when test="${fn:substring(cri.searchType,0,1) eq 'E'}">원피스</c:when>
-			<c:when test="${fn:substring(cri.searchType,0,1) eq 'F'}">팬츠</c:when>
-			<c:when test="${fn:substring(cri.searchType,0,1) eq 'G'}">가방</c:when>
-			<c:when test="${fn:substring(cri.searchType,0,1) eq 'H'}">신발</c:when>
+			<c:when test="${cri.searchType eq 'AA'}"><h1>아우터</h1><h4>가디건 / 조끼</h4></c:when>
+			<c:when test="${cri.searchType eq 'AB'}"><h1>아우터</h1><h4>자켓 / 코트</h4></c:when>
+			<c:when test="${cri.searchType eq 'AC'}"><h1>아우터</h1><h4>패딩</h4></c:when>
+			<c:when test="${cri.searchType eq 'BA'}"><h1>상의</h1><h4>티셔츠</h4></c:when>
+			<c:when test="${cri.searchType eq 'BB'}"><h1>상의</h1><h4>멘투멘</h4></c:when>
+			<c:when test="${cri.searchType eq 'BC'}"><h1>상의</h1><h4>후드</h4></c:when>
+			<c:when test="${cri.searchType eq 'BD'}"><h1>상의</h1><h4>반팔</h4></c:when>
+			<c:when test="${cri.searchType eq 'C'}"><h1>셔츠 / 블라우스</h1></c:when>
+			<c:when test="${cri.searchType eq 'D'}"><h1>트레이닝</h1></c:when>
+			<c:when test="${cri.searchType eq 'E'}"><h1>원피스</h1></c:when>
+			<c:when test="${cri.searchType eq 'FA'}"><h1>팬츠</h1><h4>청바지</h4></c:when>
+			<c:when test="${cri.searchType eq 'FB'}"><h1>팬츠</h1><h4>롱바지</h4></c:when>
+			<c:when test="${cri.searchType eq 'FC'}"><h1>팬츠</h1><h4>슬랙스</h4></c:when>
+			<c:when test="${cri.searchType eq 'FD'}"><h1>팬츠</h1><h4>면바지</h4></c:when>
+			<c:when test="${cri.searchType eq 'FE'}"><h1>팬츠</h1><h4>레깅스</h4></c:when>
+			<c:when test="${cri.searchType eq 'GA'}"><h1>가방</h1><h4>백팩</h4></c:when>
+			<c:when test="${cri.searchType eq 'GB'}"><h1>가방</h1><h4>크로스 / 토드백</h4></c:when>
+			<c:when test="${cri.searchType eq 'HA'}"><h1>신발</h1><h4>운동화 / 단화</h4></c:when>
+			<c:when test="${cri.searchType eq 'HB'}"><h1>신발</h1><h4>구두 / 워커</h4></c:when>
+			<c:when test="${cri.searchType eq 'HC'}"><h1>신발</h1><h4>샌들 / 슬리퍼 / 장화</h4></c:when>
 			<c:otherwise>ALL</c:otherwise>
 		</c:choose>
-	</h1>
+	
 	
 </div>
 
@@ -91,8 +103,10 @@
 	              	</h3>
 	                <div class="price">
 	                	<span>
-	                		<fmt:formatNumber value="${productVO.pdu_price }" pattern="#,###" />원
-	                	</span> <fmt:formatNumber value="${productVO.pdu_discounted_price }" pattern="#,###" />원
+	                	
+
+	                		<fmt:formatNumber type="number" value="${productVO.pdu_price }" pattern="###,###,###,###,###,###" />원
+	                	</span> <fmt:formatNumber type="number" value="${productVO.pdu_discounted_price }" pattern="###,###,###,###,###,###" />원
 	                </div>
 	            </div>
 	        </div>
@@ -103,7 +117,7 @@
 	</div>
 	
 
-	<div class="text-center">
+	<div class="d-flex justify-content-center mt-5">
 		<ul class="pagination">
 			<c:if test="${pagingSetting.prev}">
 				<li><a class="page-link"

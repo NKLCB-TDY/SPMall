@@ -38,6 +38,8 @@ public class MainController {
 	}
 	
 	
+	
+	
 	//로그인 페이지 
 	@RequestMapping(value = "/mainLogin.do", method = RequestMethod.GET)
 	public String mainLogin(Authentication authentication) {
