@@ -36,8 +36,7 @@ public class OrderController {
 	
 	@RequestMapping(value = "checkout.do", method = RequestMethod.GET)
 	public ModelAndView checkout_GET(@RequestParam("cart_code") List<Integer> cart_code, 
-			ModelAndView mv,
-			Authentication authentication) throws Exception {
+										ModelAndView mv,	Authentication authentication) throws Exception {
 		
 		
 		CustomerUser user = (CustomerUser)authentication.getPrincipal();
@@ -48,8 +47,16 @@ public class OrderController {
 		
 		mv.addObject("memberVO",map.get("memberVO"));
 		mv.addObject("cartList",map.get("cartList"));
+		mv.addObject("cartCode", cart_code);
 		mv.setViewName("member/order/checkout");
 		
+		return mv;
+	}
+	
+	@RequestMapping(value = "checkout.do", method = RequestMethod.POST)
+	public ModelAndView checkout_POST(OrderVO orderVO,
+			ModelAndView mv,
+			Authentication authentication) throws Exception {
 		return mv;
 	}
 }

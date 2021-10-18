@@ -1,17 +1,19 @@
 package com.spmall.order;
 
+import java.util.List;
+
 public class OrderVO {
 	//구매자 정보
 	private String order_member_id;
 	
 	//받는사람 정보 
-	private String recipient; //받는사람 
+	private String order_recipient; //받는사람 
 	private String order_addr1; //주소
 	private String order_addr2;
 	private String order_addr3;
 	private String order_addr4;
 	private String recipient_phone; //받는사람 전화번호
-	
+	private String order_shp_request; //배송 요청 사항
 	
 	//주문정보
 	private String pdu_detail_code_ref;
@@ -24,5 +26,5 @@ public class OrderVO {
 
 	private String delivery_request; //배송요청사항
 	
- 
+	private List<Integer> cart_code;
 }

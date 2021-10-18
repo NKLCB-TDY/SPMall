@@ -410,7 +410,6 @@
 			
 			//check 되있다면 push
 			if($('#checkPdu'+i).is(':checked')){
-				console.log($('#checkPdu'+i).val());
 				let cart_code = parseInt($('#checkPdu'+i).val());
 				checkList.push(cart_code);
 			}
