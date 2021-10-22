@@ -22,7 +22,6 @@ import com.spmall.common.CustomerUser;
 
 @Controller
 @RequestMapping("/order/*") //장바구니
-
 public class OrderController {
 	
 	@Inject
@@ -54,9 +53,37 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "checkout.do", method = RequestMethod.POST)
-	public ModelAndView checkout_POST(OrderVO orderVO,
+	public ModelAndView checkout_POST(@RequestParam("cart_code") List<Integer> cart_code, OrderVO orderVO, 
 			ModelAndView mv,
 			Authentication authentication) throws Exception {
+		
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		String member_id = user.getUsername();
+		orderVO.setOrder_member_id(member_id);
+		
+		//cart테이블에 저장되있는 정보 order로 이동
+		int order_code = orderService.insertOrder(orderVO);
+		orderService.insertDetailOrder(cart_code, order_code);
+		System.out.println(orderVO.toString());
+		
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "list.do", method = RequestMethod.GET)
+	public ModelAndView orderList(ModelAndView mv, Authentication authentication) throws Exception {
+		
+		
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		String member_id = user.getUsername();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = orderService.orderList(member_id);
+		
+		mv.addObject("orderList",map.get("orderList"));
+		mv.addObject("orderDetailList",map.get("orderDetailList"));
+		mv.setViewName("member/order/list");
+		
 		return mv;
 	}
 }

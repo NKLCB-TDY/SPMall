@@ -77,6 +77,14 @@ public class CartVO {
 	public void setCheck_YN(String check_YN) {
 		this.check_YN = check_YN;
 	}
+	@Override
+	public String toString() {
+		return "CartVO [cart_code=" + cart_code + ", cart_pdu_detail_code_ref=" + cart_pdu_detail_code_ref
+				+ ", cart_member_id=" + cart_member_id + ", cart_pdu_size=" + cart_pdu_size + ", cart_pdu_color="
+				+ cart_pdu_color + ", cart_pdu_quantity=" + cart_pdu_quantity + ", check_YN=" + check_YN
+				+ ", pdu_image_file_name=" + pdu_image_file_name + ", pdu_name=" + pdu_name + ", pdu_discounted_price="
+				+ pdu_discounted_price + "]";
+	}
 	
-		
+	
 }

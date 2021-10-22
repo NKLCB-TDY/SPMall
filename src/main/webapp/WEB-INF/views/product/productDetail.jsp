@@ -289,7 +289,9 @@ body {
 		
 		if(size == "No_Value"){
 			alert('사이즈를 선택해주세요');
-		}else if('장바구니'){
+			return;
+		}
+		if(select == '장바구니'){
 			let checkOverlap_result = checkOverlap(pdu_detail_code_ref, size, color);
 			if(checkOverlap_result == 401){
 				alert('로그인 후 이용가능합니다.');
@@ -353,6 +355,9 @@ body {
 			}
 
 			
+		}else if('바로구매'){
+			alert("개발중..");
+			return;
 		}
 
 	}

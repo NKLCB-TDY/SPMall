@@ -66,7 +66,7 @@ $(function(){
 	});
 });
 
-function Sub(){
+function Submit(){
 	
 	var phone = $('#member_cp1').val() + $('#member_cp2').val() + $('#member_cp3').val()
 	console.log(phone);

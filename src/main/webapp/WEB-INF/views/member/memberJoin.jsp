@@ -189,7 +189,7 @@
 							
 							<div class="d-grid gap-2 col-md-6 mx-auto ">
 								<button class="btn btn-primary btn-lg py-3 btn-block" 
-									type="button"  id="joinMember" onclick="Sub()">
+									type="button"  id="joinMember" onclick="Submit()">
 									회원가입
 								</button>
 							</div>
