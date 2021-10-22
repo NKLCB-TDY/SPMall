@@ -37,6 +37,7 @@
 
 <c:set var="count" value="1"/>
 <c:set var="total_pdu_price" value="0"/>
+<c:set var="total_point" value="0"/>
 	<div class="container pt-5">
 		<div class="mb-5">
 			<br>
@@ -145,7 +146,6 @@
 			  <tbody>
 			  
 			  <c:forEach items="${cartList}" var="cartVO">
-			  	
 			    <tr class= "table-success">
 			      <td><c:out value="${count}"/></td>
 			      <td scope="row">
@@ -161,7 +161,7 @@
 			      </td>
 			      <td scope="row">${cartVO.cart_pdu_quantity}</td>
 			      <td scope="row"><fmt:formatNumber type="number" pattern="###,###,###,###,###,###"
-									 value="${cartVO.pdu_discounted_price/100}"/>원</td>
+									 value="${cartVO.pdu_discounted_price*cartVO.cart_pdu_quantity/100}"/>원</td>
 			      <td scope="row" style="color: red;">
 					<fmt:formatNumber type="number" pattern="###,###,###,###,###,###" 
 						value="${cartVO.pdu_discounted_price*cartVO.cart_pdu_quantity}" />원			      
@@ -170,6 +170,7 @@
 			    
 			    
 			    <c:set var="count" value="${count+1}"/>
+			    <c:set var="save_point" value="${save_point+cartVO.pdu_discounted_price*cartVO.cart_pdu_quantity/100}"/>
 			    <c:set var="total_pdu_price" value="${total_pdu_price+cartVO.pdu_discounted_price*cartVO.cart_pdu_quantity}"/>
 			   </c:forEach>
 			  </tbody>
@@ -194,6 +195,12 @@
 			      <td class="td2" id="shipping">0원</td>
 			    </tr>
 			    <tr>
+			      <td class="td1">포인트 적립금</td>
+			      <td class="td2" id="save_point"><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" 
+			      	value="${save_point}"/>원
+			      </td>
+			    </tr>
+			    <tr>
 			      <td class="td1">총 결재금액</td>
 			      <td class="td2" id="total_price"></td>
 			    </tr>
@@ -204,27 +211,31 @@
 	
 	
 	<div class="d-flex justify-content-center mt-5">
-		<button class="btn btn-danger btn-lg" onclick="Submit()">구매 하기</button>
+		<button class="btn btn-danger btn-lg" onclick="Submit()">결제하기</button>
 	</div>
 	
 	
 	<script>
 		//장바구니 코드(사이즈,컬러,수량을 Get cart테이블에서 Delete하기위해)
-		const cartCodeList = new Array(); //check가된 상품코드를 담기위한 리스트
+		let cartCodeList = new Array(); //check가된 상품코드를 담기위한 리스트
 		cartCodeList = ${cartCode};
 		//총 상품가격
-		const totalPduPrice = removeCommasWon($('#total_pdu_price').text());
+		let totalPduPrice = removeCommasWon($('#total_pdu_price').text());
 		//포인트
-		const memberPoint = removeCommasWon($('#member_point').text());
+		let memberPoint = removeCommasWon($('#member_point').text());
+		//포인트 적립
+		let savePoint = removeCommasWon($('#save_point').text());
 		//배달료
-		const shipping = removeCommasWon($('#shipping').text());
+		let shipping = removeCommasWon($('#shipping').text());
+		var obj = new Object();
 		
 		//총 결제 가격
 		const totalPrice = totalPduPrice + shipping - memberPoint;
 		
-		//포인트 사용 여부에 따라 변경되니 전체가격은 
+		//포인트 사용 여부에 따라 변경되니 전체가격도 이벤트에 따라 변경
 		$(function(){
 			$('#total_price').html(numberWithCommas(totalPrice));
+			$('#save_point').html(numberWithCommas(savePoint));
 		});
 		
 		function insertInfo(){
@@ -240,15 +251,18 @@
 		}
 		
 		function Submit(){
-			const recipient = $('#recipient').val();
-			const addr1 = $('#postCode').val();
-			const addr2 = $('#basicAddr').val();
-			const addr3 = $('#dongAddr').val();
-			const addr4 = $('#detailAddr').val();
-			const recipientPhone = $('#recipient_cp1').val() + $('#recipient_cp2').val() + $('#recipient_cp3').val();
-			const shpRequest = $('#shp_request').val(); //요청사항
+			let recipient = $('#recipient').val();
+			let addr1 = $('#postCode').val();
+			let addr2 = $('#basicAddr').val();
+			let addr3 = $('#dongAddr').val();
+			let addr4 = $('#detailAddr').val();
+			let cp1 = $('#recipient_cp1').val();
+			let cp2 = $('#recipient_cp2').val();
+			let cp3 = $('#recipient_cp3').val();
+			let recipientPhone = cp1 + cp2 + cp3;
+			let shpRequest = $('#shp_request').val(); //요청사항
 			
-			if(order_recipient == ""){
+			if(recipient == ""){
 				alert("받는 사람 정보 (이름)을 확인해주세요.!")
 				$('#recipient').focus();
 				return;
@@ -256,15 +270,29 @@
 			if(addr1 == "" || addr2 == "" || addr3 == "" || addr4 == ""){
 				alert("받는 사람 정보 (주소)를 확인해주세요");
 				$('#postCode').focus();
+				return;
 			};
 			
-			if(recipient_phone =""){
-				
+			if(cp1 == ""){
+				alert("전화번호를 확인해 주세요.");
+				$('#recipient_cp1').focus();
+				return;
+			};
+			if(cp2 == ""){
+				alert("전화번호를 확인해 주세요.");
+				$('#recipient_cp2').focus();
+				return;
+			};
+			if(cp3 == ""){
+				alert("전화번호를 확인해 주세요.");
+				$('#recipient_cp3').focus();
+				return;
 			};
 			
+			$.ajaxSettings.traditional = true;
 			$.ajax({
 				type : 'POST',
-				url  : '/order/checkout',
+				url  : '/order/checkout.do',
 				data : {
 					order_recipient : recipient,
 					order_addr1 : addr1,
@@ -273,9 +301,9 @@
 					order_addr4 : addr4,
 					order_recipient_phone : recipientPhone,
 					order_shp_request : shpRequest,
-					
 					order_total_pdu_price : totalPduPrice,
 					cart_code : cartCodeList
+					
 				},
 				success : function(data){
 					

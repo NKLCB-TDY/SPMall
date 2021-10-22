@@ -9,13 +9,17 @@
 .image {
 	cursor: pointer;
 }
+.menu:hover {
+  background-color: #FDF5DE;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
 	<section class="py-5">
 		<div class="container px-2 px-lg-2">
 			<div class="row justify-content-center mt-5">
-				<div class="col-4 p-3 d-flex justify-content-center">
+				<div class="menu col-4 p-3 d-flex justify-content-center" >
 
 					<!-- Product image-->
 					<img
@@ -23,7 +27,7 @@
 						onclick="location.href='/cs/faq.do'" class="mw-100" alt="...">
 
 				</div>
-				<div class="col-4 p-3 d-flex justify-content-center">
+				<div class="menu col-4 p-3 d-flex justify-content-center">
 
 					<!-- Product image-->
 					<img
@@ -33,12 +37,12 @@
 
 
 				</div>
-				<div class="col-4 p-3 d-flex justify-content-center">
+				<div class="menu col-4 p-3 d-flex justify-content-center">
 
 					<!-- Product image-->
 					<img
 						src="${pageContext.request.contextPath}/resources/image/mypage/3.JPG"
-						onclick="location.href='/cs/faq.do'" class="mw-100"
+						onclick="location.href='/order/list.do'" class="mw-100"
 						alt="...">
 
 
@@ -47,7 +51,7 @@
 			</div>
 			
 			<div class="row justify-content-center mt-5">
-				<div class="col-4 p-3 d-flex justify-content-center">
+				<div class="menu col-4 p-3 d-flex justify-content-center">
 
 					<!-- Product image-->
 					<img

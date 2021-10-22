@@ -10,6 +10,8 @@
 		<typeAlias type="com.spmall.admin.PduImageVO" 						alias="PduImageVO" />
 		<typeAlias type="com.spmall.product.ProductVO" 						alias="ProductVO" />
 		<typeAlias type="com.spmall.cart.CartVO" 							alias="CartVO" />
+		<typeAlias type="com.spmall.order.OrderVO" 							alias="OrderVO" />
+		<typeAlias type="com.spmall.order.OrderDetailVO" 					alias="OrderDetailVO" />
 		
 	</typeAliases>
 </configuration>

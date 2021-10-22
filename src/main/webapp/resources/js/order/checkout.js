@@ -49,13 +49,3 @@ function find_addr() {
  }
 
 
-function Sub(){
-	var num = 0;
-	var list = new Array();
-	var phone = $('#member_cp1').val() + $('#member_cp2').val() + $('#member_cp3').val()
-	console.log(phone);
-	$('#member_phone').val(phone);
-	document.memberJoin.action = "memberJoin.do";
-	document.memberJoin.submit();
-	
-}

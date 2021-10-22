@@ -25,11 +25,11 @@
                    <form action="processlogin.do" method="POST" name="login">
                            <div class="form-group">
                               <label for="exampleInputEmail1">아이디 ID</label>
-                              <input type="text" name="member_id"  class="form-control" id="email" placeholder="Enter email">
+                              <input type="text" name="member_id"  class="form-control" placeholder="아이디를 입력해 주세요">
                            </div>
                            <div class="form-group">
                               <label for="exampleInputEmail1">패스워드 PW</label>
-                              <input type="password" name="member_pwd" id="password"  class="form-control" placeholder="Enter Password">
+                              <input type="password" name="member_pwd" id="password"  class="form-control" placeholder="비밀번호를 입력해 주세요">
                            </div>
                            
                            <div class="col-md-12 text-center ">

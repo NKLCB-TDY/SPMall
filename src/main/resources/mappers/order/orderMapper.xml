@@ -27,6 +27,79 @@
 			  	cart.cart_pdu_detail_code_ref = p.pdu_detail_code
 			 order by 
 			 	cart.cart_code desc
-		 
+	</select>
+	
+	<insert id="insertOrder">
+		insert into 
+			tbl_order(
+				order_member_id, 
+				order_recipient, 
+				order_addr1, 
+				order_addr2, 
+				order_addr3, 
+				order_addr4, 
+				order_recipient_phone, 
+				order_shp_request, 
+				order_total_pdu_price, 
+				order_shipping, 
+				order_use_point ) 
+			values(
+				#{order_member_id},
+				#{order_recipient},
+				#{order_addr1},
+				#{order_addr2},
+				#{order_addr3},
+				#{order_addr4},
+				#{order_recipient_phone},
+				#{order_shp_request},
+				#{order_total_pdu_price},
+				#{order_shipping},
+				#{order_use_point} )
+				
+		<selectKey resultType="int" keyProperty="order_code" order="AFTER">
+    	    SELECT LAST_INSERT_ID()
+    	</selectKey>
+	</insert>
+	
+	
+	<insert id="insertDetailOrder">
+		insert into 
+			tbl_order_detail(
+				order_code_ref,
+				order_pdu_detail_code_ref,
+				order_pdu_name,
+				order_pdu_price,
+				order_pdu_size,
+				order_pdu_color,
+				order_pdu_quantity
+			)values(
+				#{order_code_ref},
+				#{order_pdu_detail_code_ref},
+				#{order_pdu_name},
+				#{order_pdu_price},
+				#{order_pdu_size},
+				#{order_pdu_color},
+				#{order_pdu_quantity}
+			)
+	</insert>
+	
+	
+	<delete id="deleteCart">
+		delete from cart where cart_code = #{cart_code}
+	</delete>
+	
+	
+	<select id="orderList" resultType="OrderVO">
+		select *
+		from  tbl_order
+		where order_member_id = #{member_id}
+		order by order_date desc
+	</select>
+	
+	<select id="orderDetailList" resultType="OrderDetailVO">
+		select ord.*, img.pdu_image_file_name
+		from  tbl_order_detail as ord, pdu_category_detail_image as img
+		where order_code_ref = #{order_code} AND ord.order_pdu_detail_code_ref = img.pdu_img_code
+		order by order_code_ref desc
 	</select>
 </mapper>
