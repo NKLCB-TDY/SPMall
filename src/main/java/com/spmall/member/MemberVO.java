@@ -20,7 +20,7 @@ public class MemberVO {
 	private String member_addr4;		//상세주소
 	
 	private Integer member_point;
-	private Timestamp memeber_create_at; 		//가입날짜
+	private Timestamp member_create_at; 		//가입날짜
 	private Timestamp member_lately_date;		//최근접속날짜
 	private Integer member_total_login;			//로그인 횟수
 	private Integer member_total_buy;			//구매횟수
@@ -102,11 +102,12 @@ public class MemberVO {
 	public void setMember_point(Integer member_point) {
 		this.member_point = member_point;
 	}
-	public Timestamp getMemeber_create_at() {
-		return memeber_create_at;
+	
+	public Timestamp getMember_create_at() {
+		return member_create_at;
 	}
-	public void setMemeber_create_at(Timestamp memeber_create_at) {
-		this.memeber_create_at = memeber_create_at;
+	public void setMember_create_at(Timestamp member_create_at) {
+		this.member_create_at = member_create_at;
 	}
 	public Timestamp getMember_lately_date() {
 		return member_lately_date;
@@ -140,23 +141,15 @@ public class MemberVO {
 	public void setRole_Name(String role_Name) {
 		Role_Name = role_Name;
 	}
-	
 	@Override
 	public String toString() {
 		return "MemberVO [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_name=" + member_name
 				+ ", member_gender=" + member_gender + ", member_phone=" + member_phone + ", member_email1="
 				+ member_email1 + ", member_email2=" + member_email2 + ", member_addr1=" + member_addr1
 				+ ", member_addr2=" + member_addr2 + ", member_addr3=" + member_addr3 + ", member_addr4=" + member_addr4
-				+ ", member_point=" + member_point + ", memeber_create_at=" + memeber_create_at
-				+ ", member_lately_date=" + member_lately_date + ", member_total_login=" + member_total_login
-				+ ", member_total_buy=" + member_total_buy + ", member_del_yn=" + member_del_yn + ", Role_Name="
-				+ Role_Name + "]";
+				+ ", member_point=" + member_point + ", member_create_at=" + member_create_at + ", member_lately_date="
+				+ member_lately_date + ", member_total_login=" + member_total_login + ", member_total_buy="
+				+ member_total_buy + ", member_del_yn=" + member_del_yn + ", Role_Name=" + Role_Name + "]";
 	}
-	
-	
-	
 
-	
-	
-	
 }

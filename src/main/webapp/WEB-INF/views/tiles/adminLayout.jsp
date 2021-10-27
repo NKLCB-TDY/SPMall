@@ -84,7 +84,7 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">회원 관리</h6>
-                        <a class="collapse-item" href="">회원목록 및 정보</a>
+                        <a class="collapse-item" href="/admin/memberManage.do">회원목록 및 정보</a>
                         <a class="collapse-item" href="register.html">회원 활동 내역</a>
                     </div>
                 </div>

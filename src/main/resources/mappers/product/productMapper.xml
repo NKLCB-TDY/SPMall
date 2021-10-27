@@ -49,14 +49,25 @@
 	
 	<select id ="pduImageList" resultType = "PduImageVO">
 		<![CDATA[
-			select 
-				*
-			from 
-				pdu_category_detail_image
-			where
-			    pdu_image_file_type = 'main_image' OR pdu_image_file_type = 'sub_image1'
-			order 
-				by pdu_detail_code_ref desc
+			select img.* , pdu_cate.pdu_category_code_ref
+			from (
+				select 
+					*
+				from 
+					pdu_category_detail_image
+				where
+				    pdu_image_file_type = 'main_image' OR pdu_image_file_type = 'sub_image1'
+				order 
+					by pdu_detail_code_ref desc) img 
+				join 
+				pdu_category_detail pdu_cate
+			on  img.pdu_detail_code_ref = pdu_cate.pdu_detail_code
+			
+		]]>
+		<include refid="search"> </include>
+		<![CDATA[
+			order by pdu_detail_code_ref desc, pdu_image_file_type asc
+			limit #{pageStart}, #{perPageNum}
 		]]>
 	</select>
 	

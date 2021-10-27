@@ -129,7 +129,7 @@ function Submit(){
 	console.log(phone);
 	$('#member_phone').val(phone);
 	alert("회원가입이 완료 되었습니다.");
-	document.memberJoin.action = "memberJoin.do";
+	document.memberJoin.action = "memberLoin.do";
 	document.memberJoin.submit();
 	
 }

@@ -57,4 +57,28 @@
 				#{pdu_image_file_name},
 				#{pdu_image_file_type} )
 	</insert>
+	
+	
+	<select id="salesMonth" resultType="int">
+		SELECT SUM(order_total_pdu_price)
+		FROM tbl_order
+		WHERE MONTH(order_date) = MONTH(CURRENT_DATE())
+	</select>
+	
+	<select id="salesToday" resultType="int">
+		SELECT SUM(order_total_pdu_price)
+		FROM tbl_order
+		WHERE order_date > CURRENT_DATE()
+	</select>
+	
+	<select id="numberOfOrders" resultType="int">
+		SELECT count(*)
+		FROM tbl_order
+		WHERE order_date > CURRENT_DATE();
+	</select>
+	
+	
+	<select id="memberList" resultType="MemberVO">
+		select * from tbl_member;
+	</select>
 </mapper>

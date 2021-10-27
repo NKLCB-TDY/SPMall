@@ -1,6 +1,7 @@
 package com.spmall.product;
 
 public class ProductVO {
+	private int pdu_img_code;
 	private int pdu_detail_code;			//기본키
 	private String pdu_category_main; 		//메인 코드
 	private String pdu_category_code_ref; 	//상품 상위 코드
@@ -16,6 +17,12 @@ public class ProductVO {
 	
 
 	
+	public int getPdu_img_code() {
+		return pdu_img_code;
+	}
+	public void setPdu_img_code(int pdu_img_code) {
+		this.pdu_img_code = pdu_img_code;
+	}
 	public int getPdu_detail_code() {
 		return pdu_detail_code;
 	}

@@ -1,6 +1,7 @@
 package com.spmall.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -22,6 +23,16 @@ public class AdminServiceImpl implements AdminService  {
 		//상품정보 및 이미지 등록
 		adminDAO.newPrsInsert(vo);
 		adminDAO.newPrsInsert_img(imageFileList);
+	}
+
+	@Override
+	public Map<String, Object> outputInfo() throws Exception {
+		return adminDAO.outputInfo();
+	}
+
+	@Override
+	public Map<String, Object> memberManage() throws Exception {
+		return adminDAO.memberManage();
 	}
 	
 }

@@ -313,8 +313,8 @@ body {
 						cart_pdu_quantity : quantity
 					},
 					success: function(data){
-						popover1 = 1;
-						console.log("등록완료");
+						
+						alert("장바구니 등록완료");
 						
 					},
 					
@@ -353,6 +353,7 @@ body {
 					
 				}
 			}
+			popover();
 
 			
 		}else if('바로구매'){
@@ -370,7 +371,7 @@ body {
 	        html: true,
 	        title : '<span class="text-info"><strong>장바구니 등록완료</strong></span>'+
 	        		'<a href="#" class="close" data-dismiss="alert">&times;</a>',
-	        content : '<a type="button" href="##">장바구니로 이동하시겠습니까?</a>'
+	        content : '<a type="button" href="/cart/cartView.do">장바구니로 이동하시겠습니까?</a>'
 		});
 		
 		//popover에서 취소버튼 누를시
@@ -383,7 +384,7 @@ body {
 			
 				setTimeout(function () {
 		            $('.popover').popover('hide');
-		        }, 5000);
+		        }, 7000);
 	    });
 	}
 	//장바구니에 중복된 상품이 있는지 체크
@@ -407,7 +408,7 @@ body {
 				
 			},
 			error : function(error) {
-				console.log('error');
+				console.log('error');	
 			}
 		});
 		

@@ -12,11 +12,11 @@
     <meta name="author" content="" />
     <title>당근당근</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="" />
+    
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
    <!-- Bootstrap 5 cdn-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"/>
   	
   	<!-- 검색버튼 font -->
   	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
@@ -101,7 +101,7 @@
                       	data-bs-toggle="dropdown" aria-expanded="false">상의 </a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li><a class="dropdown-item" href="/product/productList.do?page1=PerpageNum=8&searchType=BA&keyword=" >티셔츠</a></li>
-                          <li><a class="dropdown-item" href="/product/productList.do?page1=PerpageNum=8&searchType=BB&keyword=">멘투멘</a></li>
+                          <li><a class="dropdown-item" href="/product/productList.do?page1=PerpageNum=8&searchType=BB&keyword=">맨투맨</a></li>
                           <li><a class="dropdown-item" href="/product/productList.do?page1=PerpageNum=8&searchType=BC&keyword=">후드</a></li>
                           <li><a class="dropdown-item" href="/product/productList.do?page1=PerpageNum=8&searchType=BD&keyword=">반팔</a></li>
                       </ul>       
@@ -156,6 +156,7 @@
     
     <!-- member 로그인시 cartCounting하는데 코드중복없이 사용하기에 header가 적합하다고생각해 여기적음 (더좋은 방법이생각나면 수정)-->
     <script>
+    
 	    $(function(){
 	    		$.ajax({
 	    			 type: 'POST',

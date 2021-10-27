@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spmall.common.Criteria;
 import com.spmall.common.PagingSetting;
 import com.spmall.common.SearchCriteria;
 
@@ -54,6 +53,7 @@ public class ProductController {
 		pagingSetting.setTotalCount(pduService.countingPaging(cri));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map = pduService.productList(cri);
 		
 		mv.addObject("productList", map.get("productList"));

@@ -2,7 +2,6 @@ package com.spmall.product;
 
 import java.util.Map;
 
-import com.spmall.common.Criteria;
 import com.spmall.common.SearchCriteria;
 
 public interface ProductService {	

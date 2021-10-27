@@ -7,12 +7,16 @@
 
 
 <c:set var="list" value="${cartCodeList}" />
-<!DOCTYPE html>
-<html>
+
+
 <head>
 <!-- 주소처리 js -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/checkout.js"></script>
+
+
+
+   
 <style>
 	.td1{
 		   width: 120px;
@@ -215,10 +219,12 @@
 	</div>
 	
 	
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	<script>
 		//장바구니 코드(사이즈,컬러,수량을 Get cart테이블에서 Delete하기위해)
 		let cartCodeList = new Array(); //check가된 상품코드를 담기위한 리스트
 		cartCodeList = ${cartCode};
+		
 		//총 상품가격
 		let totalPduPrice = removeCommasWon($('#total_pdu_price').text());
 		//포인트
@@ -231,7 +237,7 @@
 		
 		//총 결제 가격
 		const totalPrice = totalPduPrice + shipping - memberPoint;
-		
+	
 		//포인트 사용 여부에 따라 변경되니 전체가격도 이벤트에 따라 변경
 		$(function(){
 			$('#total_price').html(numberWithCommas(totalPrice));
@@ -251,6 +257,7 @@
 		}
 		
 		function Submit(){
+			
 			let recipient = $('#recipient').val();
 			let addr1 = $('#postCode').val();
 			let addr2 = $('#basicAddr').val();
@@ -261,6 +268,9 @@
 			let cp3 = $('#recipient_cp3').val();
 			let recipientPhone = cp1 + cp2 + cp3;
 			let shpRequest = $('#shp_request').val(); //요청사항
+			
+			var IMP = window.IMP; // 생략가능
+			IMP.init('imp01620829'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 			
 			if(recipient == ""){
 				alert("받는 사람 정보 (이름)을 확인해주세요.!")
@@ -291,25 +301,32 @@
 			
 			$.ajaxSettings.traditional = true;
 			$.ajax({
-				type : 'POST',
-				url  : '/order/checkout.do',
-				data : {
-					order_recipient : recipient,
-					order_addr1 : addr1,
-					order_addr2 : addr2,
-					order_addr3 : addr3,
-					order_addr4 : addr4,
-					order_recipient_phone : recipientPhone,
-					order_shp_request : shpRequest,
-					order_total_pdu_price : totalPduPrice,
-					cart_code : cartCodeList
-					
-				},
-				success : function(data){
-					
-				}
-			});
+ 				type : 'POST',
+ 				url  : '/order/checkout.do',
+ 				data : {
+ 					order_recipient : recipient,
+ 					order_addr1 : addr1,
+ 					order_addr2 : addr2,
+ 					order_addr3 : addr3,
+ 					order_addr4 : addr4,
+ 					order_recipient_phone : recipientPhone,
+ 					order_shp_request : shpRequest,
+ 					order_total_pdu_price : totalPduPrice,
+ 					cart_code : cartCodeList
+ 					
+ 				},
+ 				success : function(data){
+ 					alert("결제완료!");
+ 					location.href='/main/main.do';	
+ 				}
+ 			});
+		      
+			
+			
 		}
+		
+
+		
 		//콤마 찍기
 		function numberWithCommas(x) {
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
@@ -319,7 +336,8 @@
 			return parseInt(x.replace(/,|원/gi,''));
 		}
 	</script>
+	
 </body>
-</html>
+
 
 

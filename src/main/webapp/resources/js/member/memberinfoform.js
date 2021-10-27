@@ -50,6 +50,22 @@ function find_addr() {
         }).open();
  }
 
+//비밀번호 확인
+$(function(){
+	$('#member_pwd2').blur(function(){
+		if($('#member_pwd2').val() == ''){
+			$('#password_check').text('비밀번호를 입력해주세요.');
+		}else{
+			if($('#member_pwd1').val() != $('#member_pwd2').val()){
+				$('#password_check').text('비밀번호가 틀립니다. 확인해주세요');
+			}else{
+				$('#password_check').text('비밀번호 일치!');
+			}
+		}
+		
+	});	
+});
+
 //Email 처리
 $(function(){
 	$('#email_select').change(function() { //이메일선택부분이 바뀌면
@@ -69,7 +85,6 @@ $(function(){
 function Submit(){
 	
 	var phone = $('#member_cp1').val() + $('#member_cp2').val() + $('#member_cp3').val()
-	console.log(phone);
 	$('#member_phone').val(phone);
 	document.updateform.action = "/member/memberupdate.do";
 	document.updateform.submit();

@@ -11,6 +11,8 @@ public class OrderDetailVO {
     private int order_pdu_quantity; //상품개수
     private String order_pdu_name;
     private Date order_date;
+    private String order_status;
+    private String order_cs_status;
     private String pdu_image_file_name;
     
 	public int getOrder_code_ref() {
@@ -57,6 +59,18 @@ public class OrderDetailVO {
 	}
 	
 	
+	public String getOrder_status() {
+		return order_status;
+	}
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
+	}
+	public String getOrder_cs_status() {
+		return order_cs_status;
+	}
+	public void setOrder_cs_status(String order_cs_status) {
+		this.order_cs_status = order_cs_status;
+	}
 	public Date getOrder_date() {
 		return order_date;
 	}

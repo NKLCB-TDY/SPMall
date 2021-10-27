@@ -33,9 +33,13 @@ public class ProductDAOImpl implements ProductDAO {
 		map.put("productList", list);
 		
 		List<PduImageVO> imageList = new ArrayList<PduImageVO>();
-		imageList = sqlSession.selectList(namespace + ".pduImageList");
-		map.put("imageList", imageList);
 		
+		//한 상품에 2개의 이미지를 가져오기위해 setPerPage 조정
+		cri.setPerPageNum(cri.getPerPageNum()*2);
+		imageList = sqlSession.selectList(namespace + ".pduImageList", cri);
+		map.put("imageList", imageList);
+		//원래 대로 perpageNum을 돌려놓음(정상적인 페이징 처리를 위해)
+		cri.setPerPageNum(cri.getPerPageNum()/2);
 		
 		return map;
 	}

@@ -4,6 +4,7 @@ public class AdminVO {
 	private String category_code;
 	private String category_code_ref;
 	private String category_name;
+	
 	private int depth;
 	
 

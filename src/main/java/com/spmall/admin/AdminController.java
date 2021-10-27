@@ -1,9 +1,9 @@
 package com.spmall.admin;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,8 +34,16 @@ public class AdminController {
 	String uploadPath;
 	
 	@RequestMapping(value = "adminMain.do", method = RequestMethod.GET)
-	public String adminMain() {
-		return "admin/admin/adminMain";
+	public ModelAndView adminMain(ModelAndView mv) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = adminService.outputInfo();
+		
+		
+		mv.addObject("salesMonth", map.get("salesMonth"));
+		mv.addObject("salesToday", map.get("salesToday"));
+		mv.addObject("numberOfOrders", map.get("numberOfOrders"));
+		mv.setViewName("admin/admin/adminMain");
+		return mv;
 	}
 	
 	//상품등록 부분 시작
@@ -50,7 +57,7 @@ public class AdminController {
 		mv.addObject("category",JSONArray.fromObject(category));
 		mv.setViewName("admin/admin/newPrsInsert");
 		return mv;
-	}
+	} 
 	
 	//상품등록 처리
 	@RequestMapping(value = "newPrsInsert.do", method =RequestMethod.POST)
@@ -102,7 +109,16 @@ public class AdminController {
 		return "redirect:/admin/newPrsInsert.do";
 	}
 	
-	
+	@RequestMapping(value = "memberManage.do", method = RequestMethod.GET)
+	public ModelAndView memberManage(ModelAndView mv) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = adminService.memberManage();
+		
+		
+		mv.addObject("memberList", map.get("memberList"));
+		mv.setViewName("admin/admin/memberManage");
+		return mv;
+	}
 	
 	
 }
