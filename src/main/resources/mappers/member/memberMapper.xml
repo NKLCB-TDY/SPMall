@@ -43,7 +43,7 @@
 	<select id ="memberInfo" resultType="MemberVO">
 		select 
 			member_id, member_name, member_gender, member_phone, member_email1, member_email2,
-			member_addr1, member_addr2, member_addr3, member_addr4, memeber_create_at
+			member_addr1, member_addr2, member_addr3, member_addr4, member_create_at
 		from 
 			tbl_member
 		where 

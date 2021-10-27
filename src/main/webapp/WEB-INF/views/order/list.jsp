@@ -32,12 +32,13 @@
 				<table class="table table-hover shopping-cart-wrap">
 					<thead class="text-muted">
 						<tr>
-						  <th scope="col" width="20%">상품상태</th>
-						  <th scope="col" width="20%">상품 이미지</th>
-						  <th scope="col" width="20%">상품 이름</th>
+						  <th scope="col" width="10%">배송상태</th>
+						  <th scope="col" width="10%">주문일자</th>
+						  <th scope="col" width="10%">상품 이미지</th>
+						  <th scope="col" width="10%">상품 이름</th>
 						  <th scope="col" width="20%">상품 내용</th>
 						  <th scope="col" width="10%">수량</th>
-						  <th scope="col" width="15%">상품가격</th>
+						  <th scope="col" width="10%">상품가격</th>
 						</tr>
 					</thead>
 				
@@ -45,23 +46,28 @@
 						
 						<tr>
 							<td>
-								
+								${orderDetail.order_status}
 							</td>
-								
+							<td>
+								<fmt:formatDate value="${orderDetail.order_date}" pattern="yyyy.MM.dd" />
+							</td>	
 							<td>
 								<img class="img-thumbnail"
 									src="/test/upload/${orderDetail.order_pdu_detail_code_ref}/s_${orderDetail.pdu_image_file_name}">
 							</td>
 							
 							<td> 	
-						    
-						    
-								
+						    	${orderDetail.order_pdu_name }
 							</td>
 							<td> 
-								
+								Size : ${orderDetail.order_pdu_size }<br/>
+								Color : ${orderDetail.order_pdu_color }
 							</td>
 							<td class="text-right"> 
+								${orderDetail.order_pdu_quantity }
+							</td>
+							<td>
+								${orderDetail.order_pdu_price}
 							</td>
 						</tr>
 					

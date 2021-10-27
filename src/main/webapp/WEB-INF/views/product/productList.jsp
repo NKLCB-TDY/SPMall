@@ -34,7 +34,7 @@
 			<c:when test="${cri.searchType eq 'AB'}"><h1>아우터</h1><h4>자켓 / 코트</h4></c:when>
 			<c:when test="${cri.searchType eq 'AC'}"><h1>아우터</h1><h4>패딩</h4></c:when>
 			<c:when test="${cri.searchType eq 'BA'}"><h1>상의</h1><h4>티셔츠</h4></c:when>
-			<c:when test="${cri.searchType eq 'BB'}"><h1>상의</h1><h4>멘투멘</h4></c:when>
+			<c:when test="${cri.searchType eq 'BB'}"><h1>상의</h1><h4>맨투맨</h4></c:when>
 			<c:when test="${cri.searchType eq 'BC'}"><h1>상의</h1><h4>후드</h4></c:when>
 			<c:when test="${cri.searchType eq 'BD'}"><h1>상의</h1><h4>반팔</h4></c:when>
 			<c:when test="${cri.searchType eq 'C'}"><h1>셔츠 / 블라우스</h1></c:when>

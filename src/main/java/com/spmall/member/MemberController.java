@@ -70,18 +70,18 @@ public class MemberController {
 
 	
 	//회원 정보 & 수정 페이지 처리해야함!!!!!
-	@RequestMapping(value = "/memberinfoform.do", method = RequestMethod.GET)
-	public ModelAndView memberInfoForm() {
+	@RequestMapping(value = "/memberModify.do", method = RequestMethod.GET)
+	public ModelAndView memberModify(ModelAndView mv, Authentication authentication) {
+		CustomerUser user = (CustomerUser) authentication.getPrincipal();
+		String member_id = user.getUsername();
 		
-		String member_id = "sdfsdfsdf"; //임시id
-		ModelAndView mv = new ModelAndView();
-		mv.addObject(memberService.memberInfo(member_id));
-		mv.setViewName("member/member/memberinfoform");
+		mv.addObject("MemberVO", memberService.memberInfo(member_id));
+		mv.setViewName("member/member/memberModify");
 		return mv;
 	}
 	
 	//회원정보 수정 처리
-	@RequestMapping(value = "/memberupdate.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/memberModify.do", method = RequestMethod.POST)
 	public String memberUpdate(MemberVO vo) {
 		logger.info("회원정보수정");
 		System.out.println("NONONONO");

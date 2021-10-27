@@ -24,7 +24,7 @@
 					<!-- Product image-->
 					<img
 						src="${pageContext.request.contextPath}/resources/image/mypage/1.JPG"
-						onclick="location.href='/cs/faq.do'" class="mw-100" alt="...">
+						onclick="location.href='/member/memberModify.do'" class="mw-100" alt="...">
 
 				</div>
 				<div class="menu col-4 p-3 d-flex justify-content-center">

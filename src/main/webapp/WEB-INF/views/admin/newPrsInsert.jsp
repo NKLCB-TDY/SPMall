@@ -70,7 +70,8 @@
 				<input type="text" class="form-control" name="pdu_discount_rate" id="pdu_discount_rate"
 					  placeholder="퍼센테이지"> <small
 					id="show_discounted_price" class="form-text text-muted">10% 할인시 숫자 10</small>
-				<input type="hidden" name="pdu_discounted_price" id="pdu_discounted_price">	
+				<input type="hidden" name="pdu_discounted_price" id="pdu_discounted_price">
+					
 			</div>
 					
 			<div class="card shadow mb-4">
@@ -94,14 +95,14 @@
 				</div>
 				<select name="pdu_color_name">
 					<option value="" selected>색 선택</option>
-					<option value="black">블랙</option>
-					<option value="white">화이트</option>
-					<option value="red">레드</option>
-					<option value="yellow">노랑</option>
-					<option value="beige">베이지</option>
-					<option value="green">그린</option>
-					<option value="brown">브라운</option>
-					<option value="charcoal">차콜</option>
+					<option value="블랙">블랙</option>
+					<option value="화이트">화이트</option>
+					<option value="레드">레드</option>
+					<option value="노랑">노랑</option>
+					<option value="베이지">베이지</option>
+					<option value="그린">그린</option>
+					<option value="브라운">브라운</option>
+					<option value="차콜">차콜</option>
 				</select>
 			</div>
 					
@@ -163,7 +164,9 @@
 	</div>
 	
 	<hr>
-	<button type="submit" class="btn btn-primary ">등록 하기</button>
+	<div class="d-flex justify-content-center">
+		<button type="submit" class="btn btn-primary ">등록 하기</button>
+	</div>
 </form>
 
 <!-- 파일업로드, 카테고리 처리를 위한 js -->
@@ -187,6 +190,7 @@ $(function () {
 		let show_discounted_price = document.getElementById("show_discounted_price");
 		
 		show_discounted_price.innerText = "할인된 가격 : "+discounted_price+" 원";
+		
 	});
 });
 function readURL(input,id) {

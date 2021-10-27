@@ -99,7 +99,8 @@
 	<select id="orderDetailList" resultType="OrderDetailVO">
 		select ord.*, img.pdu_image_file_name
 		from  tbl_order_detail as ord, pdu_category_detail_image as img
-		where order_code_ref = #{order_code} AND ord.order_pdu_detail_code_ref = img.pdu_img_code
+		where order_code_ref = #{order_code} AND ord.order_pdu_detail_code_ref = img.pdu_detail_code_ref
+				AND img.pdu_image_file_type = 'main_image'
 		order by order_code_ref desc
 	</select>
 </mapper>

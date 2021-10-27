@@ -1,13 +1,11 @@
 package com.spmall.product;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.spmall.common.Criteria;
 import com.spmall.common.SearchCriteria;
 
 @Service
