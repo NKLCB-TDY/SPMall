@@ -212,7 +212,6 @@ body {
 
 
 <script>
-	let popover1 = 0;
 	//썸네일 클릭시 이미지 출력
 	function changeImage(element) {
 		let main_prodcut_image = document.getElementById('main_product_image');
@@ -221,8 +220,6 @@ body {
 	
 
 	$(function(){
-		
-
 		//select
 		$('#size').on('change',function(){
 			var option;
@@ -326,7 +323,6 @@ body {
 				
 			}else{ //중복된 상품이 있으므로 update
 				let result = confirm("중복되는 상품이 장바구니에 있습니다. 그래도 추가하시겠습니까?");
-
 				if(result == true){
 					$.ajax({
 						type : 'POST',
@@ -339,9 +335,8 @@ body {
 							cart_pdu_quantity : quantity
 						},
 						success: function(data){
-							popover1 = 1;
 							alert('정상적으로 추가되었습니다.');
-							
+							popover();
 						},
 						
 						error : function(error) {
@@ -353,15 +348,15 @@ body {
 					
 				}
 			}
-			popover();
-
+			
+		return;
 			
 		}else if('바로구매'){
 			alert("개발중..");
 			return;
 		}
 
-	}
+	};
 	
 	function popover(){
 		

@@ -103,4 +103,10 @@
 				AND img.pdu_image_file_type = 'main_image'
 		order by order_code_ref desc
 	</select>
+	
+	
+	<select id="orderCode" resultType="int">
+		select MAX(order_code)+1
+		from tbl_order;
+	</select>
 </mapper>

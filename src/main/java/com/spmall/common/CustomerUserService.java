@@ -33,7 +33,7 @@ public class CustomerUserService implements UserDetailsService{
 		}
 		
 		List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
-		System.out.println(vo.getRole_Name());
+		
 		auth.add(new SimpleGrantedAuthority(vo.getRole_Name()));
 		CustomerUser user = new CustomerUser(username, vo.getMember_pwd(), auth);
 		user.setRoleName(vo.getRole_Name());

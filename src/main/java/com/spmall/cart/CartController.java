@@ -126,7 +126,7 @@ public class CartController {
 	@ResponseBody
 	@RequestMapping(value= "updateCheck.do", method = RequestMethod.POST)
 	public void updateCheck(CartVO cartvo) throws Exception {
-		System.out.println(cartvo.getCheck_YN());
+		
 		cartService.updateCheck(cartvo);
 		
 	}

@@ -89,7 +89,7 @@ public class AdminController {
 				
 					
 					String name = uploadFileUtils.makeThumbnail(uploadPath+"\\"+imageFileVO.
-					getPdu_detail_code_ref()+ "\\", imageFileName); System.out.println(name);
+					getPdu_detail_code_ref()+ "\\", imageFileName);
 					 
 				}
 			}

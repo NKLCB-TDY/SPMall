@@ -44,7 +44,7 @@ public class MemberController {
 	@RequestMapping(value="/memberJoin.do", method = RequestMethod.POST)
 	public String memberJoin(MemberVO vo) {
 		memberService.memberJoin(vo);
-		return "redirect:/main/main.do";
+		return "redirect:/main/mainLogin.do";
 	}
 	
 	//id 겹치는지 확인
@@ -70,21 +70,20 @@ public class MemberController {
 
 	
 	//회원 정보 & 수정 페이지 처리해야함!!!!!
-	@RequestMapping(value = "/memberModify.do", method = RequestMethod.GET)
-	public ModelAndView memberModify(ModelAndView mv, Authentication authentication) {
+	@RequestMapping(value = "/memberUpdate.do", method = RequestMethod.GET)
+	public ModelAndView memberUpdate(ModelAndView mv, Authentication authentication) {
 		CustomerUser user = (CustomerUser) authentication.getPrincipal();
 		String member_id = user.getUsername();
 		
 		mv.addObject("MemberVO", memberService.memberInfo(member_id));
-		mv.setViewName("member/member/memberModify");
+		mv.setViewName("member/member/memberUpdate");
 		return mv;
 	}
 	
 	//회원정보 수정 처리
-	@RequestMapping(value = "/memberModify.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/memberUpdate.do", method = RequestMethod.POST)
 	public String memberUpdate(MemberVO vo) {
 		logger.info("회원정보수정");
-		System.out.println("NONONONO");
 		memberService.memberUpdate(vo);
 		return "redirect:/main/main.do";
 	}

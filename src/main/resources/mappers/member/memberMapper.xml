@@ -53,6 +53,8 @@
 	<update id="memberUpdate">
 		update tbl_member 
 		set 
+			member_pwd = #{member_pwd},
+			member_name = #{member_name},
 			member_phone = #{member_phone},
 			member_email1 = #{member_email1},
 			member_email2 = #{member_email2},
