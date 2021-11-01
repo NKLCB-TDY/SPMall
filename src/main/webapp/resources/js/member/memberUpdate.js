@@ -86,7 +86,24 @@ function Submit(){
 	
 	var phone = $('#member_cp1').val() + $('#member_cp2').val() + $('#member_cp3').val()
 	$('#member_phone').val(phone);
-	document.updateform.action = "/member/memberupdate.do";
-	document.updateform.submit();
+	if($('#member_pwd1').val() == ''){
+		alert('비밀번호를 입력해주세요');
+		$('#member_pwd1').focus();
+		$('#member_pwd1').scrollIntoView();
+		return;
+	}
+	
+	if($('#member_pwd2').val() == ''){
+		$('#member_pwd2').focus();
+		$('#member_pwd2').scrollIntoView();
+		alert('비밀번호를 입력해주세요');
+		return;
+	}
+	
+	
+	
+	alert("수정 되었습니다.");
+	document.memberUpdate.action = "/member/memberUpdate.do";
+	document.memberUpdate.submit();
 	
 }

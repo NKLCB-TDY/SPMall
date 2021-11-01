@@ -44,6 +44,7 @@ public class OrderController {
 		mv.addObject("memberVO",map.get("memberVO"));
 		mv.addObject("cartList",map.get("cartList"));
 		mv.addObject("cartCode", cart_code);
+		mv.addObject("orderCode",map.get("orderCode")); //아임포트에 주문번호를 넣기위해 가져옴 
 		mv.setViewName("member/order/checkout");
 		
 		return mv;
@@ -61,7 +62,7 @@ public class OrderController {
 		//cart테이블에 저장되있는 정보 order로 이동
 		int order_code = orderService.insertOrder(orderVO);
 		orderService.insertDetailOrder(cart_code, order_code);
-		System.out.println(orderVO.toString());
+		
 		
 		
 		return mv;

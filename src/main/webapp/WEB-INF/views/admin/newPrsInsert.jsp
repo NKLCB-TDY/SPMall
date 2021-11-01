@@ -96,6 +96,7 @@
 				<select name="pdu_color_name">
 					<option value="" selected>색 선택</option>
 					<option value="블랙">블랙</option>
+					<option value="아이보리">아이보리</option>
 					<option value="화이트">화이트</option>
 					<option value="레드">레드</option>
 					<option value="노랑">노랑</option>
@@ -103,6 +104,7 @@
 					<option value="그린">그린</option>
 					<option value="브라운">브라운</option>
 					<option value="차콜">차콜</option>
+					<option value="청색">진청색</option>
 				</select>
 			</div>
 					
@@ -174,49 +176,54 @@
 <script type="text/javascript" src="/resources/js/admin/upload/upload.js"></script>
 
 <script>
-$(function () {
-	$("#pdu_discount_rate").blur(function(){
-		// primePrice == 원가
-		let primePrice = $("#pdu_price").val();
-		let discountRate =  $("#pdu_discount_rate").val();
-		
-		console.log(primePrice);
-		// discounted_price == 할인된가격
-		let discounted_price = primePrice - (primePrice/100 * discountRate);
-		console.log(discounted_price);
-		$("#pdu_discounted_price").val(discounted_price);
-		
-		//할인가 보여주기
-		let show_discounted_price = document.getElementById("show_discounted_price");
-		
-		show_discounted_price.innerText = "할인된 가격 : "+discounted_price+" 원";
-		
+	$(function () {
+		$("#pdu_discount_rate").blur(function(){
+			// primePrice == 원가
+			let primePrice = $("#pdu_price").val();
+			let discountRate =  $("#pdu_discount_rate").val();
+			
+			console.log(primePrice);
+			// discounted_price == 할인된가격
+			let discounted_price = primePrice - (primePrice/100 * discountRate);
+			console.log(discounted_price);
+			$("#pdu_discounted_price").val(discounted_price);
+			
+			//할인가 보여주기
+			let show_discounted_price = document.getElementById("show_discounted_price");
+			
+			show_discounted_price.innerText = "할인된 가격 : "+discounted_price+" 원";
+			
+		});
 	});
-});
-function readURL(input,id) {
-	 if (input.files && input.files[0]) {
-	  var reader = new FileReader();
-	  reader.onload = function (e) {
-		  if(id =='main'){
-	   		$('#preview').attr('src', e.target.result);  
-		  }else{
-			$("#preview"+id).attr('src', e.target.result);  
-		  }
+	
+	function readURL(input,id) {
+		 if (input.files && input.files[0]) {
+		  var reader = new FileReader();
+		  reader.onload = function (e) {
+			  if(id =='main'){
+		   		$('#preview').attr('src', e.target.result);  
+			  }else{
+				$("#preview"+id).attr('src', e.target.result);  
+			  }
+		}
+		  
+		  reader.readAsDataURL(input.files[0]);
+		 }
 	}
-	  
-	  reader.readAsDataURL(input.files[0]);
-	 }
-}
 
-let cnt =1;
-function add_imgFile(){
-	$("#sub_list").append("서브이미지 "+cnt+" : <input type='file' name='sub_image"+cnt+"'id='"+cnt+
-			"'onchange='readURL(this,this.id);' />"+"<br>");
-	$("#image_list").append("<img src='#' width=200 height=200 id='preview"+cnt+"'>");
-	cnt++;
-}
+	let cnt =1;
+	function add_imgFile(){
+		$("#sub_list").append("<div id='subImg"+cnt+"'>서브이미지 "+cnt+" : <input type='file' name='sub_image"+cnt+"'id='"+cnt+
+				"'onchange='readURL(this,this.id);' /><button type='button' onclick='removeSub("+cnt+")'>x</button></div>");
+		$("#image_list").append("<img src='#' width=200 height=200 id='preview"+cnt+"'>");
+		cnt++;
+	}
 	
-	
+	function removeSub(count){
+		$('#subImg'+count).remove();
+		$('#preview'+count).remove();
+		cnt--;
+	}
 	/////// 상품 Category 처리 start
 	
 	// 컨트롤러에서 데이터 받기

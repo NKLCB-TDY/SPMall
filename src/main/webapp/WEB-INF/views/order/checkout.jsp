@@ -13,7 +13,8 @@
 <!-- 주소처리 js -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/checkout.js"></script>
-
+<!-- 아임포트 -->
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
 
    
@@ -237,7 +238,11 @@
 		
 		//총 결제 가격
 		const totalPrice = totalPduPrice + shipping - memberPoint;
-	
+		
+		//아임포트 변수
+		var IMP = window.IMP; // 생략 가능
+	  	IMP.init("imp01620829"); // 예: imp00000000
+	  	
 		//포인트 사용 여부에 따라 변경되니 전체가격도 이벤트에 따라 변경
 		$(function(){
 			$('#total_price').html(numberWithCommas(totalPrice));
@@ -258,7 +263,12 @@
 		
 		function Submit(){
 			
+			let buyerName = '${memberVO.member_name}';
+			let email = '${memberVO.member_email1}@${memberVO.member_email2}';
 			let recipient = $('#recipient').val();
+			let orderCode = 'Order${orderCode}';
+			console.log(orderCode +"or");
+			let	orderName = '${cartList[0].pdu_name}';
 			let addr1 = $('#postCode').val();
 			let addr2 = $('#basicAddr').val();
 			let addr3 = $('#dongAddr').val();
@@ -268,6 +278,10 @@
 			let cp3 = $('#recipient_cp3').val();
 			let recipientPhone = cp1 + cp2 + cp3;
 			let shpRequest = $('#shp_request').val(); //요청사항
+			
+			if(${fn:length(cartList)} >= 2){
+				orderName += ' 외 ${fn:length(cartList)-1} 개'
+			}
 			
 			var IMP = window.IMP; // 생략가능
 			IMP.init('imp01620829'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -300,29 +314,45 @@
 			};
 			
 			$.ajaxSettings.traditional = true;
-			$.ajax({
- 				type : 'POST',
- 				url  : '/order/checkout.do',
- 				data : {
- 					order_recipient : recipient,
- 					order_addr1 : addr1,
- 					order_addr2 : addr2,
- 					order_addr3 : addr3,
- 					order_addr4 : addr4,
- 					order_recipient_phone : recipientPhone,
- 					order_shp_request : shpRequest,
- 					order_total_pdu_price : totalPduPrice,
- 					cart_code : cartCodeList
- 					
- 				},
- 				success : function(data){
- 					alert("결제완료!");
- 					location.href='/main/main.do';	
- 				}
- 			});
-		      
 			
-			
+			IMP.request_pay({
+			    pg : 'html5_inicis',
+			    merchant_uid: orderCode, // 상점에서 관리하는 주문 번호
+			    name : orderName,
+			    amount : totalPrice,
+			    buyer_email : email,
+			    buyer_name : buyerName,
+			    buyer_tel : cp1+'-'+cp2+'-'+cp3,
+			    buyer_addr : addr2 + ' ' + addr3 + ' ' + addr4,
+			    buyer_postcode : addr1
+			}, function(rsp) { // callback 로직
+				 if (rsp.success) {
+		              // 결제 성공 시 로직,
+					$.ajax({
+			 			type : 'POST',
+			 			url  : '/order/checkout.do',
+			 			data : {
+			 				order_recipient : recipient,
+			 				order_addr1 : addr1,
+			 				order_addr2 : addr2,
+			 				order_addr3 : addr3,
+			 				order_addr4 : addr4,
+			 				order_recipient_phone : recipientPhone,
+			 				order_shp_request : shpRequest,
+			 				order_total_pdu_price : totalPduPrice,
+			 				cart_code : cartCodeList
+			 			},
+			 			success : function(data){
+				 			alert("결제완료");
+			 				window.location='/main/main.do';	
+			 			}
+		 			});
+		              
+		          } else {
+		              // 결제 실패 시 로직,
+		        	  alert("결제실패"); 
+		          }
+			});  
 		}
 		
 

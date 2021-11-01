@@ -46,7 +46,6 @@ public class UploadFileUtils {
 							file.createNewFile(); 
 					}
 				}
-				System.out.println(uploadPath);
 				mFile.transferTo(new File(uploadPath + "\\"+"image"+ "\\"+originalFileName));
 			}
 		}

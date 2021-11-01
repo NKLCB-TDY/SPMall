@@ -274,20 +274,6 @@
 			});
 	}	
 	
-/* 	$(function(){
-		$('input[name="check_pdu"]').on("click", function(){
-			
-			for(let i=0; i<${cartList.size()}; i++){
-				console.log( $('#checkPdu'+i).is(':checked'));
-				if( $('#checkPdu'+i).is(':checked') ){
-					total_price += parseInt($('#price'+i).text());
-				}
-			}
-			$('#total_Price').html(total_price);
-		});
-		
-	}); */
-	
 	//수량 버튼 클릭시 동작
 	function totalPriceChange_quantity(){
 		console.log("OKg");

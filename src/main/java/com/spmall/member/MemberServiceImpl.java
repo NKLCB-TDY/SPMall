@@ -33,6 +33,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void memberUpdate(MemberVO vo) {
+		vo.setMember_pwd(bcpwd.encode(vo.getMember_pwd()));
 		memberDAO.memberUpdate(vo);
 	}
 

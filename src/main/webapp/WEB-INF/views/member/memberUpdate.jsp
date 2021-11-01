@@ -13,7 +13,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 회원가입 유효성검사 .js  -->
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/member/memberinfoform.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/member/memberUpdate.js"></script>
 	
 <style>
 	select{
@@ -25,7 +25,7 @@
 <body>
  
 				      
-	<form method="post" name="memberJoin">
+	<form method="post" name="memberUpdate">
 		<div class="container ">
 			<div class="row">
 				<div class="col-md-12 mb-5 mb-md-0">

@@ -37,6 +37,8 @@ public class OrderDAOImpl implements OrderDAO {
 		list = sqlSession.selectList("order.checkout", cart_code);
 		map.put("cartList", list);
 		
+		int orderCode = sqlSession.selectOne("order.orderCode");
+		map.put("orderCode", orderCode);
 		return map;
 	}
 
@@ -91,11 +93,6 @@ public class OrderDAOImpl implements OrderDAO {
 			int order_code = vo.getOrder_code();
 			orderDetailList.addAll(sqlSession.selectList("order.orderDetailList", order_code)) ;
 		}
-		
-		/*
-		 * for(OrderDetailVO vo : orderDetailList) {
-		 * System.out.println(vo.getOrder_code_ref()); }
-		 */
 		
 		map.put("orderDetailList", orderDetailList);
 		return map;
