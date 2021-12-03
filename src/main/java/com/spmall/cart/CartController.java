@@ -18,16 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spmall.common.CustomerUser;
 
 @Controller
-@RequestMapping("/cart/*") //Àå¹Ù±¸´Ï
+@RequestMapping("/cart/*") //ï¿½ï¿½Ù±ï¿½ï¿½ï¿½
 public class CartController {
 	
 	@Inject
 	CartService cartService;
-	
-	
-	
-	
-	//cartView ÆäÀÌÁö ÀÌµ¿
+
+	//cartView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping(value = "cartView.do", method = RequestMethod.GET)
 	public ModelAndView cartView(Authentication authentication, ModelAndView mv) throws Exception {
 		
@@ -50,7 +47,7 @@ public class CartController {
 	
 
 	
-	//Àå¹Ù±¸´Ï¿¡ »óÇ° Ãß°¡
+	//ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½Ç° ï¿½ß°ï¿½
 	@ResponseBody
 	@RequestMapping(value= "addToCart.do", method = RequestMethod.POST)
 	public void addToCart(Authentication authentication, CartVO cartVO) throws Exception {
@@ -62,17 +59,17 @@ public class CartController {
 	}
 	
 	
-	//Àå¹Ù±¸´Ï¿¡ »óÇ° Ãß°¡Àü Áßº¹µÈ Àå¹Ù±¸´Ï¿¡ Áßº¹µÈ »óÇ°ÀÌ ÀÖ´ÂÁö È®ÀÎ
+	//ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½Ç° ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping(value= "checkOverlap.do", method = RequestMethod.POST)
 	public int checkOverlap(Authentication authentication, CartVO cartVO) throws Exception {
 
-		//·Î±×ÀÎ Á¤º¸ ¾øÀ»½Ã 
+		//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		if(authentication != null) {
 
 			CustomerUser user = (CustomerUser)authentication.getPrincipal();
 			cartVO.setCart_member_id(user.getUsername());
-			//Áßº¹µ¥ÀÌÅÍ ÀÖÀ»½Ã 1¹ÝÈ¯, ¾øÀ¸¸é 0¹ÝÈ¯
+			//ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½È¯, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½È¯
 			return cartService.checkOverlap(cartVO);
 		}
 		return 401;
@@ -87,7 +84,7 @@ public class CartController {
 		return cartService.countingCart(user.getUsername());
 	}
 	
-	//Àå¹Ù±¸´Ï¿¡ Ç°º¹ Ãß°¡½Ã Áßº¹µÈ ¹°Ç°ÀÌ ÀÖÀ¸¹Ç·Î ¼ö·®¸¸ update
+	//ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ Ç°ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ update
 	@ResponseBody
 	@RequestMapping(value= "updateToCart.do", method = RequestMethod.POST)
 	public void updateToCart(Authentication authentication, CartVO cartVO) throws Exception {
@@ -101,7 +98,7 @@ public class CartController {
 	
 
 	
-	//Àå¹Ù±¸´Ï ¸ñ·ÏÁ¦°Å
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping(value="removeCart.do", method = RequestMethod.POST)
 	public void removeCart(@RequestParam("offsetNum") int offsetNum, Authentication authentication)throws Exception {
@@ -114,7 +111,7 @@ public class CartController {
 		
 	}
 	
-	//¼ö·®¾÷µ¥ÀÌÆ®
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	@ResponseBody
 	@RequestMapping(value="updateQuantity.do", method = RequestMethod.POST)
 	public void updateQuantity(CartVO cartvo)throws Exception {
@@ -122,7 +119,7 @@ public class CartController {
 		cartService.updateQuantity(cartvo);
 	}
 	
-	//»óÇ° checkUpdate
+	//ï¿½ï¿½Ç° checkUpdate
 	@ResponseBody
 	@RequestMapping(value= "updateCheck.do", method = RequestMethod.POST)
 	public void updateCheck(CartVO cartvo) throws Exception {

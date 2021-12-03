@@ -64,7 +64,7 @@ public class AdminController {
 	public String newPrsInsert_POST(PduCategoryDetailVO vo, MultipartHttpServletRequest multipartRequest)throws Exception{
 		multipartRequest.setCharacterEncoding("utf-8");
 		UploadFileUtils uploadFileUtils = new UploadFileUtils();
-		String imageFileName=null;
+		String imageFileName = null;
 		
 		//sub 카테고리가 없는 상품인 경우 
 		if(vo.getPdu_category_code_ref().isEmpty()) {
