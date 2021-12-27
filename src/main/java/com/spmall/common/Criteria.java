@@ -5,8 +5,8 @@ public class Criteria {
 	private int perPageNum;
 	
 	public Criteria() {
-		this.page = 1;  //1ÆäÀÌÁö default
-		this.perPageNum = 8; //8°³ Ãâ·Â
+		this.page = 1;   //1í˜ì´ì§€ default
+		this.perPageNum = 8; //8ê°œ ì¶œë ¥
 	}
 
 	public int getPage() {
@@ -28,7 +28,7 @@ public class Criteria {
 	}
 
 	public void setPerPageNum(int perPageNum) {
-		if(perPageNum <= 0 || perPageNum > 100) { //perPageNum ¹üÀ§ 0 < x < 100 ¾Æ´Ò½Ã 8À¸·Î ÃÊ±âÈ­
+		if(perPageNum <= 0 || perPageNum > 100) { //perPageNum ë²”ìœ„ 0 < x < 100 ì•„ë‹ì‹œ 8ìœ¼ë¡œ ì´ˆê¸°í™”
 			this.perPageNum = 8;
 			return;
 		}

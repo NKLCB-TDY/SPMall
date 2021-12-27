@@ -18,7 +18,7 @@ public class AdminDAOImpl implements AdminDAO {
 	SqlSession sqlSession;
 	
 
-	//ī�װ��� ã��
+	//제품카테고리 가져오기
 	@Override
 	public List<AdminVO> searchCate() throws Exception {
 		return sqlSession.selectList("admin.searchCate");

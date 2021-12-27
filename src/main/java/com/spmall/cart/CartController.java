@@ -18,13 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spmall.common.CustomerUser;
 
 @Controller
-@RequestMapping("/cart/*") //��ٱ���
+@RequestMapping("/cart/*") //장바구니
 public class CartController {
 	
 	@Inject
 	CartService cartService;
 
-	//cartView ������ �̵�
+	//cartView 페이지 이동
 	@RequestMapping(value = "cartView.do", method = RequestMethod.GET)
 	public ModelAndView cartView(Authentication authentication, ModelAndView mv) throws Exception {
 		
@@ -47,7 +47,7 @@ public class CartController {
 	
 
 	
-	//��ٱ��Ͽ� ��ǰ �߰�
+	//cartView 페이지 이동
 	@ResponseBody
 	@RequestMapping(value= "addToCart.do", method = RequestMethod.POST)
 	public void addToCart(Authentication authentication, CartVO cartVO) throws Exception {
@@ -59,17 +59,17 @@ public class CartController {
 	}
 	
 	
-	//��ٱ��Ͽ� ��ǰ �߰��� �ߺ��� ��ٱ��Ͽ� �ߺ��� ��ǰ�� �ִ��� Ȯ��
+	//장바구니에 상품 추가전 중복된 장바구니에 중복된 상품이 있는지 확인
 	@ResponseBody
 	@RequestMapping(value= "checkOverlap.do", method = RequestMethod.POST)
 	public int checkOverlap(Authentication authentication, CartVO cartVO) throws Exception {
 
-		//�α��� ���� ������ 
+		//로그인 정보 없을시 
 		if(authentication != null) {
 
 			CustomerUser user = (CustomerUser)authentication.getPrincipal();
 			cartVO.setCart_member_id(user.getUsername());
-			//�ߺ������� ������ 1��ȯ, ������ 0��ȯ
+			//중복데이터 있을시 1반환, 없으면 0반환
 			return cartService.checkOverlap(cartVO);
 		}
 		return 401;
@@ -84,7 +84,7 @@ public class CartController {
 		return cartService.countingCart(user.getUsername());
 	}
 	
-	//��ٱ��Ͽ� ǰ�� �߰��� �ߺ��� ��ǰ�� �����Ƿ� ������ update
+	//장바구니에 품복 추가시 중복된 물품이 있으므로 수량만
 	@ResponseBody
 	@RequestMapping(value= "updateToCart.do", method = RequestMethod.POST)
 	public void updateToCart(Authentication authentication, CartVO cartVO) throws Exception {
@@ -98,7 +98,7 @@ public class CartController {
 	
 
 	
-	//��ٱ��� �������
+	//장바구니 목록제거
 	@ResponseBody
 	@RequestMapping(value="removeCart.do", method = RequestMethod.POST)
 	public void removeCart(@RequestParam("offsetNum") int offsetNum, Authentication authentication)throws Exception {
@@ -111,7 +111,7 @@ public class CartController {
 		
 	}
 	
-	//����������Ʈ
+	//수량업데이트
 	@ResponseBody
 	@RequestMapping(value="updateQuantity.do", method = RequestMethod.POST)
 	public void updateQuantity(CartVO cartvo)throws Exception {
@@ -119,7 +119,7 @@ public class CartController {
 		cartService.updateQuantity(cartvo);
 	}
 	
-	//��ǰ checkUpdate
+	//상품
 	@ResponseBody
 	@RequestMapping(value= "updateCheck.do", method = RequestMethod.POST)
 	public void updateCheck(CartVO cartvo) throws Exception {

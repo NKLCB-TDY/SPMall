@@ -20,7 +20,7 @@ public class AdminServiceImpl implements AdminService  {
 
 	@Override
 	public void newPrsInsert(PduCategoryDetailVO vo, List<PduImageVO> imageFileList) throws Exception {
-		//»óÇ°Á¤º¸ ¹× ÀÌ¹ÌÁö µî·Ï
+		//ì œí’ˆë“±ë¡
 		adminDAO.newPrsInsert(vo);
 		adminDAO.newPrsInsert_img(imageFileList);
 	}

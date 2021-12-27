@@ -8,7 +8,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 
 public class PagingSetting {
-	//ÇÏ´Ü¿¡ aÅÂ±×·Î ´©¸¦´©ÀÖµµ·Ï º¸¿©Áö´Â ºÎºĞ ¸î°³ Ãâ·ÂÇÒ²«Áö 1|2|3|4|5...|10 >>next  
+	//í•˜ë‹¨ì— aíƒœê·¸ë¡œ ëˆ„ë¥¼ëˆ„ìˆë„ë¡ ë³´ì—¬ì§€ëŠ” ë¶€ë¶„ ëª‡ê°œ ì¶œë ¥í• ê»€ì§€ 1|2|3|4|5...|10 >> next  
 	private int displayPageNum = 10;
 	
 	private int totalCount;
@@ -27,7 +27,7 @@ public class PagingSetting {
 		this.cri = cri;
 	}
 
-	//Á¶°Ç¿¡ ¸Â´Â ÀüÃ¼ µ¥ÀÌÅÍ °³¼ö °¡Á®¿À±â
+	//ì¡°ê±´ì— ë§ëŠ” ì „ì²´ ë°ì´í„° ê°œìˆ˜ ê°€ì ¸ì˜¤ê¸°
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 		calcData();
@@ -96,10 +96,10 @@ public class PagingSetting {
 		return uriComponents.toUriString();
 	}
 	
-	//url¿¡ Å°¿öµå Ãß°¡½Ã ÇÑ±Û ÀÎÄÚµù
+	//urlì— í‚¤ì›Œë“œ ì¶”ê°€ì‹œ í•œê¸€ ì¸ì½”ë”©
 	private String encoding(String keyword) {
 		
-		if(keyword == null || keyword.trim().length() == 0) { //trim: ¹®ÀÚ¿­ ¾ÕµÚ °ø¹éÁ¦°Å
+		if(keyword == null || keyword.trim().length() == 0) { //trim: ï¿½ï¿½ï¿½Ú¿ï¿½ ï¿½Õµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			return "";
 		}
 		try {

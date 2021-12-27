@@ -90,7 +90,6 @@ public class AdminController {
 					
 					String name = uploadFileUtils.makeThumbnail(uploadPath+"\\"+imageFileVO.
 					getPdu_detail_code_ref()+ "\\", imageFileName);
-					 
 				}
 			}
 		}catch (Exception e) {
